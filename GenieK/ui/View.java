@@ -1,5 +1,7 @@
 package ui
 
+import java.utils.*;
+
 public class View{
 
     private string output;
