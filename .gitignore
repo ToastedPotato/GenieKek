@@ -1,3 +1,6 @@
 #ignorer les fichiers générés automatiquement par Visual Paradigm
 *.lck
 *.bak*
+
+#ignorer les fichiers class
+*.class
