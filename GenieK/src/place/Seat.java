@@ -1,4 +1,6 @@
-package place
+package place;
+
+import reservation.*;
 
 public class Seat extends Place{
     

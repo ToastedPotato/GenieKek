@@ -1,8 +1,10 @@
-package place
+package place;
+
+import reservation.*;
 
 public abstract class Place{
-    State state;
-    Reservation res;
+    protected State state;
+    protected Reservation res;
     
     public void setReservation(Reservation res){
     

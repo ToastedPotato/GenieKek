@@ -1,22 +1,21 @@
-package place
+package place;
 
-public class Reserved implements State{
+import reservation.*;
+
+public class Confirmed implements State{
     
-    public Reserved(){
+    public Confirmed(){
         return;
     }
     
     public void manageRes(Place context, Reservation res){
-        //Annulation de réservation        
+        //annulation
         context.setReservation(null);
         context.setState(new Free());
         return;
     }
     
     public void payment(Place context, Confirmation conf){
-        //paiement de réservation
-        context.res.setConfirmation(conf);
-        context.setState(new Confirmed());
         return;
     }
 

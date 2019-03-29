@@ -1,12 +1,16 @@
-package ui
+package ui;
 
-import java.utils.*;
+import java.util.*;
 
 public class View{
 
-    private string output;
+    private String output = "";
     
-    public void update(string message){
+    public View(){
+        return;
+    }
+    
+    public void update(String message){
         this.output = message;
     }
     

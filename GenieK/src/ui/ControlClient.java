@@ -1,25 +1,25 @@
-package ui
+package ui;
 
-import java.utils.*;
+import java.util.*;
 
-public class ControlClient{
+public class ControlClient extends Control{
     
     private Scanner scanner = new Scanner(System.in);
-    
-    private View view;
-    
-    //menu principal: 1-Voir Voyages disponibles 2-Gérer Réservation 3- Quitter
-    private String mainMenu;
-    
+        
     //String contenant les options de recherche de vol/croisière/trajet de train
-    private String findTripMenu;
+    private String findTripMenu = "";
     
-    private String selectTripMenu;
+    private String selectTripMenu = "";
     
     //String contenant les options de gestion de réservation: annuler, payer, etc.
     //private String reservationMenu;
     
     public ControlClient(){
+        this.view = new View();
+        this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" + 
+            "    [1] - Consulter les vols disponibles\n" + 
+            "    [2] - Consulter votre réservation\n" + 
+            "    [3] - Quitter\n";
         return;
     }
     
@@ -33,10 +33,10 @@ public class ControlClient{
             this.view.update(mainMenu);
             this.view.display();
             
-            Switch(choice) {
-                case "1" : findTrip();
+            switch (choice) {
+                case "1" : this.findTrip();
                     break;
-                case "2" : reservationManagement();
+                case "2" : this.reservationManagement();
                     break;
                 case "3" : 
                     run = false;    
@@ -77,7 +77,7 @@ public class ControlClient{
     public void reservationManagement(){
     //gestion de la réservation du client
         
-        this.view.update("Veuillez entrer votre numéro de réservation.")
+        this.view.update("Veuillez entrer votre numéro de réservation.");
         this.view.display();
         String resNumber = scanner.next();
         
