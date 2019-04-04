@@ -1,5 +1,6 @@
 package factory.trip;
 
+import station.Station;
 import trip.*;
 
 public class LineFactory extends TripFactory {
@@ -16,8 +17,9 @@ public class LineFactory extends TripFactory {
     }
 
     @Override
-    protected Trip fabricateTrip() {
-        System.out.println("chouchou je suis un train");
-        return new Line();
+    protected Trip fabricateTrip(Station[] stops) {
+        TripWithStop t = new Line();
+        t.setStops(stops);
+        return t;
     }
 }

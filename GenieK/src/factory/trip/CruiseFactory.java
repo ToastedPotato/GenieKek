@@ -1,5 +1,6 @@
 package factory.trip;
 
+import station.Station;
 import trip.*;
 
 public class CruiseFactory extends TripFactory {
@@ -16,7 +17,9 @@ public class CruiseFactory extends TripFactory {
     }
 
     @Override
-    protected Trip fabricateTrip() {
-        return new Cruise();
+    protected Trip fabricateTrip(Station[] stops) {
+        TripWithStop t = new Cruise();
+        t.setStops(stops);
+        return t;
     }
 }
