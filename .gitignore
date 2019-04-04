@@ -4,3 +4,7 @@
 
 #ignorer les fichiers class
 *.class
+
+#ignorer les cochonneries générées par les IDE
+*.xml
+*.iml
