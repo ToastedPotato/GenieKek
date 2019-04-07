@@ -7,4 +7,6 @@
 
 #ignorer les cochonneries générées par les IDE
 *.xml
+
+*/.idea
 *.iml
