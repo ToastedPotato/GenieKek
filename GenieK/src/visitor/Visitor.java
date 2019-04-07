@@ -4,15 +4,15 @@ package transport;
 package trip;
 
 
-public interface Visiteur {
+public interface Visitor {
 
-    public void visit (Company company);
-    public void visit (Place place);
-    public void visit (Station station);
-    public void visit (Transport transport);
-    public void visit (Schedule schedule);
-    public void visit (Trip trip);
-    public void visit (TripWithStop)
+    public String visit (Company company);
+    public String visit (Place place);
+    public String visit (Station station);
+    public String visit (Transport transport);
+    public String visit (Schedule schedule);
+    public String visit (Trip trip);
+    public String visit (TripWithStop tripWithStop)
 
         
 }
