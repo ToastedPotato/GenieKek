@@ -1,3 +1,7 @@
+package ui.command;
+
+import station.*;
+
 public class ModifyStation implements Command{
 
     Station target;
@@ -9,23 +13,23 @@ public class ModifyStation implements Command{
     String newId;
     String newName;
     String newCity;
-    
+        
     public ModifyStation(Station target, String newId, String newName, String newCity){
         this.target = target;
         
-        this.oldId = this.target.getId();
-        this.oldName = this.target.getName();
-        this.oldCity = this.target.getCity();
+        this.oldId = target.getId();
+        this.oldName = target.getName();
+        this.oldCity = target.getCity();
         
-        this.newId = newId;
-        this.newName = newName;
-        this.newCity = newCity;
+        if(newId != null){this.newId = newId;}
+        if(newName != null){this.newName = newName;}
+        if(newCity != null){this.newCity = newCity;}
     }
     
     public void execute(){
-        if(!this.newId.equals("")){this.target.setId(this.newId);}
-        if(!this.newName.equals("")){this.target.setName(this.newName);}
-        if(!this.newCity.equals("")){this.target.setCity(this.newCity);}    
+        if(this.newId != null){this.target.setId(this.newId);}
+        if(this.newName != null){this.target.setName(this.newName);}
+        if(this.newCity != null){this.target.setCity(this.newCity);}    
     }
     
     public void unexecute(){
