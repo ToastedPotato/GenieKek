@@ -18,6 +18,11 @@ public class FlightFactory extends TripFactory {
 
     @Override
     protected Trip fabricateTrip(Station[] stops) {
+        return null;
+    }
+
+    @Override
+    protected Trip fabricateTrip() {
        return new Flight();
     }
 }

@@ -2,10 +2,10 @@ package transport;
 
 public class Transport {
 
-    private String id;
+    private int num;
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int num) {
+        this.num = num;
     }
 
 }
