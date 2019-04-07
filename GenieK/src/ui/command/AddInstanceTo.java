@@ -1,4 +1,6 @@
-public class AddInstanceTo<T> extends Command{
+package ui.command;
+
+public class AddInstanceTo<T> implements Command{
     
     T target; //l'objet auquel l'instance créée doit être rattachée
     

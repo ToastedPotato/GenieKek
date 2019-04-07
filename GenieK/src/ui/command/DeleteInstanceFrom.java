@@ -1,4 +1,6 @@
-public class DeleteInstanceFrom<T> extends Command{
+package ui.command;
+
+public class DeleteInstanceFrom<T> implements Command{
 
     T target;   //l'objet duquel il faut retirer l'instance
     

@@ -18,10 +18,11 @@
 ./src/trip/CruiseException.java
 ./src/trip/Trip.java
 ./src/ui/ControlClient.java
-./src/ui/AddInstanceTo.java
-./src/ui/ModifyCommand.java
-./src/ui/DeleteInstanceFrom.java
-./src/ui/Command.java
+./src/ui/command/AddInstanceTo.java
+./src/ui/command/AssignPriceCommand.java
+./src/ui/command/ModifyCommand.java
+./src/ui/command/DeleteInstanceFrom.java
+./src/ui/command/Command.java
 ./src/ui/View.java
 ./src/ui/Control.java
 ./src/reservation/Confirmation.java
