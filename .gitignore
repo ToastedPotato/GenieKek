@@ -7,6 +7,6 @@
 
 #ignorer les cochonneries générées par les IDE
 *.xml
-
+GenieK/.idea/*.xml
 */.idea
 *.iml
