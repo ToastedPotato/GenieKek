@@ -1,6 +1,5 @@
 package ui.menu;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +16,8 @@ public class Menu {
         menuItems.put(id, new MenuItem(id, text, menuItemListener));
     }
 
-    public void selectItem(String input) {
-        menuItems.get(input).select();
+    public boolean selectItem(String input) {
+        return menuItems.get(input).select();
     }
 
     public String toString() {

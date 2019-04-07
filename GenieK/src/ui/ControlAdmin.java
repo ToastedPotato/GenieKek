@@ -1,5 +1,8 @@
 package ui;
 
+import ui.menu.Menu;
+import ui.menu.MenuItemListener;
+
 import java.util.Scanner;
 
 public class ControlAdmin extends Control {
@@ -7,87 +10,121 @@ public class ControlAdmin extends Control {
     private Scanner scanner = new Scanner(System.in);
 
     //String contenant les options de recherche de vol/croisière/trajet de train
-    private String findTripMenu = "";
+    private Menu stationManagementMenu;
+    private Menu compagnyManagementMenu;
 
-    private String selectTripMenu = "";
+    private Menu stationCreationMenu;
+    private Menu compagnyCreationManu;
 
     //String contenant les options de gestion de réservation: annuler, payer, etc.
     //private String reservationMenu;
 
     public ControlAdmin(){
         this.view = new View();
-        this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" +
-                "    [1] - Aéroport\n" +
-                "    [2] - Compagnie\n" +
-                "    [3] - Quitter\n";
-        return;
+        initMenu();
     }
 
-    public void listen(){
+    public void listen(Menu menu){
         //La boucle d'exécution primaire du contrôleur
 
         boolean run = true;
         String choice = scanner.next();
 
         while(run){
-            this.view.update(mainMenu);
+            this.view.update(menu.toString());
             this.view.display();
 
-            switch (choice) {
-                case "1" : this.findTrip();
-                    break;
-                case "2" : this.reservationManagement();
-                    break;
-                case "3" :
-                    run = false;
-                    System.out.println("Merci d'avoir utilisé notre service.");
-                    break;
-                default: System.out.println("Choix invalide, veuillez entrer un chiffre de 1 à 3.");
-                    break;
+            run = menu.selectItem(choice);
+        }
+        return;
+    }
+
+    public void initMenu(){
+        this.mainMenu = new Menu("Admin Dashboard");
+        this.mainMenu.addItem("1", "Station", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    listen(stationManagementMenu);
+                    return true;
             }
-        }
-        return;
-    }
+        });
 
-    public void findTrip(){
-        //offre les options de recherche de voyage disponibles
+        this.mainMenu.addItem("2", "Compagnie", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    listen(stationManagementMenu);
+                    return true;
+            }
+        });
 
-        this.view.update(this.findTripMenu);
-        this.view.display();
-        String searchParams = scanner.next();
+        this.mainMenu.addItem("3", "Quitter", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return false;
+            }
+        });
 
-        //TODO: traitement des paramètres; splice puis un switch, etc.
+        stationManagementMenu = new Menu("Station Management");
+        stationManagementMenu.addItem("1", "Créer", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return true;
+            }
+        });
 
-        //TODO: appel du visiteur approprié pour lire les voyages disponibles
-        String searchResults = "";
+        stationManagementMenu.addItem("2", "Modifier", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return true;
+            }
+        });
+
+        stationManagementMenu.addItem("3", "Supprimer", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return true;
+            }
+        });
+
+        stationManagementMenu.addItem("4", "Quitter", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return false;
+            }
+        });
+
+        compagnyManagementMenu = new Menu("Company Management");
+        compagnyManagementMenu.addItem("1", "Créer", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
 
 
-        //Options disponibles après recherche: selectionner un voyage, presser "Enter"-> Retour au menu principal
-        this.view.update(this.selectTripMenu);
-        this.view.display();
-        String choice = scanner.next();
 
-        if(!choice.equals("\n") && !choice.equals("\r\n")){
-            //TODO: réservation d'un siège selon préférences client
-        }
+                    return true;
+            }
+        });
 
-        return;
-    }
+        compagnyManagementMenu.addItem("2", "Modifier", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return true;
+            }
+        });
 
-    public void reservationManagement(){
-        //gestion de la réservation du client
+        compagnyManagementMenu.addItem("3", "Supprimer", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return true;
+            }
+        });
 
-        this.view.update("Veuillez entrer votre numéro de réservation.");
-        this.view.display();
-        String resNumber = scanner.next();
+        compagnyManagementMenu.addItem("4", "Quitter", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                    return false;
+            }
+        });
 
-        //TODO: appel du visiteur/itérateur approprié pour lire la liste de réservations
-
-        /*TODO: affichage des infos de la réservation et des options de
-            réservation (si disponibles): [1] Annuller [2] Réserver une autre
-            place [3] Payer la réservation [4] Retour au menu principal*/
-
-        return;
     }
 
 }

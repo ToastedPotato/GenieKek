@@ -2,6 +2,6 @@ package ui.menu;
 
 public interface MenuItemListener {
 
-    void onSelect();
+    boolean onSelect();
 
 }

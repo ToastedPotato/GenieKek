@@ -11,8 +11,8 @@ public class MenuItem {
         this.listener = listener;
     }
 
-    public void select() {
-        listener.onSelect();
+    public boolean select() {
+        return listener.onSelect();
     }
 
     public String getId() {
