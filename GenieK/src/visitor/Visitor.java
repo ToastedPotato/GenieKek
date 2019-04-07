@@ -14,5 +14,5 @@ public interface Visiteur {
     public void visit (Trip trip);
     public void visit (TripWithStop)
 
-
+        
 }

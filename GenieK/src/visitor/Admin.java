@@ -1,7 +1,6 @@
-package visiteur;
+package visitor;
 
-public class Client implements Visiteur{
-
+public class Client implements Visitor{
 
 
     public void visit (Company company){
@@ -31,7 +30,6 @@ public class Client implements Visiteur{
     public void visit (TripWithStop){
 
     }
-
 
 
 }
