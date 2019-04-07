@@ -16,6 +16,8 @@ public class ControlClient extends Control{
     
     public ControlClient(){
         this.view = new View();
+
+
         this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" + 
             "    [1] - Consulter les vols disponibles\n" + 
             "    [2] - Consulter votre réservation\n" + 
@@ -25,7 +27,9 @@ public class ControlClient extends Control{
     
     public void listen(){
     //La boucle d'exécution primaire du contrôleur
-        
+
+
+
         boolean run = true;
         String choice = scanner.next();
         

@@ -1,8 +1,8 @@
 package ui.command;
 
-public interface class Command{
+public interface Command{
 
-    public void execute();
+    void execute();
     
-    public void undo();
+    void unexecute();
 }

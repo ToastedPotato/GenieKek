@@ -1,12 +1,13 @@
 package ui.command;
 
-public class AddInstanceTo<T> implements Command{
+import java.util.ArrayList;
+
+public class AddInstanceTo implements Command{
     
-    T target; //l'objet auquel l'instance créée doit être rattachée
+    private ArrayList<Object> target; //l'objet auquel l'instance créée doit être rattachée
+    private Object instance; //la nouvelle instance
     
-    Object instance; //la nouvelle instance
-    
-    public AddInstanceTo<T>(T target, Object instance){
+    public AddInstanceTo(ArrayList<Object> target, Object instance){
         this.target = target;
         this.instance = instance;
     }
@@ -15,7 +16,7 @@ public class AddInstanceTo<T> implements Command{
         target.add(this.instance);
     }
     
-    public void undo(){
+    public void unexecute(){
         target.remove(this.instance);
     }
 }

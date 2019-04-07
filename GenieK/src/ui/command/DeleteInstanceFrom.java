@@ -1,21 +1,22 @@
 package ui.command;
 
+import java.util.ArrayList;
+
 public class DeleteInstanceFrom<T> implements Command{
 
-    T target;   //l'objet duquel il faut retirer l'instance
-    
-    Object instance; //l'instance à retirer de l'objet
-    
-    public DeleteInstanceFrom<T>(T target, Object instance){
+    private ArrayList<Object> target; //l'objet auquel l'instance créée doit être rattachée
+    private Object instance; //la nouvelle instance
+
+    public DeleteInstanceFrom(ArrayList<Object> target, Object instance){
         this.target = target;
         this.instance = instance;
-    }    
-    
+    }
+
     public void execute(){
         target.remove(this.instance);
     }
-    
-    public void undo(){
+
+    public void unexecute(){
         target.add(this.instance);
     }
 }
