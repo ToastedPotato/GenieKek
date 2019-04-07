@@ -4,16 +4,17 @@ public class AddInstanceTo<T> extends Command{
     
     Object instance; //la nouvelle instance
     
-    public CreateCommand<T>(T target){
+    public AddInstanceTo<T>(T target, Object instance){
         this.target = target;
+        this.instance = instance;
     }
     
     public void execute(){
-        target.add(instance);
+        target.add(this.instance);
     }
     
     public void undo(){
-        target.remove(instance);
+        target.remove(this.instance);
     }
 }
 

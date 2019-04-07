@@ -1,10 +1,19 @@
-public abstract class DeleteInstanceFrom<T> extends Command{
+public class DeleteInstanceFrom<T> extends Command{
 
     T target;   //l'objet duquel il faut retirer l'instance
     
-    Object Instance; //l'instance à retirer de l'objet
+    Object instance; //l'instance à retirer de l'objet
     
-    public void execute(){}
+    public DeleteInstanceFrom<T>(T target, Object instance){
+        this.target = target;
+        this.instance = instance;
+    }    
     
-    public void undo(){}
+    public void execute(){
+        target.remove(this.instance);
+    }
+    
+    public void undo(){
+        target.add(this.instance);
+    }
 }
