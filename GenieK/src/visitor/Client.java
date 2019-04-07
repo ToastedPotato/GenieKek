@@ -3,35 +3,47 @@ package visitor;
 public class Client implements Visitor{
 
 
+    public String visit (Company company){
 
-    public void visit (Company company){
-
-    }
-
-    public void visit (Place place){
+        return "ID:"company.getId()+" Nom:"+company.getName();
 
     }
 
-    public void visit (Station station){
+    public String visit (Place place){
+        return "Reservation:"place.getRes()+ "Etat "place.getState()
 
     }
 
-    public void visit (Transport transport){
+    public String visit (Station station){
+
+        return "ID:"+ station.getId() +" Nom:"+station.getName()+ " Ville:"+station.city()
 
     }
 
-    public void visit (Schedule schedule){
+    public String visit (Transport transport){
+
+        return "ID: " transport.getId()
 
     }
 
-    public void visit (Trip trip){
+    public String visit (Schedule schedule){
+
+        return "Depart:"+ schedule.getDepart()+" Arrive:"+schedule.getArrive()+" Transport"+schedule.getTransport()
 
     }
 
-    public void visit (TripWithStop){
+    public String visit (Trip trip){
+
+        return  "ID:"+trip.getId()+" Numero de voyage:"+ trip.getNumber()+ " Depart:"+trip.getArrive()+" ID Compagnie"+trip.getIdCompany()+ " Liste d'horaire:".getSchedules();
 
     }
 
+    public String visit (TripWithStop tripWithStop){
+
+        return  "ID:"+trip.getId()+" Numero de voyage:"+ trip.getNumber()+
+                " Depart:"+tripWithStop.getArrive()+" ID Compagnie"+tripWithStop.getIdCompany()+ " Liste d'horaire:"tripWithStop.getSchedules();
+        + "Liste d'arret:"+tripWithStop.getStops();
+    }
 
 
 }
