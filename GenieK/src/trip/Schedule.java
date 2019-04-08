@@ -15,4 +15,31 @@ public class Schedule {
         this.arrive = arrive;
         this.transport = transport;
     }
+
+    public setDepart(Date depart) {
+        this.depart = depart;
+    }
+
+    public getDepart() {
+        return this.depart;
+    }
+
+    public setArrive(Date arrive){
+       this.arrive = arrive;
+    }
+
+    public getArrive(){
+        return this.arrive;
+    }
+
+    public setTransport(Transport transport){
+        this.transport=transport;
+    }
+
+    public getTransport(){
+        return this.transport;
+    }
+
+
+
 }
