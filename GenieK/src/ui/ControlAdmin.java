@@ -39,6 +39,23 @@ public class ControlAdmin extends Control {
         return;
     }
 
+    public void displayer(String msg){
+        //La boucle d'exécution primaire du contrôleur
+
+        boolean run = true;
+        String choice = scanner.next();
+
+        msg += "press q to return to the last menu\n";
+
+        while(run){
+            this.view.update(msg);
+            this.view.display();
+
+            if(choice=="q") run = false;
+        }
+        return;
+    }
+
     public void initMenu(){
         this.mainMenu = new Menu("Admin Dashboard");
         this.mainMenu.addItem("1", "Station", new MenuItemListener() {
@@ -86,6 +103,14 @@ public class ControlAdmin extends Control {
             }
         });
 
+        stationManagementMenu.addItem("4", "Afficher", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                displayer(DataBase.getInstance().stationsToString(visitor));
+                return true;
+            }
+        });
+
         stationManagementMenu.addItem("4", "Quitter", new MenuItemListener() {
             @Override
             public boolean onSelect() {
@@ -118,7 +143,8 @@ public class ControlAdmin extends Control {
         compagnyManagementMenu.addItem("4", "Afficher", new MenuItemListener() {
             @Override
             public boolean onSelect() {
-                    return false;
+                    displayer(DataBase.getInstance().companiesToString(visitor));
+                    return true;
             }
         });
 
