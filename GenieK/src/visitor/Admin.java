@@ -34,15 +34,27 @@ public class Client implements Visitor{
 
     public String visit (Trip trip){
 
-        return  "ID:"+trip.getId()+" Numero de voyage:"+ trip.getNumber()+ " Depart:"+trip.getArrive()+" ID Compagnie"+trip.getIdCompany()+ " Liste d'horaire:".getSchedules();
+        tring planeName;
+        String dateDepart;
+        String dateArrive;
+        String sectionInfoDep:
+        String sectionInfoArr;
+        String price;
+
+        return tripWithStop.getDepart()+"-"+tripWithStop.getArrive()":["+tripWithStop.getIdCompany()"]"+planeName"("+dateDepart+"-"+dateArrive+")|"+sectionInfoDep+"|"+sectionInfoArr+")+price
 
     }
 
     public String visit (TripWithStop tripWithStop){
 
-        return  "ID:"+trip.getId()+" Numero de voyage:"+ trip.getNumber()+
-                " Depart:"+tripWithStop.getArrive()+" ID Compagnie"+tripWithStop.getIdCompany()+ " Liste d'horaire:"tripWithStop.getSchedules();
-        + "Liste d'arret:"+tripWithStop.getStops();
+        String planeName;
+        String dateDepart;
+        String dateArrive;
+        String sectionInfoDep:
+        String sectionInfoArr;
+        String price;
+
+        return tripWithStop.getDepart()+"-"+tripWithStop.getArrive()":["+tripWithStop.getIdCompany()"]"+planeName"("+dateDepart+"-"+dateArrive+")|"+sectionInfoDep+"|"+sectionInfoArr+")+price
     }
 
 
