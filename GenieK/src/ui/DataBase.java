@@ -5,16 +5,20 @@ import station.Station;
 import visitor.Visitor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataBase {
 
     private static DataBase instance = null;
 
-    private List<Station> stations = new ArrayList<>();
-    private List<Company> companies = new ArrayList<>();
+    private ArrayList<Station> stations = new ArrayList<>();
+    private ArrayList<Company> companies = new ArrayList<>();
 
-    public List<Station> getStations() {
+    public static DataBase getInstance(){
+        if(instance == null) instance = new DataBase();
+        return instance;
+    }
+
+    public ArrayList<Station> getStations() {
         return stations;
     }
 
@@ -22,17 +26,12 @@ public class DataBase {
         this.stations.add(station);
     }
 
-    public List<Company> getCompanies() {
+    public ArrayList<Company> getCompanies() {
         return companies;
     }
 
     public void addCompany(Company company) {
         this.companies.add(company);
-    }
-
-    public static DataBase getInstance(){
-        if(instance == null) instance = new DataBase();
-        return instance;
     }
 
     public String stationsToString(Visitor visitor){

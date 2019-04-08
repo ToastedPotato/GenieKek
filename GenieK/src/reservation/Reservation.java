@@ -2,20 +2,18 @@ package reservation;
 
 public class Reservation{
     
-    private Confirmation conf;
+    private Confirmation confirmation;
     
     public Reservation(){
-        this.conf = null;
-        return;
+        this.confirmation = null;
     }
     
     public Confirmation getConfirmation(){
-        return this.conf;
+        return this.confirmation;
     }
     
     public void setConfirmation(Confirmation conf){
-        this.conf = conf;
-        return;
+        this.confirmation = conf;
     }
     
 }
