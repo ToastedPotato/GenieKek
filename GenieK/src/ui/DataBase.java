@@ -2,6 +2,7 @@ package ui;
 
 import company.Company;
 import station.Station;
+import visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +33,33 @@ public class DataBase {
     public static DataBase getInstance(){
         if(instance == null) instance = new DataBase();
         return instance;
+    }
+
+    public String stationsToString(Visitor visitor){
+
+        String string = "";
+
+        for (Station s:stations) {
+
+            string += visitor.visit(s) + "\n";
+
+        }
+
+        return  string;
+
+    }
+
+    public String companiesToString(Visitor visitor){
+
+        String string = "";
+
+        for (Company c:companies) {
+
+            string += visitor.visit(c) + "\n";
+
+        }
+
+        return string;
+
     }
 }

@@ -1,8 +1,10 @@
-package company;
-package station;
-package transport;
-package trip;
+package visitor;
 
+import company.Company;
+import place.Place;
+import station.Station;
+import transport.Transport;
+import trip.*;
 
 public interface Visitor {
 
@@ -12,7 +14,7 @@ public interface Visitor {
     public String visit (Transport transport);
     public String visit (Schedule schedule);
     public String visit (Trip trip);
-    public String visit (TripWithStop tripWithStop)
+    public String visit (TripWithStop tripWithStop);
 
         
 }

@@ -97,9 +97,6 @@ public class ControlAdmin extends Control {
         compagnyManagementMenu.addItem("1", "Créer", new MenuItemListener() {
             @Override
             public boolean onSelect() {
-
-
-
                     return true;
             }
         });
@@ -118,14 +115,23 @@ public class ControlAdmin extends Control {
             }
         });
 
-        compagnyManagementMenu.addItem("4", "Quitter", new MenuItemListener() {
+        compagnyManagementMenu.addItem("4", "Afficher", new MenuItemListener() {
             @Override
             public boolean onSelect() {
                     return false;
             }
         });
 
+        compagnyManagementMenu.addItem("5", "Quitter", new MenuItemListener() {
+            @Override
+            public boolean onSelect() {
+                return false;
+            }
+        });
+
     }
+
+
 
 }
 
