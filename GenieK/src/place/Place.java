@@ -6,14 +6,9 @@ import reservation.*;
 public abstract class Place{
 
     private State state;
-    public Reservation res;
-
+    
     public Place() {
         this.state = new Free();
-    }
-
-    public void setReservation(Reservation res){
-        this.res = res;
     }
     
     public void setState(State state){
@@ -29,8 +24,8 @@ public abstract class Place{
 
     }
 
-    public void payement(Confirmation conf){
-        this.state.payment(this, conf);
+    public void payement(Confirmation conf, Reservation res){
+        this.state.payment(this, conf, res);
 
     }
 

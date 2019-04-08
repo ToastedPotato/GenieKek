@@ -11,7 +11,7 @@ public class Free implements State{
      * @param reservation : réservation
      */
     public void manage(Place place, Reservation reservation){
-        place.setReservation(reservation);
+        reservation.setPlace(place);
         place.setState(new Reserved());
     }
 
@@ -21,7 +21,7 @@ public class Free implements State{
      * @param place : la place
      * @param confirmation : confirmation
      */
-    public void payment(Place place, Confirmation confirmation){
+    public void payment(Place place, Confirmation confirmation, Reservation reservation){
         try {
             throw new StateException("Paiement impossible sur l'état Libre");
         } catch (StateException e) {

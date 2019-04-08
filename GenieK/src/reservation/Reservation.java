@@ -4,6 +4,8 @@ public class Reservation{
     
     private Confirmation confirmation;
     
+    private Place place;
+    
     public Reservation(){
         this.confirmation = null;
     }
@@ -14,6 +16,15 @@ public class Reservation{
     
     public void setConfirmation(Confirmation conf){
         this.confirmation = conf;
+    }
+    
+    public Place getPlace(){
+        return this.place;
+    }
+    
+    public void setPlace(Place place){
+        this.place = place;
+        return;
     }
     
 }

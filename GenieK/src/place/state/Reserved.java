@@ -11,7 +11,7 @@ public class Reserved implements State{
      * @param reservation : la réservation
      */
     public void manage(Place place, Reservation reservation){
-        place.setReservation(null);
+        reservation.setPlace(null);
         place.setState(new Free());
     }
 
@@ -20,8 +20,8 @@ public class Reserved implements State{
      * @param place : la place
      * @param confirmation : la confirmation
      */
-    public void payment(Place place, Confirmation confirmation){
-        place.res.setConfirmation(confirmation);
+    public void payment(Place place, Confirmation confirmation, Reservation reservation){
+        reservation.setConfirmation(confirmation);
         place.setState(new Confirmed());
     }
 
