@@ -5,7 +5,7 @@ import reservation.*;
 
 public abstract class Place{
 
-    State state;
+    private State state;
     public Reservation res;
 
     public Place() {
@@ -20,6 +20,9 @@ public abstract class Place{
         this.state = state;
     }
 
+    public boolean isFree() {
+        return state instanceof Free;
+    }
 
     public void manage(Reservation res){
         this.state.manage(this, res);

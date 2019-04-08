@@ -16,47 +16,40 @@ public class ControlAdmin extends Control {
     private Menu stationCreationMenu;
     private Menu compagnyCreationManu;
 
-    //String contenant les options de gestion de réservation: annuler, payer, etc.
-    //private String reservationMenu;
-
     public ControlAdmin(){
         this.view = new View();
         initMenu();
     }
 
-    public void listen(Menu menu){
+    private void listen(Menu menu){
         //La boucle d'exécution primaire du contrôleur
-
         boolean run = true;
         String choice = scanner.next();
 
         while(run){
             this.view.update(menu.toString());
             this.view.display();
-
             run = menu.selectItem(choice);
         }
-        return;
     }
 
-    public void displayer(String msg){
+    private void displayer(String msg){
         //La boucle d'exécution primaire du contrôleur
-
         boolean run = true;
         String choice = scanner.next();
 
         msg += "press q to return to the last menu\n";
 
         while(run){
+            // FIXME : boucle inutile, on affice et on attend la réponse de l'utilisateur,
+            // là on affiche le message jusqu'à ce que l'admin quitte
             this.view.update(msg);
             this.view.display();
-
-            if(choice=="q") run = false;
+            if(choice.equals("q")) run = false;
         }
-        return;
     }
 
-    public void initMenu(){
+    private void initMenu(){
         this.mainMenu = new Menu("Admin Dashboard");
         this.mainMenu.addItem("1", "Station", new MenuItemListener() {
             @Override
