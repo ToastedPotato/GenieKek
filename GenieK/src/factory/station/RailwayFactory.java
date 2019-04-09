@@ -2,16 +2,12 @@ package factory.station;
 
 import station.*;
 
-public class GareFactory extends StationFactory {
+public class RailwayFactory extends StationFactory {
 
-    private static GareFactory instance = null;
-
-    private GareFactory() {
-
-    }
+    private static RailwayFactory instance = null;
 
     public static StationFactory getInstance() {
-        if (instance == null) instance = new GareFactory();
+        if (instance == null) instance = new RailwayFactory();
         return instance;
     }
 

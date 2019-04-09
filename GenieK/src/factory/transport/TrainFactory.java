@@ -6,10 +6,6 @@ public class TrainFactory extends TransportFactory {
 
     private static TrainFactory instance = null;
 
-    private TrainFactory() {
-
-    }
-
     public static TransportFactory getInstance() {
         if (instance == null) instance = new TrainFactory();
         return instance;
@@ -17,7 +13,6 @@ public class TrainFactory extends TransportFactory {
 
     @Override
     protected Transport fabricateTransport() {
-        System.out.println("chouchou je suis un train");
         return new Train();
     }
 }

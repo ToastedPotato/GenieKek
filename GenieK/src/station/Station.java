@@ -2,22 +2,22 @@ package station;
 
 public class Station {
 
-    protected String id, name, city;
+    protected String id, city;
 
-    public void setName(String name){
-        this.name = name;
+    public Station() {
     }
-    
-    public String getName(){
-        return this.name;
+
+    public Station(String id, String city) {
+        this.id = id;
+        this.city = city;
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
     
     public String getId(){
-        return this.Id;
+        return this.id;
     }
     
     public void setCity(String city) {
@@ -25,6 +25,6 @@ public class Station {
     }
     
     public String getCity(){
-        return this.City;
+        return this.city;
     }
 }

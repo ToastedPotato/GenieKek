@@ -14,7 +14,6 @@ public interface Visitor {
     public String visit (Transport transport);
     public String visit (Schedule schedule);
     public String visit (Trip trip);
-    public String visit (TripWithStop tripWithStop);
 
         
 }

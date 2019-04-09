@@ -18,10 +18,10 @@ public class ControlClient extends Control{
         this.view = new View();
 
 
-        this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" + 
+        /*this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" +
             "    [1] - Consulter les vols disponibles\n" + 
             "    [2] - Consulter votre réservation\n" + 
-            "    [3] - Quitter\n";
+            "    [3] - Quitter\n";*/
         return;
     }
     
@@ -34,7 +34,7 @@ public class ControlClient extends Control{
         String choice = scanner.next();
         
         while(run){
-            this.view.update(mainMenu);
+            //this.view.update(mainMenu);
             this.view.display();
             
             switch (choice) {

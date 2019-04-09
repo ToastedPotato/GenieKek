@@ -28,5 +28,4 @@ public abstract class Place{
         this.state.payment(this, conf, res);
 
     }
-
 }

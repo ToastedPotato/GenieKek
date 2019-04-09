@@ -1,14 +1,11 @@
 package factory.transport;
 
+import transport.Boat;
 import transport.Transport;
 
 public class BoatFactory extends TransportFactory {
 
     private static BoatFactory instance = null;
-
-    private BoatFactory() {
-
-    }
 
     public static TransportFactory getInstance() {
         if (instance == null) instance = new BoatFactory();
@@ -17,6 +14,6 @@ public class BoatFactory extends TransportFactory {
 
     @Override
     protected Transport fabricateTransport() {
-        return null;
+        return new Boat();
     }
 }

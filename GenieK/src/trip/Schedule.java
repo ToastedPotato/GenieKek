@@ -16,30 +16,27 @@ public class Schedule {
         this.transport = transport;
     }
 
-    public setDepart(Date depart) {
+    public Date getDepart() {
+        return depart;
+    }
+
+    public void setDepart(Date depart) {
         this.depart = depart;
     }
 
-    public getDepart() {
-        return this.depart;
+    public Date getArrive() {
+        return arrive;
     }
 
-    public setArrive(Date arrive){
-       this.arrive = arrive;
+    public void setArrive(Date arrive) {
+        this.arrive = arrive;
     }
 
-    public getArrive(){
-        return this.arrive;
+    public Transport getTransport() {
+        return transport;
     }
 
-    public setTransport(Transport transport){
-        this.transport=transport;
+    public void setTransport(Transport transport) {
+        this.transport = transport;
     }
-
-    public getTransport(){
-        return this.transport;
-    }
-
-
-
 }

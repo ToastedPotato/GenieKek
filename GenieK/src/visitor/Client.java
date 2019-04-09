@@ -1,8 +1,8 @@
 package visitor;
 
-public class Client implements Visitor{
+public class Client { //implements Visitor{
 
-
+    /*
     public String visit (Company company){
 
         return "ID:"company.getId()+" Nom:"+company.getName();
@@ -57,6 +57,6 @@ public class Client implements Visitor{
         return tripWithStop.getDepart()+"-"+tripWithStop.getArrive()":["+tripWithStop.getIdCompany()"]"+planeName"("+dateDepart+"-"+dateArrive+")|"+sectionInfoDep+"|"+sectionInfoArr)
 
     }
-
+*/
 
 }

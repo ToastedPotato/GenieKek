@@ -2,16 +2,19 @@ package trip;
 
 import station.Station;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Trip{
 
     private String id;
     private int number;
-    private Station depart;
-    private Station arrive;
+    private Station depart, arrive;
     private String idCompany;
-    private List<Schedule> schedules;
+    private ArrayList<Schedule> schedules = new ArrayList<>();
+    private ArrayList<Station> stops = new ArrayList<>();
+
 
     public Trip() {
 
@@ -26,9 +29,7 @@ public class Trip{
     }
 
     public void addSchedules(Schedule s){
-
         schedules.add(s);
-
     }
     
     public String getId() {
@@ -55,7 +56,7 @@ public class Trip{
         return this.arrive;
     }
     
-    public void setStation(Station depart,Station arrive) throws CruiseException {
+    public void setStation(Station depart,Station arrive) {
         this.depart = depart;
         this.arrive = arrive;
     }
@@ -68,11 +69,22 @@ public class Trip{
         this.idCompany = idCompany;
     }
 
-    public void setSchedules(List<Schedule> schedules) {
+    public void setSchedules(ArrayList<Schedule> schedules) {
         this.schedules = schedules;
     }
 
-    public List<Schedule> getSchedules() {
+    public ArrayList<Schedule> getSchedules() {
         return schedules;
+    }
+
+    public void setStops(Station[] stops) {
+        this.stops.addAll(Arrays.asList(stops));
+    }
+
+    public Trip addStop(Station stop) {
+        // si l'élément existe déjà on sort
+        if (stops.indexOf(stop) >= 0) return this;
+        stops.add(stop);
+        return this;
     }
 }
