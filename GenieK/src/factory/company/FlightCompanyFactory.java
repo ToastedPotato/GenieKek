@@ -2,6 +2,7 @@ package factory.company;
 
 import company.*;
 import factory.transport.PlaneFactory;
+import factory.trip.FlightFactory;
 
 
 public class FlightCompanyFactory extends CompanyFactory {
@@ -16,6 +17,7 @@ public class FlightCompanyFactory extends CompanyFactory {
     protected Company fabricateCompany(){
         FlightCompany c = new FlightCompany();
         c.setTransportFactory(PlaneFactory.getInstance());
+        c.setTripFactory(FlightFactory.getInstance());
         return c;
     }
 }

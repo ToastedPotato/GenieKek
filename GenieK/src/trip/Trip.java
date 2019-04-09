@@ -1,6 +1,7 @@
 package trip;
 
 import station.Station;
+import transport.Transport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,20 +13,12 @@ public class Trip{
     private int number;
     private Station depart, arrive;
     private String idCompany;
+    private Transport transport;
     private ArrayList<Schedule> schedules = new ArrayList<>();
     private ArrayList<Station> stops = new ArrayList<>();
 
-
     public Trip() {
 
-    }
-
-    public Trip(String id, int number, Station depart, Station arrive, String idCompany) {
-        this.id = id;
-        this.number = number;
-        this.depart = depart;
-        this.arrive = arrive;
-        this.idCompany = idCompany;
     }
 
     public void addSchedules(Schedule s){
@@ -55,8 +48,16 @@ public class Trip{
     public Station getArrive(){
         return this.arrive;
     }
-    
-    public void setStation(Station depart,Station arrive) {
+
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
+    }
+
+    public void setStation(Station depart, Station arrive) {
         this.depart = depart;
         this.arrive = arrive;
     }

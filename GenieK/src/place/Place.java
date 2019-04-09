@@ -21,11 +21,9 @@ public abstract class Place{
 
     public void manage(Reservation res){
         this.state.manage(this, res);
-
     }
 
     public void payement(Confirmation conf, Reservation res){
         this.state.payment(this, conf, res);
-
     }
 }

@@ -1,6 +1,6 @@
 package ui;
 
-public class View{
+public class View {
 
     private String output = "";
     

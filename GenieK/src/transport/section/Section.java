@@ -2,9 +2,9 @@ package transport.section;
 
 import place.Place;
 
-public class Section {
+public abstract class Section {
 
-    private int nbPlaces;
+    protected int nbPlaces;
     private float ratio;
     protected Place[] places;
 
@@ -13,6 +13,8 @@ public class Section {
         this.ratio = ratio;
         this.places = new Place[nbPlaces];
     }
+
+    protected abstract void initPlaces();
 
     public int getNbPlaces() {
         return nbPlaces;
@@ -28,5 +30,4 @@ public class Section {
             if (place.isFree()) nb++;
         return nb;
     }
-
 }

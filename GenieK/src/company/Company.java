@@ -35,16 +35,40 @@ public class Company {
         this.name = name;
     }
 
-    public Transport createTransport(String id) {
-        Transport t = transportFactory.createTransport(id);
-        transports.add(t);
-        return t;
+    public Transport createTransport(String transportId) {
+        Transport transport = transportFactory.createTransport(transportId);
+        transports.add(transport);
+        return transport;
     }
 
-    public Trip createTrip(String id, int number, Station departure, Station arrived) {
-        Trip t = tripFactory.createTrip(id, number, departure, arrived, id);
-        trips.add(t);
-        return t;
+    public Trip createTrip(String tripId, int number, Station departure, Station arrived, String transportId) {
+        Transport transport = getTransport(transportId);
+        try {
+            if (transport == null) throw new TransportException(transportId);
+        } catch (TransportException e) {
+            e.printStackTrace();
+        }
+        Trip trip = tripFactory.createTrip(tripId, number, departure, arrived, tripId, transport);
+        trips.add(trip);
+        return trip;
+    }
+
+    public Transport getTransport(String transportId) {
+        for (Transport transport : transports) {
+            if (transport.getId().equals(transportId)) return transport;
+        }
+        return null;
+    }
+
+    public boolean haveTrip(String tripId) {
+        for (Trip trip : trips) {
+            if (trip.getId().equals(tripId)) return true;
+        }
+        return false;
+    }
+
+    public Reservation reservedPlace(String tripId, String sectionId) {
+        return null;
     }
 
     public ArrayList<Trip> getTrips() {

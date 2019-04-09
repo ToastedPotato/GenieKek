@@ -1,5 +1,8 @@
 package ui.menu;
 
+import ui.Control;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,17 +10,49 @@ public class Menu {
 
     private HashMap<String, MenuItem> menuItems =  new HashMap<>();
     private String title;
+    private Menu parent;
+    private Control control;
 
-    public Menu(String title) {
+    public Menu(Control control, String title) {
+        this.control = control;
         this.title = title;
+        this.parent = null;
+        addItem("q", "Quitter", new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                System.exit(0);
+            }
+        });
+    }
+
+    public Menu(Control control, Menu parent, String title) {
+        this.control = control;
+        this.title = title;
+        this.parent = parent;
+        addItem("q", "Retour au menu parent", new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                control.listen(parent);
+            }
+        });
     }
 
     public void addItem(String id, String text, MenuItemListener menuItemListener) {
         menuItems.put(id, new MenuItem(id, text, menuItemListener));
     }
 
-    public boolean selectItem(String input) {
-        return menuItems.get(input).select();
+    public void addItem(String id, String text, Menu menu) {
+        addItem(id, text, new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                control.listen(menu);
+            }
+        });
+    }
+
+    public void selectItem(String input) {
+        menuItems.get(input).select();
+        control.listen(this);
     }
 
     public String toString() {

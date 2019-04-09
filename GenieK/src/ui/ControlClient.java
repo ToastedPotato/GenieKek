@@ -2,8 +2,8 @@ package ui;
 
 import java.util.*;
 
-public class ControlClient extends Control{
-    
+public class ControlClient {// extends Control{
+    /*
     private Scanner scanner = new Scanner(System.in);
         
     //String contenant les options de recherche de vol/croisière/trajet de train
@@ -18,10 +18,10 @@ public class ControlClient extends Control{
         this.view = new View();
 
 
-        /*this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" +
+        this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" +
             "    [1] - Consulter les vols disponibles\n" + 
             "    [2] - Consulter votre réservation\n" + 
-            "    [3] - Quitter\n";*/
+            "    [3] - Quitter\n";
         return;
     }
     
@@ -87,11 +87,12 @@ public class ControlClient extends Control{
         
         //TODO: appel du visiteur/itérateur approprié pour lire la liste de réservations
         
-        /*TODO: affichage des infos de la réservation et des options de 
+        /TODO: affichage des infos de la réservation et des options de
             réservation (si disponibles): [1] Annuller [2] Réserver une autre 
-            place [3] Payer la réservation [4] Retour au menu principal*/
+            place [3] Payer la réservation [4] Retour au menu principal
             
         return;
     }
+    */
 
 }

@@ -14,10 +14,15 @@ public class GenericSection extends Section {
         this.disposition = disposition;
         // calcul le nombre de rangée nécessaire par rapport à la disposition
         this.nbRow = nbSeat / getNbColumn();
+        initPlaces();
+    }
+
+    @Override
+    protected void initPlaces() {
         // place les sièges colonne par colonne puis une fois
         // arrivé au bout on passe à la rangée suivante
         int row = 0, colum = 0;
-        for (int i = 0; i < nbSeat; i++) {
+        for (int i = 0; i < nbPlaces; i++) {
             places[i] = new Seat(row, Column.values()[colum]);
             colum++;
             // si on arrive à la dernière colonne de la disposition on passe à la prochaine rangée

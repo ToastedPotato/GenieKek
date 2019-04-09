@@ -4,8 +4,17 @@ import place.Cabin;
 
 public class CruiseSection extends Section {
 
+    private int capacity;
+
     public CruiseSection(int nbCabin, float ratio, int capacity) {
         super(nbCabin, ratio);
-        for (int i = 0; i < nbCabin; i++) places[i] = new Cabin(capacity);
+        this.capacity = capacity;
+        initPlaces();
+    }
+
+    @Override
+    protected void initPlaces() {
+        for (int i = 0; i < nbPlaces; i++)
+            places[i] = new Cabin(capacity);
     }
 }

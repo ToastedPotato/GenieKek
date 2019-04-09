@@ -16,141 +16,69 @@ public class ControlAdmin extends Control {
     private Menu stationCreationMenu;
     private Menu compagnyCreationManu;
 
-    public ControlAdmin(){
-        this.view = new View();
-        initMenu();
-    }
+    protected void initMenu() {
+        mainMenu = new Menu(this, "Tableau de bord administrateur");
 
-    private void listen(Menu menu){
-        //La boucle d'exécution primaire du contrôleur
-        boolean run = true;
-        String choice = scanner.next();
-
-        while(run){
-            this.view.update(menu.toString());
-            this.view.display();
-            run = menu.selectItem(choice);
-        }
-    }
-
-    private void displayer(String msg){
-        //La boucle d'exécution primaire du contrôleur
-        boolean run = true;
-        String choice = scanner.next();
-
-        msg += "press q to return to the last menu\n";
-
-        while(run){
-            // FIXME : boucle inutile, on affice et on attend la réponse de l'utilisateur,
-            // là on affiche le message jusqu'à ce que l'admin quitte
-            this.view.update(msg);
-            this.view.display();
-            if(choice.equals("q")) run = false;
-        }
-    }
-
-    private void initMenu(){
-        this.mainMenu = new Menu("Admin Dashboard");
-        this.mainMenu.addItem("1", "Station", new MenuItemListener() {
-            @Override
-            public boolean onSelect() {
-                    listen(stationManagementMenu);
-                    return true;
-            }
-        });
-
-        this.mainMenu.addItem("2", "Compagnie", new MenuItemListener() {
-            @Override
-            public boolean onSelect() {
-                    listen(stationManagementMenu);
-                    return true;
-            }
-        });
-
-        this.mainMenu.addItem("3", "Quitter", new MenuItemListener() {
-            @Override
-            public boolean onSelect() {
-                    return false;
-            }
-        });
-
-        stationManagementMenu = new Menu("Station Management");
+        stationManagementMenu = new Menu(this, mainMenu, "Management des Stations");
         stationManagementMenu.addItem("1", "Créer", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    return true;
+            public void onSelect() {
+                System.out.println("*** Créer");
             }
         });
 
         stationManagementMenu.addItem("2", "Modifier", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    return true;
+            public void onSelect() {
+                System.out.println("*** Modifier");
             }
         });
 
         stationManagementMenu.addItem("3", "Supprimer", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    return true;
+            public void onSelect() {
+                System.out.println("*** Supprimer");
             }
         });
 
         stationManagementMenu.addItem("4", "Afficher", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                displayer(DataBase.getInstance().stationsToString(visitor));
-                return true;
+            public void onSelect() {
+                display(DataBase.getInstance().stationsToString(visitor));
             }
         });
 
-        stationManagementMenu.addItem("4", "Quitter", new MenuItemListener() {
-            @Override
-            public boolean onSelect() {
-                    return false;
-            }
-        });
-
-        compagnyManagementMenu = new Menu("Company Management");
+        compagnyManagementMenu = new Menu(this, mainMenu, "Management des Compagnies");
         compagnyManagementMenu.addItem("1", "Créer", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    return true;
+            public void onSelect() {
+                System.out.println("*** Créer");
             }
         });
 
         compagnyManagementMenu.addItem("2", "Modifier", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    return true;
+            public void onSelect() {
+                System.out.println("*** Modifier");
             }
         });
 
         compagnyManagementMenu.addItem("3", "Supprimer", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    return true;
+            public void onSelect() {
+                System.out.println("*** Supprimer");
             }
         });
 
         compagnyManagementMenu.addItem("4", "Afficher", new MenuItemListener() {
             @Override
-            public boolean onSelect() {
-                    displayer(DataBase.getInstance().companiesToString(visitor));
-                    return true;
+            public void onSelect() {
+                    display(DataBase.getInstance().companiesToString(visitor));
             }
         });
 
-        compagnyManagementMenu.addItem("5", "Quitter", new MenuItemListener() {
-            @Override
-            public boolean onSelect() {
-                return false;
-            }
-        });
-
+        mainMenu.addItem("1", "Station", stationManagementMenu);
+        mainMenu.addItem("2", "Compagnie", compagnyManagementMenu);
     }
-
-
-
 }
 
