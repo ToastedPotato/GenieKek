@@ -10,10 +10,15 @@ public abstract class Control {
     private View view;
     protected Menu mainMenu;
     protected Visitor visitor;
+    protected DataBase dataBase;
     private Scanner scanner = new Scanner(System.in);
     
     public Control() {
+        dataBase = DataBase.getInstance();
         view = new View();
+    }
+
+    protected void show() {
         initMenu();
         listen(mainMenu);
     }
@@ -24,9 +29,14 @@ public abstract class Control {
         menu.selectItem(choice);
     }
 
-    public void display(String message) {
-        message += "\n\n *** appuyer sur 'q' pour retourner au dernier menu\n";
+    public void print(String message) {
         view.update(message);
+        view.display();
+    }
+
+    public void display(String data) {
+        data += "\n\n *** appuyer sur 'q' pour retourner au dernier menu\n";
+        view.update(data);
         view.display();
         String input;
         do {

@@ -10,13 +10,11 @@ public class Menu {
 
     private HashMap<String, MenuItem> menuItems =  new HashMap<>();
     private String title;
-    private Menu parent;
     private Control control;
 
     public Menu(Control control, String title) {
         this.control = control;
         this.title = title;
-        this.parent = null;
         addItem("q", "Quitter", new MenuItemListener() {
             @Override
             public void onSelect() {
@@ -28,7 +26,6 @@ public class Menu {
     public Menu(Control control, Menu parent, String title) {
         this.control = control;
         this.title = title;
-        this.parent = parent;
         addItem("q", "Retour au menu parent", new MenuItemListener() {
             @Override
             public void onSelect() {
@@ -39,6 +36,17 @@ public class Menu {
 
     public void addItem(String id, String text, MenuItemListener menuItemListener) {
         menuItems.put(id, new MenuItem(id, text, menuItemListener));
+    }
+
+    public void addItem(String id, String text, MenuInputCompleted menuInputCompleted, Field ... fields) {
+        menuItems.put(id, new MenuItem(id, text, new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                MenuInput menuInput = new MenuInput(control, fields);
+                menuInput.display();
+                menuInputCompleted.onCompleted(menuInput);
+            }
+        }));
     }
 
     public void addItem(String id, String text, Menu menu) {

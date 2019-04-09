@@ -56,7 +56,7 @@ public class DataBase {
         c = FlightCompanyFactory.getInstance().createCompany("ARC", "Air Canada", 800);
         c.createTransport("A45")
                 .addSection(new FSection(60, new Large()));
-        c.createTrip("PTM", 1, getStation("CGD"), getStation("YUL"), "A45");
+        c.createTrip("PTM", 1, getStation("CDG"), getStation("YUL"), "A45");
         addCompany(c);
 
         c = CruiseCompanyFactory.getInstance().createCompany("COS", "Costa Croisière", 2000);
@@ -78,6 +78,9 @@ public class DataBase {
         for (Station station : stations) {
             if (station.getId().equals(stationId)) return station;
         }
+        try {
+            throw new NullObjectException(stationId);
+        } catch (NullObjectException ignored) {}
         return null;
     }
 
@@ -93,6 +96,9 @@ public class DataBase {
         for (Company company : companies) {
             if (company.getId().equals(companyId)) return company;
         }
+        try {
+            throw new NullObjectException(companyId);
+        } catch (NullObjectException ignored) {}
         return null;
     }
 
@@ -115,17 +121,11 @@ public class DataBase {
 
 
     public String stationsToString(Visitor visitor){
-
         String string = "";
-
-        for (Station s:stations) {
-
-            string += visitor.visit(s) + "\n";
-
+        for (Station station :stations) {
+            string += visitor.visit(station) + "\n";
         }
-
         return  string;
-
     }
 
     public String companiesToString(Visitor visitor){
