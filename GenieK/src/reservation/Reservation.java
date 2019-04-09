@@ -2,11 +2,17 @@ package reservation;
 
 public class Reservation{
     
+    private static int number= 1;
+    
+    private String resNum;
+    
     private Confirmation confirmation;
     
     private Place place;
     
-    public Reservation(){
+    public Reservation(String idCompany){
+        this.resNum = idCompany + number;
+        number++;
         this.confirmation = null;
     }
     
