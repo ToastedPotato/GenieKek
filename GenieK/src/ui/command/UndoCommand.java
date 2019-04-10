@@ -10,7 +10,9 @@ public class UndoCommand implements Command {
 
     @Override
     public void execute() {
-        controller.unexecute(controller.undo());
+        Command command = controller.undo();
+        if (command == null) return;
+        controller.unexecute(command);
     }
 
     @Override

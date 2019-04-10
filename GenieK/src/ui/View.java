@@ -11,5 +11,4 @@ public class View {
     void display(){
         System.out.println(this.output);
     }
-
 }

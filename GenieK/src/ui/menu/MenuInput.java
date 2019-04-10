@@ -8,12 +8,12 @@ public class MenuInput {
 
     private Scanner scanner = new Scanner(System.in);
     private HashMap<String, String> inputs = new HashMap<>();
-    private ArrayList<Field> fields = new ArrayList<>();
+    private ArrayList<Field> fields;
     private Control control;
 
-    public MenuInput(Control control, Field ... fields) {
+    public MenuInput(Control control, FieldGroup fieldGroup) {
         this.control = control;
-        this.fields.addAll(Arrays.asList(fields));
+        this.fields = fieldGroup.getFields();
     }
 
     public void display() {
@@ -21,9 +21,13 @@ public class MenuInput {
     }
 
     private void listen(Field field) {
-        control.print(field.getText() + ":");
-        String input = scanner.next();
+        control.display(field.getText() + ":");
+        String input = scanner.nextLine();
         inputs.put(field.getId(), input);
+    }
+
+    public String get(Field.Input fieldInput) {
+        return get(fieldInput.toString());
     }
 
     public String get(String fieldId) {

@@ -38,15 +38,19 @@ public class Menu {
         menuItems.put(id, new MenuItem(id, text, menuItemListener));
     }
 
-    public void addItem(String id, String text, MenuInputCompleted menuInputCompleted, Field ... fields) {
+    public void addItem(String id, String text, MenuInputCompleted menuInputCompleted, FieldGroup fieldGroup) {
         menuItems.put(id, new MenuItem(id, text, new MenuItemListener() {
             @Override
             public void onSelect() {
-                MenuInput menuInput = new MenuInput(control, fields);
+                MenuInput menuInput = new MenuInput(control, fieldGroup);
                 menuInput.display();
                 menuInputCompleted.onCompleted(menuInput);
             }
         }));
+    }
+
+    public void addItem(String id, String text, MenuInputCompleted menuInputCompleted, Field ... fields) {
+        addItem(id, text, menuInputCompleted, new FieldGroup(fields));
     }
 
     public void addItem(String id, String text, Menu menu) {
@@ -58,9 +62,10 @@ public class Menu {
         });
     }
 
-    public void selectItem(String input) {
+    public boolean selectItem(String input) {
+        if (!menuItems.containsKey(input)) return false;
         menuItems.get(input).select();
-        control.listen(this);
+        return true;
     }
 
     public String toString() {

@@ -10,7 +10,9 @@ public class RedoCommand implements Command {
 
     @Override
     public void execute() {
-        controller.execute(controller.redo());
+        Command command = controller.redo();
+        if (command == null) return;
+        controller.execute(command);
     }
 
     @Override

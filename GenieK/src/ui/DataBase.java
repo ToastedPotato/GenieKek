@@ -88,6 +88,13 @@ public class DataBase {
         this.stations.add(station);
     }
 
+    public boolean removeStation(String stationId) {
+        Station station = getStation(stationId);
+        if (station == null) return false;
+        stations.remove(station);
+        return true;
+    }
+
     public ArrayList<Company> getCompanies() {
         return companies;
     }
@@ -121,24 +128,19 @@ public class DataBase {
 
 
     public String stationsToString(Visitor visitor){
-        String string = "";
-        for (Station station :stations) {
-            string += visitor.visit(station) + "\n";
+        StringBuilder string = new StringBuilder();
+        for (Station station : stations) {
+            string.append(visitor.visit(station)).append("\n");
         }
-        return  string;
+        return string.toString();
     }
 
     public String companiesToString(Visitor visitor){
-
-        String string = "";
-
-        for (Company c:companies) {
-
-            string += visitor.visit(c) + "\n";
-
+        StringBuilder string = new StringBuilder();
+        for (Company company : companies) {
+            string.append(visitor.visit(company)).append("\n");
         }
-
-        return string;
+        return string.toString();
 
     }
 }
