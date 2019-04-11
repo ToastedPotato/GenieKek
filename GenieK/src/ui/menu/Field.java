@@ -11,7 +11,12 @@ public class Field {
         TYPE ("Type"),
         DISPO ("Disposition"),
         SEAT ("Nombre de siège"),
-        CABIN ("Nombre de cabine")
+        CABIN ("Nombre de cabine"),
+        NUM ("Nombre"),
+        DEP ("Depart"),
+        ARR ("Arrivee"),
+        TRANS_ID("Tranport ID")
+
         ;
 
         private final String text;
