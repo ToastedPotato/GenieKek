@@ -1,5 +1,6 @@
 package factory.station;
 
+import exception.IdException;
 import station.*;
 
 public abstract class StationFactory {

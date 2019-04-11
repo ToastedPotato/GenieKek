@@ -1,5 +1,6 @@
 package ui.command;
 
+import exception.IdException;
 import station.*;
 
 public class ModifyStation implements Command{

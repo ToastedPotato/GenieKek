@@ -21,7 +21,7 @@ public class MenuInput {
     }
 
     private void listen(Field field) {
-        control.display(field.getText() + ":");
+        control.print(field.getText() + ": ");
         String input = scanner.nextLine();
         inputs.put(field.getId(), input);
     }

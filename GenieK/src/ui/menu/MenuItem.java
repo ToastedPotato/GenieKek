@@ -1,17 +1,24 @@
 package ui.menu;
 
+import ui.Console;
+import ui.Control;
+
 public class MenuItem {
 
-    private String id, text;
+    private String id, text, description;
     private MenuItemListener listener;
+    private Control control;
 
-    public MenuItem(String id, String text, MenuItemListener listener) {
+    public MenuItem(Control control, String id, String text, String description, MenuItemListener listener) {
+        this.control = control;
         this.id = id;
         this.text = text;
+        this.description = description;
         this.listener = listener;
     }
 
     public void select() {
+        if (description != null) control.println(description);
         listener.onSelect();
     }
 
@@ -24,6 +31,10 @@ public class MenuItem {
     }
 
     public String toString() {
-        return "    [" + id + "] - " + text + "\n";
+        return "[" + id + "] " + Console.colorize(Console.PURPLE, text) + "\n";
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

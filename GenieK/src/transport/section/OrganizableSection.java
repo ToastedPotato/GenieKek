@@ -1,16 +1,55 @@
 package transport.section;
 
+import exception.EnumException;
 import place.Column;
 import place.Seat;
-import transport.section.disposition.Disposition;
+import visitor.Visitor;
 
-public class GenericSection extends Section {
+public class OrganizableSection extends Section {
+
+    public enum Type {
+        PREMIERE ("F",100),
+        BUSINESS ("A", 75),
+        PREMIUM ("P", 60),
+        ECONOMIC ("E",50)
+        ;
+
+        private final String str;
+        private final int ratio;
+
+        Type (String str, int ratio) {
+            this.str = str;
+            this.ratio = ratio;
+        }
+
+        public static Type get(String str) {
+            for (Type type : Type.values()) {
+                if (type.str.equals(str)) return type;
+            }
+            try {
+                throw new EnumException(str);
+            } catch (EnumException ignored) { }
+            return null;
+        }
+
+        public String getStr() {
+            return str;
+        }
+
+        public int getRatio() {
+            return ratio;
+        }
+
+        public String print(Visitor visitor) {
+            return visitor.visit(this);
+        }
+    }
 
     private Disposition disposition;
     private int nbRow;
 
-    public GenericSection(int nbSeat, float ratio, Disposition disposition) {
-        super(nbSeat, ratio);
+    public OrganizableSection(Type type, Disposition disposition, int nbSeat) {
+        super(nbSeat, type.ratio, type.str);
         this.disposition = disposition;
         // calcul le nombre de rangée nécessaire par rapport à la disposition
         this.nbRow = nbSeat / getNbColumn();

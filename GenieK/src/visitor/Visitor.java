@@ -4,16 +4,22 @@ import company.Company;
 import place.Place;
 import station.Station;
 import transport.Transport;
+import transport.section.CabinSection;
+import transport.section.Disposition;
+import transport.section.OrganizableSection;
 import trip.*;
 
 public interface Visitor {
 
-    public String visit (Company company);
-    public String visit (Place place);
-    public String visit (Station station);
-    public String visit (Transport transport);
-    public String visit (Schedule schedule);
-    public String visit (Trip trip);
+    String visit (Company company);
+    String visit (Place place);
+    String visit (Station station);
+    String visit (Transport transport);
+    String visit (Schedule schedule);
+    String visit (Trip trip);
+    String visit (OrganizableSection.Type type);
+    String visit (CabinSection.Type type);
+    String visit (Disposition dispo);
 
         
 }

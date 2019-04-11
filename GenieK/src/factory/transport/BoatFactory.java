@@ -1,7 +1,9 @@
 package factory.transport;
 
+import place.Cabin;
 import transport.Boat;
 import transport.Transport;
+import transport.section.CabinSection;
 
 public class BoatFactory extends TransportFactory {
 
@@ -14,6 +16,6 @@ public class BoatFactory extends TransportFactory {
 
     @Override
     protected Transport fabricateTransport() {
-        return new Boat();
+        return new Boat(CabinSection.class);
     }
 }

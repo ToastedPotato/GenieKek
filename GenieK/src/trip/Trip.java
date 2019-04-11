@@ -2,6 +2,7 @@ package trip;
 
 import station.Station;
 import transport.Transport;
+import transport.section.Section;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +66,11 @@ public class Trip{
     public String getIdCompany() {
         return this.idCompany;
     }    
-    
+
+    public ArrayList<Section> getSections() {
+        return transport.getSections();
+    }
+
     public void setIdCompany(String idCompany) {
         this.idCompany = idCompany;
     }
@@ -76,10 +81,6 @@ public class Trip{
 
     public ArrayList<Schedule> getSchedules() {
         return schedules;
-    }
-
-    public void setStops(Station[] stops) {
-        this.stops.addAll(Arrays.asList(stops));
     }
 
     public Trip addStop(Station stop) {

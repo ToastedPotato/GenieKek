@@ -1,8 +1,8 @@
 package ui.command;
 
 import company.Company;
-import station.IdException;
-import station.PriceException;
+import exception.IdException;
+import exception.PriceException;
 
 public class ModifyCompany implements Command{
 

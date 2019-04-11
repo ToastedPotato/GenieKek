@@ -1,8 +1,8 @@
 package factory.company;
 
 import company.Company;
-import station.IdException;
-import station.PriceException;
+import exception.IdException;
+import exception.PriceException;
 
 public abstract class CompanyFactory {
 

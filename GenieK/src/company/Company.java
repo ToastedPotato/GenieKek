@@ -1,11 +1,15 @@
 package company;
 
+import exception.IdException;
+import exception.TransportException;
+import exception.TripException;
 import factory.transport.*;
 import factory.trip.TripFactory;
 import reservation.Reservation;
 import station.Station;
 import transport.Transport;
 import trip.Trip;
+import visitor.Visitor;
 
 import java.util.ArrayList;
 
@@ -35,28 +39,70 @@ public class Company {
         this.name = name;
     }
 
+    public ArrayList<Transport> getTransports() {
+        return transports;
+    }
+
     public Transport createTransport(String transportId) {
-        Transport transport = transportFactory.createTransport(transportId);
-        transports.add(transport);
-        return transport;
+        if (transportId.length() != 3) {
+            try {
+                throw new IdException(transportId);
+            } catch (IdException ignored) { }
+            return null;
+        }
+        return transportFactory.createTransport(transportId, id);
     }
 
     public Trip createTrip(String tripId, int number, Station departure, Station arrived, String transportId) {
-        Transport transport = getTransport(transportId);
-        try {
-            if (transport == null) throw new TransportException(transportId);
-        } catch (TransportException e) {
-            e.printStackTrace();
+        if (tripId.length() != 3) {
+            try {
+                throw new IdException(tripId);
+            } catch (IdException ignored) { }
+            return null;
         }
-        Trip trip = tripFactory.createTrip(tripId, number, departure, arrived, tripId, transport);
-        trips.add(trip);
-        return trip;
+        Transport transport = getTransport(transportId);
+        if (transport == null) {
+            try {
+                throw new TransportException(transportId);
+            } catch (TransportException ignored) { }
+            return null;
+        }
+        return tripFactory.createTrip(tripId, number, departure, arrived, id, transport);
+    }
+
+    public String transportToString(Visitor visitor) {
+        String string = "";
+        for (Transport transport : transports) {
+            string += visitor.visit(transport) + "\n";
+        }
+        return string;
+    }
+
+    public String tripToString(Visitor visitor) {
+        String string = "";
+        for (Trip trip : trips) {
+            string += visitor.visit(trip) + "\n";
+        }
+        return string;
     }
 
     public Transport getTransport(String transportId) {
         for (Transport transport : transports) {
             if (transport.getId().equals(transportId)) return transport;
         }
+        try {
+            throw new TransportException(transportId);
+        } catch (TransportException ignored) { }
+        return null;
+    }
+
+    public Trip getTrip(String tripId) {
+        for (Trip trip : trips) {
+            if (trip.getId().equals(tripId)) return trip;
+        }
+        try {
+            throw new TripException(tripId);
+        } catch (TripException ignored) { }
         return null;
     }
 
@@ -73,22 +119,6 @@ public class Company {
 
     public ArrayList<Trip> getTrips() {
         return trips;
-    }
-
-    // TODO : à supprimer, juste pour les tests
-    public String toString() {
-        StringBuilder string = new StringBuilder("[COMPANY :: " + name + "]\n-------------------\n");
-        for(Trip trip : trips) {
-            string.append(" - (")
-                    .append(trip.getId())
-                    .append(") ")
-                    .append(trip.getDepart().getCity())
-                    .append(" -> ")
-                    .append(trip.getArrive().getCity())
-                    .append("\n");
-
-        }
-        return string.toString();
     }
 
     public String getId() {

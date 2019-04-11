@@ -5,39 +5,33 @@ import trip.*;
 
 public class ModifyTrip implements Command{
 
-    private Trip target;
-    private String oldId, newId, oldIdCompany, newIdCompany;
+    private Trip trip;
+    private String oldId, newId;
     private int oldNumber, newNumber;
     private Station oldDepart, oldArrive, newDepart, newArrive;
         
-    public ModifyTrip(Trip target, String newId, int newNumber, Station newDepart, Station newArrive, String newIdCompany){
-        this.target = target;
-        
-        this.oldId = target.getId();
-        this.oldNumber = target.getNumber();
-        this.oldDepart = target.getDepart();
-        this.oldArrive = target.getArrive();
-        this.oldIdCompany = target.getIdCompany();
-        
-        if(newId != null){this.newId = newId;}
-        if(newNumber != 0){this.newNumber = newNumber;}
-        if(newDepart != null){this.newDepart = newDepart;}
-        if(newArrive != null){this.newArrive = newArrive;}
-        if(newIdCompany != null){this.newIdCompany = newIdCompany;}
+    public ModifyTrip(Trip trip, String newId, int newNumber, Station newDepart, Station newArrive){
+        this.trip = trip;
+        this.oldId = trip.getId();
+        this.oldNumber = trip.getNumber();
+        this.oldDepart = trip.getDepart();
+        this.oldArrive = trip.getArrive();
+        this.newId = newId;
+        this.newNumber = newNumber;
+        this.newDepart = newDepart;
+        this.newArrive = newArrive;
     }
     
     public void execute(){
-        if(this.newId != null){this.target.setId(this.newId);}
-        if(this.newNumber != 0){this.target.setNumber(this.newNumber);}
-        if(this.newDepart != null && this.newArrive != null){this.target.setStation(this.newDepart, this.newArrive);}
-        if(this.newIdCompany != null){this.target.setIdCompany(this.newIdCompany);}    
+        this.trip.setId(this.newId);
+        this.trip.setNumber(this.newNumber);
+        this.trip.setStation(this.newDepart, this.newArrive);
     }
     
     public void unexecute(){
-        this.target.setId(this.oldId);
-        this.target.setNumber(this.oldNumber);
-        this.target.setStation(this.oldDepart, this.oldArrive);
-        this.target.setIdCompany(this.oldIdCompany);    
+        this.trip.setId(this.oldId);
+        this.trip.setNumber(this.oldNumber);
+        this.trip.setStation(this.oldDepart, this.oldArrive);
     }
 
 }

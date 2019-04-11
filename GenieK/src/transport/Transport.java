@@ -3,15 +3,19 @@ package transport;
 import transport.section.Section;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Transport {
 
-    private String id;
+    private String id, companyId;
     private ArrayList<Section> sections = new ArrayList<>();
+    private Class<?> sectionClass;
 
-    public Transport() {
+    public Transport(Class<?> sectionClass) {
+        this.sectionClass = sectionClass;
+    }
 
+    public Class<?> getSectionClass() {
+        return sectionClass;
     }
 
     public void setId(String num) {
@@ -22,8 +26,16 @@ public class Transport {
         return id;
     }
 
-    public void setSections(Section[] sections) {
-        this.sections.addAll(Arrays.asList(sections));
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public ArrayList<Section> getSections() {
+        return sections;
     }
 
     public Transport addSection(Section section) {

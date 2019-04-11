@@ -7,7 +7,11 @@ public class Field {
         NEW_ID ("Nouvel Id"),
         NAME ("Nom"),
         CITY ("Ville"),
-        PRICE ("Prix")
+        PRICE ("Prix"),
+        TYPE ("Type"),
+        DISPO ("Disposition"),
+        SEAT ("Nombre de siège"),
+        CABIN ("Nombre de cabine")
         ;
 
         private final String text;

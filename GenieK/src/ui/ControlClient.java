@@ -35,7 +35,7 @@ public class ControlClient {// extends Control{
         
         while(run){
             //this.view.update(mainMenu);
-            this.view.display();
+            this.view.println();
             
             switch (choice) {
                 case "1" : this.findTrip();
@@ -57,7 +57,7 @@ public class ControlClient {// extends Control{
     //offre les options de recherche de voyage disponibles
         
         this.view.update(this.findTripMenu);
-        this.view.display();
+        this.view.println();
         String searchParams = scanner.next();
         
         //TODO: traitement des paramètres; splice puis un switch, etc. 
@@ -68,7 +68,7 @@ public class ControlClient {// extends Control{
         
         //Options disponibles après recherche: selectionner un voyage, presser "Enter"-> Retour au menu principal 
         this.view.update(this.selectTripMenu);
-        this.view.display();
+        this.view.println();
         String choice = scanner.next();
         
         if(!choice.equals("\n") && !choice.equals("\r\n")){
@@ -82,7 +82,7 @@ public class ControlClient {// extends Control{
     //gestion de la réservation du client
         
         this.view.update("Veuillez entrer votre numéro de réservation.");
-        this.view.display();
+        this.view.println();
         String resNumber = scanner.next();
         
         //TODO: appel du visiteur/itérateur approprié pour lire la liste de réservations

@@ -1,6 +1,7 @@
 package factory.transport;
 
 import transport.*;
+import transport.section.OrganizableSection;
 
 public class PlaneFactory extends TransportFactory {
 
@@ -13,6 +14,6 @@ public class PlaneFactory extends TransportFactory {
 
     @Override
     protected Transport fabricateTransport() {
-        return new Plane();
+        return new Plane(OrganizableSection.class);
     }
 }

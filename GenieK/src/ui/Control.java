@@ -20,6 +20,8 @@ public abstract class Control {
     protected DataBase dataBase;
     private Scanner scanner = new Scanner(System.in);
 
+    private boolean FLAG_CMD = false;
+
     private HashMap<String, Command> commands = new HashMap<>();
 
     public Control() {
@@ -30,37 +32,61 @@ public abstract class Control {
         commands.put("redo", new RedoCommand(commandController));
     }
 
+    private void showCommand(String cmd, String desc) {
+        cmd = Console.colorize(Console.GREEN, cmd);
+        println("- " + cmd + " : " + desc);
+    }
+
     protected void show() {
-        display("[Commandes]");
-        display("- exit : pour quitter à tout moment");
-        for (Map.Entry<String, Command> commandMap : commands.entrySet()) {
-            display("- " + commandMap.getKey());
-        }
-        display("\n");
+        println(Console.menu("Commandes"));
+        showCommand("quit", "quitte l'application à tout moment");
+        showCommand("undo","annule l'action la plus récente");
+        showCommand("redo","réapplique l'action annulée la plus récente");
+        println("\n");
         initMenu();
         listen(mainMenu);
     }
 
     public void listen(Menu menu) {
-        display(menu.toString() + "\nVotre choix:");
+        if (!FLAG_CMD) println(menu.toString());
+        else FLAG_CMD = false;
+        print("> ");
         String choice = scanner.next();
         while (!menu.selectItem(choice) && !applyCommand(choice)) {
-            display("La commande '" + choice + "' n'existe pas\nRéessayez:");
+            println(Console.colorize(Console.RED, "La commande '" + choice + "' n'existe pas"));
+            print("> ");
             choice = scanner.next();
         }
         listen(menu);
     }
 
     private boolean applyCommand(String command) {
-        if (command.equals("exit")) System.exit(0);
+        if (command.equals("quit")) System.exit(0);
         if (!commands.containsKey(command)) return false;
         commands.get(command).execute();
+        FLAG_CMD = true;
         return true;
     }
 
-    public void display(String message) {
+    public void printsuc(String message) {
+        println(Console.colorize(Console.GREEN, message));
+    }
+
+    public void println(String message) {
         view.update(message);
-        view.display();
+        view.println();
+    }
+
+    public void print(String message) {
+        view.update(message);
+        view.print();
+    }
+
+    public void display(String data) {
+        println(data);
+        print("\"Entrée\" pour continuer");
+        scanner.nextLine();
+        scanner.nextLine();
     }
 
     protected abstract void initMenu();

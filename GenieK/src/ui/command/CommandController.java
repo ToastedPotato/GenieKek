@@ -1,5 +1,7 @@
 package ui.command;
 
+import exception.NoCommandException;
+
 import java.util.ArrayList;
 
 public class CommandController {

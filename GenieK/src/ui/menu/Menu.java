@@ -1,24 +1,33 @@
 package ui.menu;
 
+import company.Company;
+import ui.Console;
 import ui.Control;
 
-import java.io.IOException;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Menu {
 
     private HashMap<String, MenuItem> menuItems =  new HashMap<>();
-    private String title;
+    private String originTitle, title = null;
     private Control control;
+    private Menu parent = null;
+
+    public Menu(Control control, Menu parent) {
+        this.control = control;
+        this.parent = parent;
+    }
 
     public Menu(Control control, String title) {
         this.control = control;
         this.title = title;
+        this.originTitle = title;
         addItem("q", "Quitter", new MenuItemListener() {
             @Override
             public void onSelect() {
-                System.exit(0);
+                back();
             }
         });
     }
@@ -26,20 +35,41 @@ public class Menu {
     public Menu(Control control, Menu parent, String title) {
         this.control = control;
         this.title = title;
+        this.originTitle = title;
+        this.parent = parent;
         addItem("q", "Retour au menu parent", new MenuItemListener() {
             @Override
             public void onSelect() {
-                control.listen(parent);
+                back();
             }
         });
     }
 
-    public void addItem(String id, String text, MenuItemListener menuItemListener) {
-        menuItems.put(id, new MenuItem(id, text, menuItemListener));
+    public void back() {
+        if (parent == null) System.exit(0);
+        control.listen(parent);
     }
 
-    public void addItem(String id, String text, MenuInputCompleted menuInputCompleted, FieldGroup fieldGroup) {
-        menuItems.put(id, new MenuItem(id, text, new MenuItemListener() {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Menu appendTitle(String append) {
+        setTitle(originTitle + " " + append);
+        return this;
+    }
+
+    public MenuItem getItem(String id) {
+        if (!menuItems.containsKey(id)) return null;
+        return menuItems.get(id);
+    }
+
+    public void addItem(String id, String text, MenuItemListener menuItemListener) {
+        menuItems.put(id, new MenuItem(control, id, text, null, menuItemListener));
+    }
+
+    public void addItem(String id, String text, String description, FieldGroup fieldGroup, MenuInputCompleted menuInputCompleted) {
+        menuItems.put(id, new MenuItem(control, id, text, description, new MenuItemListener() {
             @Override
             public void onSelect() {
                 MenuInput menuInput = new MenuInput(control, fieldGroup);
@@ -48,9 +78,16 @@ public class Menu {
             }
         }));
     }
+    public void addItem(String id, String text, FieldGroup fieldGroup, MenuInputCompleted menuInputCompleted) {
+        addItem(id, text, null, fieldGroup, menuInputCompleted);
+    }
 
-    public void addItem(String id, String text, MenuInputCompleted menuInputCompleted, Field ... fields) {
-        addItem(id, text, menuInputCompleted, new FieldGroup(fields));
+    public void addItem(String id, String text, String description, Field field, MenuInputCompleted menuInputCompleted) {
+        addItem(id, text, description, new FieldGroup(field), menuInputCompleted);
+    }
+
+    public void addItem(String id, String text, Field field, MenuInputCompleted menuInputCompleted) {
+        addItem(id, text, null, new FieldGroup(field), menuInputCompleted);
     }
 
     public void addItem(String id, String text, Menu menu) {
@@ -69,10 +106,13 @@ public class Menu {
     }
 
     public String toString() {
-        StringBuilder text = new StringBuilder(title + "\n----------------------------------\n");
-        for(Map.Entry<String, MenuItem> entry : menuItems.entrySet()) {
-            text.append(entry.getValue().toString());
+        String string = "";
+        if (title != null) {
+            string += Console.menu(title) + "\n";
         }
-        return text.toString();
+        for(Map.Entry<String, MenuItem> entry : menuItems.entrySet()) {
+            string += entry.getValue().toString();
+        }
+        return string;
     }
 }
