@@ -114,6 +114,12 @@ public class Trip{
         this.idCompany = idCompany;
     }
 
+    public boolean haveStop(Station stop) {
+        for (Station station : stops)
+            if (station.getId().equals(stop.getId())) return true;
+        return false;
+    }
+
     public Trip addStop(Station stop) {
         // si l'élément existe déjà on sort
         if (stops.indexOf(stop) >= 0) return this;

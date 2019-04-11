@@ -1,8 +1,10 @@
 package ui;
 
 import company.Company;
+import company.FlightCompany;
 import exception.NbPlaceException;
 import exception.SectionException;
+import exception.StopException;
 import factory.company.CruiseCompanyFactory;
 import factory.company.FlightCompanyFactory;
 import factory.company.TrainCompanyFactory;
@@ -29,6 +31,7 @@ public class ControlAdmin extends Control {
 
     private Company selectedCompany = null;
     private Transport onCreationTransport = null;
+    private Trip onCreationTrip = null;
 
     private final static String DESC_STATION_CREATE = "Créer une nouvelle station en mentionnant son {Id} et sa {Ville}";
     private final static String DESC_COMPANY_CREATE = "Créer une nouvelle compagnie en mentionnant son {Id}, son {Nom} et le {Prix} de base";
@@ -47,6 +50,11 @@ public class ControlAdmin extends Control {
         commandController.execute(new AddInstanceTo<>(dataBase.getCompanies(), company));
     }
 
+    private void createTrip(Trip trip) {
+        if (trip == null) return;
+        commandController.execute(new AddInstanceTo<>(selectedCompany.getTrips(), trip));
+    }
+
     protected void initMenu() {
         // Instancie les menus
         mainMenu = new Menu(this, "Tableau de bord administrateur");
@@ -59,7 +67,7 @@ public class ControlAdmin extends Control {
         Menu companyTripMenu = new Menu(this, companyManageMenu, "Gestion des voyages");
         Menu sectionOrganizedMenu = new Menu(this, companyTransportMenu);
         Menu sectionCabinMenu = new Menu(this, companyTransportMenu);
-
+        Menu stopTripMenu = new Menu(this, companyTripMenu);
 
 
         FieldGroup createStationFields = new FieldGroup(
@@ -230,7 +238,11 @@ public class ControlAdmin extends Control {
                     if (type == null) return;
                     if (nbCabin <= 0) throw new NbPlaceException();
                     section = new CabinSection(type, nbCabin);
-                } catch (NbPlaceException ignored) { }
+                    if (onCreationTransport.haveSection(section)) {
+                        section = null;
+                        throw new SectionException(inputs.get(Field.Input.TYPE));
+                    }
+                } catch (NbPlaceException | SectionException ignored) { }
                 if (section == null) return;
                 onCreationTransport.addSection(section);
                 printsuc("+ section ajoutée");
@@ -297,8 +309,34 @@ public class ControlAdmin extends Control {
                 }
             });
 
+
+        stopTripMenu.addItem("1", "Ajouter une station d'arrêt", new Field(Field.Input.ID), new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                Station station = dataBase.getStation(inputs.get(Field.Input.ID));
+                if (station == null) return;
+                try {
+                    if (onCreationTrip.haveStop(station)) {
+                        station = null;
+                        throw new StopException(inputs.get(Field.Input.ID));
+                    }
+                } catch (StopException ignored) { }
+                if (station == null) return;
+                onCreationTrip.addStop(station);
+                printsuc("+ station d'arrêt ajoutée");
+            }
+        });
+        stopTripMenu.addItem("2", "Finaliser la création", new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                createTrip(onCreationTrip);
+                printsuc("+ voyage ajouté");
+                stopTripMenu.back();
+            }
+        });
+
         // Company Trip Menu
-        companyTripMenu.addItem("1", "Créer un voyage",createCompanyTripFields,new MenuInputCompleted() {
+        companyTripMenu.addItem("1", "Créer un voyage", createCompanyTripFields, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
                 String tripId = inputs.get(Field.Input.ID);
@@ -306,13 +344,14 @@ public class ControlAdmin extends Control {
                 Station departure = dataBase.getStation(inputs.get(Field.Input.DEP));
                 Station arrived = dataBase.getStation(inputs.get(Field.Input.ARR));
                 String transportId = inputs.get(Field.Input.TRANS_ID);
-
-                Trip trip =  selectedCompany.createTrip(tripId,number,departure,arrived,transportId);
-
-                if (trip == null){
+                Trip trip = selectedCompany.createTrip(tripId,number,departure,arrived,transportId);
+                if (trip == null) return;
+                onCreationTrip = trip;
+                if (!(selectedCompany instanceof FlightCompany)) {
+                    listen(stopTripMenu);
                     return;
                 }
-                // ajouter le voyage *************************
+                createTrip(trip);
                 printsuc("+ voyage ajoutée");
             }
 

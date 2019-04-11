@@ -80,6 +80,7 @@ public class DataBase {
                 .addStop(getStation("TUN"))
                 .addStop(getStation("EGY")));
         addCompany(c);
+        View.CONSOLE_ENABLE = true;
     }
 
     /**
@@ -248,6 +249,15 @@ public class DataBase {
         for (Company company : companies) {
             transport = company.getTransport(transportId);
             if (transport != null) return true;
+        }
+        return false;
+    }
+
+    public boolean tripExist(String tripId) {
+        Trip trip;
+        for (Company company : companies) {
+            trip = company.getTrip(tripId);
+            if (trip != null) return true;
         }
         return false;
     }

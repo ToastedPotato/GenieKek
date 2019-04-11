@@ -17,10 +17,9 @@ public class Field {
         SECTION ("La classe souhaitée"),
         DATE ("Date de départ (yyyy.MM.dd)"),
         NUM ("Nombre"),
-        DEP ("Depart"),
-        ARR ("Arrivee"),
-        TRANS_ID("Tranport ID")
-
+        DEP ("Station Id de depart"),
+        ARR ("Station Id d'arrivée"),
+        TRANS_ID("Tranport Id")
         ;
 
         private final String text;

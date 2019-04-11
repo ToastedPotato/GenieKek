@@ -1,5 +1,6 @@
 package company;
 
+import exception.ExistException;
 import exception.IdException;
 import exception.TransportException;
 import exception.TripException;
@@ -9,6 +10,7 @@ import reservation.Reservation;
 import station.Station;
 import transport.Transport;
 import trip.Trip;
+import ui.DataBase;
 import visitor.Visitor;
 
 import java.util.ArrayList;
@@ -50,6 +52,12 @@ public class Company {
             } catch (IdException ignored) { }
             return null;
         }
+        if (DataBase.getInstance().transportExist(transportId)) {
+            try {
+                throw new ExistException(transportId);
+            } catch (ExistException ignored) { }
+            return null;
+        }
         return transportFactory.createTransport(transportId, id);
     }
 
@@ -58,6 +66,12 @@ public class Company {
             try {
                 throw new IdException(tripId);
             } catch (IdException ignored) { }
+            return null;
+        }
+        if (DataBase.getInstance().tripExist(tripId)) {
+            try {
+                throw new ExistException(tripId);
+            } catch (ExistException ignored) { }
             return null;
         }
         Transport transport = getTransport(transportId);

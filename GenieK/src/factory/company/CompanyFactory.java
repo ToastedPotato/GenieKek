@@ -21,7 +21,7 @@ public abstract class CompanyFactory {
                 throw new PriceException();
             } catch (PriceException ignored) { }
         }
-        if (DataBase.getInstance().stationExist(id)) {
+        if (DataBase.getInstance().companyExist(id)) {
             try {
                 throw new ExistException(id);
             } catch (ExistException ignored) { }
@@ -33,7 +33,4 @@ public abstract class CompanyFactory {
         c.setPrice(price);
         return c;
     }
-
-
-
 }
