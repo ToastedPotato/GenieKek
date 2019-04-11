@@ -56,7 +56,7 @@ public class Admin implements Visitor{
             string += "|" + section.getStr();
             if (section instanceof OrganizableSection) string += ((OrganizableSection) section).getDisposition().getStr();
             string += "(" + Console.colorize(Console.BLUE, Integer.toString(section.getNbPlacesReserved())) + "/" + section.getNbPlaces() + ")";
-            string += section.calculPrice(DataBase.getInstance().getCompanyPrice(trip.getIdCompany()));
+            string += Console.colorize(Console.RED, Float.toString(section.calculPrice(DataBase.getInstance().getCompanyPrice(trip.getIdCompany()))));
         }
         return string;
     }

@@ -24,12 +24,14 @@ public abstract class Control {
 
     private HashMap<String, Command> commands = new HashMap<>();
 
-    public Control() {
+    public Control(Visitor visitor) {
         dataBase = DataBase.getInstance();
         commandController = new CommandController();
         view = new View();
         commands.put("undo", new UndoCommand(commandController));
         commands.put("redo", new RedoCommand(commandController));
+        this.visitor = visitor;
+        show();
     }
 
     private void showCommand(String cmd, String desc) {

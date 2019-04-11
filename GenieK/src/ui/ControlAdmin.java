@@ -2,6 +2,7 @@ package ui;
 
 import company.Company;
 import exception.NbPlaceException;
+import exception.SectionException;
 import factory.company.CruiseCompanyFactory;
 import factory.company.FlightCompanyFactory;
 import factory.company.TrainCompanyFactory;
@@ -31,9 +32,7 @@ public class ControlAdmin extends Control {
     private final static String DESC_COMPANY_CREATE = "Créer une nouvelle compagnie en mentionnant son {Id}, son {Nom} et le {Prix} de base";
 
     public ControlAdmin() {
-        super();
-        visitor = new Admin();
-        show();
+        super(new Admin());
     }
 
     private void createStation(Station station) {
@@ -192,7 +191,11 @@ public class ControlAdmin extends Control {
                         if (type == null || disposition == null) return;
                         if (nbSeat <= 0) throw new NbPlaceException();
                         section = new OrganizableSection(type, disposition, nbSeat);
-                    } catch (NbPlaceException ignored) { }
+                        if (onCreationTransport.haveSection(section)) {
+                            section = null;
+                            throw new SectionException(inputs.get(Field.Input.TYPE));
+                        }
+                    } catch (NbPlaceException | SectionException ignored) { }
                     if (section == null) return;
                     onCreationTransport.addSection(section);
                     printsuc("+ section ajoutée");

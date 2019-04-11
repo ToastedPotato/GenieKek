@@ -34,6 +34,12 @@ public class Transport {
         this.companyId = companyId;
     }
 
+    public boolean haveSection(Section section) {
+        for (Section s : sections)
+            if (s.getStr().equals(section.getStr())) return true;
+        return false;
+    }
+
     public ArrayList<Section> getSections() {
         return sections;
     }
