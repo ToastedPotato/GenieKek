@@ -50,7 +50,7 @@ public class DataBase {
         c = TrainCompanyFactory.getInstance().createCompany("STM","STM Groupe", 400);
         c.getTransports().add(c.createTransport("PIO")
                 .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 30)));
-        c.getTrips().add(c.createTrip("PZA", 1, getStation("GDN"), getStation("AGD"), "PIO")
+        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "PIO")
                 .addStop(getStation("UID"))
                 .addStop(getStation("POZ")));
         addCompany(c);
@@ -58,18 +58,17 @@ public class DataBase {
         c = FlightCompanyFactory.getInstance().createCompany("ARC", "Air Canada", 800);
         c.getTransports().add(c.createTransport("A45")
                 .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 100)));
-        c.getTrips().add(c.createTrip("PTM", 1, getStation("CDG"), getStation("YUL"), "A45"));
+        c.getTrips().add(c.createTrip("PT", 1, getStation("CDG"), getStation("YUL"), "A45"));
         addCompany(c);
 
         c = CruiseCompanyFactory.getInstance().createCompany("COS", "Costa Croisière", 2000);
         c.getTransports().add(c.createTransport("PQ4")
                 .addSection(new CabinSection(CabinSection.Type.OCEAN, 10)));
-        c.getTrips().add(c.createTrip("MED", 1, getStation("MSR"), getStation("MSR"), "PQ4")
+        c.getTrips().add(c.createTrip("ME", 1, getStation("MSR"), getStation("MSR"), "PQ4")
                 .addStop(getStation("ALE"))
                 .addStop(getStation("TUN"))
                 .addStop(getStation("EGY")));
         addCompany(c);
-
     }
 
     public Transport getTransport(String transportId) {
@@ -126,6 +125,16 @@ public class DataBase {
     public void addCompany(Company company) {
         this.companies.add(company);
     }
+
+    public boolean companyExist(String companyId) {
+        return getCompany(companyId) != null;
+    }
+
+    public boolean stationExist(String stationId) {
+        return getStation(stationId) != null;
+    }
+
+    
 
     public Company getCompanyByTrip(String tripId) {
         for (Company company : companies) {

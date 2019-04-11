@@ -179,7 +179,6 @@ public class ControlAdmin extends Control {
                     }
                 });
 
-
         sectionOrganizedMenu.addItem("1", "Ajouter une section", createOrganizedSectionFields, new MenuInputCompleted() {
                 @Override
                 public void onCompleted(MenuInput inputs) {

@@ -4,8 +4,11 @@ import station.Station;
 import transport.Transport;
 import transport.section.Section;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class Trip{
@@ -15,15 +18,13 @@ public class Trip{
     private Station depart, arrive;
     private String idCompany;
     private Transport transport;
-    private ArrayList<Schedule> schedules = new ArrayList<>();
+    private Date departureDate, arrivedDate;
     private ArrayList<Station> stops = new ArrayList<>();
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+
 
     public Trip() {
 
-    }
-
-    public void addSchedules(Schedule s){
-        schedules.add(s);
     }
     
     public String getId() {
@@ -71,16 +72,46 @@ public class Trip{
         return transport.getSections();
     }
 
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public String getDepartureDateToString() {
+        return format.format(departureDate);
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Date getArrivedDate() {
+        return arrivedDate;
+    }
+
+    public String getArrivedDateToString() {
+        return format.format(arrivedDate);
+    }
+
+    public void setArrivedDate(Date arrivedDate) {
+        this.arrivedDate = arrivedDate;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        try {
+            this.departureDate = format.parse(departureDate);
+        } catch (ParseException ignored) { }
+    }
+
+    public void setArrivedDate(String arrivedDate) {
+        try {
+            this.arrivedDate = format.parse(arrivedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setIdCompany(String idCompany) {
         this.idCompany = idCompany;
-    }
-
-    public void setSchedules(ArrayList<Schedule> schedules) {
-        this.schedules = schedules;
-    }
-
-    public ArrayList<Schedule> getSchedules() {
-        return schedules;
     }
 
     public Trip addStop(Station stop) {

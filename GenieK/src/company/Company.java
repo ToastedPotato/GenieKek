@@ -54,7 +54,7 @@ public class Company {
     }
 
     public Trip createTrip(String tripId, int number, Station departure, Station arrived, String transportId) {
-        if (tripId.length() != 3) {
+        if (tripId.length() != 2) {
             try {
                 throw new IdException(tripId);
             } catch (IdException ignored) { }
