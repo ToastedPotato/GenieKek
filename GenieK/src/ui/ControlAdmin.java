@@ -23,6 +23,8 @@ import ui.command.ModifyStation;
 import ui.menu.*;
 import visitor.Admin;
 
+import java.util.concurrent.ForkJoinPool;
+
 public class ControlAdmin extends Control {
 
     private Company selectedCompany = null;
@@ -58,6 +60,8 @@ public class ControlAdmin extends Control {
         Menu sectionOrganizedMenu = new Menu(this, companyTransportMenu);
         Menu sectionCabinMenu = new Menu(this, companyTransportMenu);
 
+
+
         FieldGroup createStationFields = new FieldGroup(
                 new Field(Field.Input.ID),
                 new Field(Field.Input.CITY));
@@ -81,6 +85,13 @@ public class ControlAdmin extends Control {
         FieldGroup createCabinSectionFields = new FieldGroup(
                 new Field(Field.Input.TYPE),
                 new Field(Field.Input.CABIN));
+
+        FieldGroup createCompanyTripFields = new FieldGroup(
+                new Field(Field.Input.ID),
+                new Field(Field.Input.NUM),
+                new Field(Field.Input.DEP),
+                new Field(Field.Input.ARR),
+                new Field(Field.Input.TRANS_ID));
 
 
         // Station Create Menu
@@ -287,7 +298,25 @@ public class ControlAdmin extends Control {
             });
 
         // Company Trip Menu
-        //companyTripMenu.addItem("1", "Créer", );
+        companyTripMenu.addItem("1", "Créer un voyage",createCompanyTripFields,new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                String tripId = inputs.get(Field.Input.ID);
+                int number = Integer.parseInt(inputs.get(Field.Input.NUM));
+                Station departure = dataBase.getStation(inputs.get(Field.Input.DEP));
+                Station arrived = dataBase.getStation(inputs.get(Field.Input.ARR));
+                String transportId = inputs.get(Field.Input.TRANS_ID);
+
+                Trip trip =  selectedCompany.createTrip(tripId,number,departure,arrived,transportId);
+
+                if (trip == null){
+                    return;
+                }
+                // ajouter le voyage *************************
+                printsuc("+ voyage ajoutée");
+            }
+
+        } );
         //companyTripMenu.addItem("2", "Modifier", );
         companyTripMenu.addItem("3", "Supprimer",
                 "Supprimez un voyage à partir de son {Id}",
