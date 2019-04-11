@@ -1,7 +1,9 @@
 package factory.station;
 
+import exception.ExistException;
 import exception.IdException;
 import station.*;
+import ui.DataBase;
 
 public abstract class StationFactory {
 
@@ -12,6 +14,13 @@ public abstract class StationFactory {
             try {
                 throw new IdException(id);
             } catch (IdException ignored) { }
+            return null;
+        }
+        if (DataBase.getInstance().stationExist(id)) {
+            try {
+                throw new ExistException(id);
+            } catch (ExistException ignored) { }
+            return null;
         }
         Station s = fabricateStation();
         s.setId(id);

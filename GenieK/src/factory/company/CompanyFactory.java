@@ -1,8 +1,10 @@
 package factory.company;
 
 import company.Company;
+import exception.ExistException;
 import exception.IdException;
 import exception.PriceException;
+import ui.DataBase;
 
 public abstract class CompanyFactory {
 
@@ -18,6 +20,12 @@ public abstract class CompanyFactory {
             try {
                 throw new PriceException();
             } catch (PriceException ignored) { }
+        }
+        if (DataBase.getInstance().stationExist(id)) {
+            try {
+                throw new ExistException(id);
+            } catch (ExistException ignored) { }
+            return null;
         }
         Company c = fabricateCompany();
         c.setId(id);

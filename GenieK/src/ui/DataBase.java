@@ -30,6 +30,9 @@ public class DataBase {
         return instance;
     }
 
+    /**
+     * Initialise la base de données
+     */
     public void init() {
         addStation(RailwayFactory.getInstance().createStation("GDN", "Montréal"));
         addStation(RailwayFactory.getInstance().createStation("AGD", "Laval"));
@@ -71,6 +74,12 @@ public class DataBase {
         addCompany(c);
     }
 
+    /**
+     * Retourne le transport correspondant
+     * Exception si le transport n'existe pas
+     * @param transportId : id du transport
+     * @return
+     */
     public Transport getTransport(String transportId) {
         Transport transport;
         for (Company company : companies) {
@@ -80,6 +89,12 @@ public class DataBase {
         return null;
     }
 
+    /**
+     * Retourne le voyage correspondant
+     * Exception si le voyage n'existe pas
+     * @param tripId
+     * @return
+     */
     public Trip getTrip(String tripId) {
         Trip trip;
         for (Company company : companies) {
@@ -89,14 +104,17 @@ public class DataBase {
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Station> getStations() {
         return stations;
     }
 
     public Station getStation(String stationId) {
-        for (Station station : stations) {
+        for (Station station : stations)
             if (station.getId().equals(stationId)) return station;
-        }
         try {
             throw new NullObjectException(stationId);
         } catch (NullObjectException ignored) {}
@@ -107,15 +125,13 @@ public class DataBase {
         this.stations.add(station);
     }
 
-
     public ArrayList<Company> getCompanies() {
         return companies;
     }
 
     public Company getCompany(String companyId) {
-        for (Company company : companies) {
+        for (Company company : companies)
             if (company.getId().equals(companyId)) return company;
-        }
         try {
             throw new NullObjectException(companyId);
         } catch (NullObjectException ignored) {}
@@ -127,14 +143,25 @@ public class DataBase {
     }
 
     public boolean companyExist(String companyId) {
-        return getCompany(companyId) != null;
+        for (Company company : companies)
+            if (company.getId().equals(companyId)) return true;
+        return false;
     }
 
     public boolean stationExist(String stationId) {
-        return getStation(stationId) != null;
+        for (Station station : stations)
+            if (station.getId().equals(stationId)) return true;
+        return false;
     }
 
-    
+    public boolean transportExist(String transportId) {
+        Transport transport;
+        for (Company company : companies) {
+            transport = company.getTransport(transportId);
+            if (transport != null) return true;
+        }
+        return false;
+    }
 
     public Company getCompanyByTrip(String tripId) {
         for (Company company : companies) {
