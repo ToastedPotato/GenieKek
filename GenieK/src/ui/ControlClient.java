@@ -71,6 +71,18 @@ public class ControlClient extends Control{
                 display(searchTrip(dataBase.getFlightCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
             }
         });
+        chooseTransport.addItem("2", "Voyager par train", searchTrip, new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                display(searchTrip(dataBase.getTrainCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
+            }
+        });
+        chooseTransport.addItem("3", "Voyager par bateau", searchTrip, new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                display(searchTrip(dataBase.getCruiseCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
+            }
+        });
 
         mainMenu.addItem("1","Rechercher un voyage", chooseTransport);
         mainMenu.addItem("2", "Reserver un siège", new Field(Field.Input.ID) , new MenuInputCompleted() {
