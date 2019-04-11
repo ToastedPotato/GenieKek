@@ -1,98 +1,89 @@
 package ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.FileHandler;
 
-public class ControlClient {// extends Control{
-    /*
-    private Scanner scanner = new Scanner(System.in);
-        
-    //String contenant les options de recherche de vol/croisière/trajet de train
-    private String findTripMenu = "";
-    
-    private String selectTripMenu = "";
-    
-    //String contenant les options de gestion de réservation: annuler, payer, etc.
-    //private String reservationMenu;
-    
-    public ControlClient(){
-        this.view = new View();
+import company.Company;
+import station.Station;
+import transport.Plane;
+import transport.section.Section;
+import trip.Trip;
+import ui.menu.*;
+import visitor.Client;
 
+import javax.xml.crypto.Data;
 
-        this.mainMenu = "Bienvenue au système Voyages Kek. Veuillez choisir parmis les options suivantes:\n" +
-            "    [1] - Consulter les vols disponibles\n" + 
-            "    [2] - Consulter votre réservation\n" + 
-            "    [3] - Quitter\n";
-        return;
+public class ControlClient extends Control{
+
+    public ControlClient() {
+        super(new Client());
     }
-    
-    public void listen(){
-    //La boucle d'exécution primaire du contrôleur
 
+    private String searchTrip(ArrayList<Company> companies,String startCity, String endCity, String depart){
 
+        Date date = null;
 
-        boolean run = true;
-        String choice = scanner.next();
-        
-        while(run){
-            //this.view.update(mainMenu);
-            this.view.println();
-            
-            switch (choice) {
-                case "1" : this.findTrip();
-                    break;
-                case "2" : this.reservationManagement();
-                    break;
-                case "3" : 
-                    run = false;    
-                    System.out.println("Merci d'avoir utilisé notre service.");
-                    break;
-                default: System.out.println("Choix invalide, veuillez entrer un chiffre de 1 à 3.");
-                    break;         
+        try {
+            date = new SimpleDateFormat("yyyy.MM.dd").parse(depart);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String display = "";
+
+        for (Company c:companies) {
+
+            for (Trip t:c.getTrips()) {
+
+                if(t.getDepart().getCity().equals(startCity) && t.getArrive().getCity().equals(endCity) && t.getDepartureDate().equals(date)){
+
+                    display += visitor.visit(t);
+
+                }
+
             }
-        }
-        return;
-    }
-    
-    public void findTrip(){
-    //offre les options de recherche de voyage disponibles
-        
-        this.view.update(this.findTripMenu);
-        this.view.println();
-        String searchParams = scanner.next();
-        
-        //TODO: traitement des paramètres; splice puis un switch, etc. 
-        
-        //TODO: appel du visiteur approprié pour lire les voyages disponibles 
-        String searchResults = ""; 
-        
-        
-        //Options disponibles après recherche: selectionner un voyage, presser "Enter"-> Retour au menu principal 
-        this.view.update(this.selectTripMenu);
-        this.view.println();
-        String choice = scanner.next();
-        
-        if(!choice.equals("\n") && !choice.equals("\r\n")){
-            //TODO: réservation d'un siège selon préférences client
-        }
-       
-        return;
-    }
-    
-    public void reservationManagement(){
-    //gestion de la réservation du client
-        
-        this.view.update("Veuillez entrer votre numéro de réservation.");
-        this.view.println();
-        String resNumber = scanner.next();
-        
-        //TODO: appel du visiteur/itérateur approprié pour lire la liste de réservations
-        
-        /TODO: affichage des infos de la réservation et des options de
-            réservation (si disponibles): [1] Annuller [2] Réserver une autre 
-            place [3] Payer la réservation [4] Retour au menu principal
-            
-        return;
-    }
-    */
 
+        }
+
+        return display;
+
+    }
+
+    @Override
+    protected void initMenu() {
+        mainMenu = new Menu(this, "Tableau de consultation Client");
+        Menu chooseTransport = new Menu( this, "Choisisez votre moyen de transport");
+        Menu manageReservation = new Menu(this, "Organisez vos reservation");
+
+
+        FieldGroup searchTrip = new FieldGroup(
+                new Field(Field.Input.CITYSTART),
+                new Field(Field.Input.CITYARRIVAL),
+                new Field(Field.Input.DATE),
+                new Field(Field.Input.SECTION)
+        );
+
+        chooseTransport.addItem("1", "Voyager par avions", searchTrip, new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                display(searchTrip(dataBase.getFlightCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
+            }
+        });
+
+        mainMenu.addItem("1","Rechercher un voyage", chooseTransport);
+        mainMenu.addItem("2", "Reserver un siège", new Field(Field.Input.ID) , new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                //TODO
+            }
+        });
+        mainMenu.addItem("3","Organisez vos reservation",new Field(Field.Input.ID) , new MenuInputCompleted() {
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                //TODO
+            }
+        });
+    }
 }

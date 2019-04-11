@@ -1,6 +1,9 @@
 package ui;
 
 import company.Company;
+import company.CruiseCompany;
+import company.FlightCompany;
+import company.TrainCompany;
 import exception.NullObjectException;
 import factory.company.CruiseCompanyFactory;
 import factory.company.FlightCompanyFactory;
@@ -8,15 +11,20 @@ import factory.company.TrainCompanyFactory;
 import factory.station.AeroportFactory;
 import factory.station.PortFactory;
 import factory.station.RailwayFactory;
+import station.*;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
 import transport.section.OrganizableSection;
 import transport.section.Disposition;
+import trip.Cruise;
+import trip.Flight;
+import trip.Line;
 import trip.Trip;
 import visitor.Visitor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataBase {
 
@@ -112,6 +120,48 @@ public class DataBase {
         return stations;
     }
 
+    public ArrayList<Aeroport> getAeroport(String city) {
+
+        ArrayList<Aeroport> aeroports = new ArrayList<>();
+
+        for (Station s:stations) {
+
+            if(s.getCity().equals(city) && s instanceof Aeroport) aeroports.add((Aeroport)s);
+
+        }
+
+        return aeroports;
+
+    }
+
+    public ArrayList<Port> getHarbor(String city) {
+
+        ArrayList<Port> ports = new ArrayList<>();
+
+        for (Station s:stations) {
+
+            if(s.getCity().equals(city) && s instanceof Port) ports.add((Port)s);
+
+        }
+
+        return ports;
+
+    }
+
+    public ArrayList<Railway> getRailway(String city) {
+
+        ArrayList<Railway> railways = new ArrayList<>();
+
+        for (Station s:stations) {
+
+            if(s.getCity().equals(city) && s instanceof Railway) railways.add((Railway) s);
+
+        }
+
+        return railways;
+
+    }
+
     public Station getStation(String stationId) {
         for (Station station : stations)
             if (station.getId().equals(stationId)) return station;
@@ -127,6 +177,45 @@ public class DataBase {
 
     public ArrayList<Company> getCompanies() {
         return companies;
+    }
+
+    public ArrayList<Company> getFlightCompany() {
+
+        ArrayList<Company> companieslist = new ArrayList<>();
+
+        for (Company c:companies) {
+
+            if(c instanceof FlightCompany) companieslist.add((FlightCompany)c);
+
+        }
+
+        return companieslist;
+    }
+
+    public ArrayList<Company> getCruiseCompany() {
+
+        ArrayList<Company> companieslist = new ArrayList<>();
+
+        for (Company c:companies) {
+
+            if(c instanceof CruiseCompany) companieslist.add((CruiseCompany)c);
+
+        }
+
+        return companieslist;
+    }
+
+    public ArrayList<Company> getTrainCompany() {
+
+        ArrayList<Company> companieslist = new ArrayList<>();
+
+        for (Company c:companies) {
+
+            if(c instanceof TrainCompany) companieslist.add((TrainCompany)c);
+
+        }
+
+        return companieslist;
     }
 
     public Company getCompany(String companyId) {

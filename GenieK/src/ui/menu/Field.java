@@ -7,11 +7,15 @@ public class Field {
         NEW_ID ("Nouvel Id"),
         NAME ("Nom"),
         CITY ("Ville"),
+        CITYSTART ("Ville de départ"),
+        CITYARRIVAL ("Ville d'arrivé"),
         PRICE ("Prix"),
         TYPE ("Type"),
         DISPO ("Disposition"),
         SEAT ("Nombre de siège"),
         CABIN ("Nombre de cabine"),
+        SECTION ("La classe souhaitée"),
+        DATE ("Date de départ (yyyy.MM.dd)"),
         NUM ("Nombre"),
         DEP ("Depart"),
         ARR ("Arrivee"),
@@ -44,4 +48,6 @@ public class Field {
     public String getText() {
         return text;
     }
+
+
 }

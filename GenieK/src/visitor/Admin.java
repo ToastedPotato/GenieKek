@@ -22,11 +22,6 @@ public class Admin implements Visitor{
     }
 
     @Override
-    public String visit (Place place){
-        return "Reservation:";
-    }
-
-    @Override
     public String visit (Station station){
         return "ID:"+ station.getId() +" Ville:"+station.getCity();
     }
@@ -42,11 +37,6 @@ public class Admin implements Visitor{
             string += Console.colorize(Console.BLUE, Integer.toString(section.getNbPlaces()));
         }
         return string;
-    }
-
-    @Override
-    public String visit (Schedule schedule){
-        return "Depart:"+ schedule.getDepart()+" Arrive:"+schedule.getArrive()+" TransportId:"+schedule.getTransport().getId();
     }
 
     @Override

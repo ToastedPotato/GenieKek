@@ -12,10 +12,8 @@ import trip.*;
 public interface Visitor {
 
     String visit (Company company);
-    String visit (Place place);
     String visit (Station station);
     String visit (Transport transport);
-    String visit (Schedule schedule);
     String visit (Trip trip);
     String visit (OrganizableSection.Type type);
     String visit (CabinSection.Type type);

@@ -1,62 +1,59 @@
 package visitor;
 
-public class Client { //implements Visitor{
+import company.Company;
+import place.Place;
+import station.Station;
+import transport.Transport;
+import transport.section.CabinSection;
+import transport.section.Disposition;
+import transport.section.OrganizableSection;
+import trip.Schedule;
+import trip.Trip;
+import ui.Console;
 
-    /*
-    public String visit (Company company){
+public class Client implements Visitor{
 
-        return "ID:"company.getId()+" Nom:"+company.getName();
-
-    }
-
-    public String visit (Place place){
-        return "Reservation:"place.getRes()+ "Etat "place.getState()
-
+    @Override
+    public String visit(Company company) {
+        return null;
     }
 
     public String visit (Station station){
 
-        return "ID:"+ station.getId() +" Nom:"+station.getName()+ " Ville:"+station.city()
+        return "ID:"+ station.getId() + " Ville:"+station.getCity();
 
     }
 
     public String visit (Transport transport){
 
-        return "ID: " transport.getId()
-
-    }
-
-    public String visit (Schedule schedule){
-
-        return "Depart:"+ schedule.getDepart()+" Arrive:"+schedule.getArrive()+" Transport"+schedule.getTransport()
+        return "ID: " + transport.getId();
 
     }
 
     public String visit (Trip trip){
 
-        tring planeName;
-        String dateDepart;
-        String dateArrive;
-        String sectionInfoDep:
-        String sectionInfoArr;
-        String price;
-
-        return tripWithStop.getDepart()+"-"+tripWithStop.getArrive()":["+tripWithStop.getIdCompany()"]"+planeName"("+dateDepart+"-"+dateArrive+")|"+sectionInfoDep+"|"+sectionInfoArr+")+price
+        return visit(trip.getDepart()) + visit(trip.getArrive());
 
     }
 
-    public String visit (TripWithStop tripWithStop){
-
-        String planeName;
-        String dateDepart;
-        String dateArrive;
-        String sectionInfoDep:
-        String sectionInfoArr;
-
-
-        return tripWithStop.getDepart()+"-"+tripWithStop.getArrive()":["+tripWithStop.getIdCompany()"]"+planeName"("+dateDepart+"-"+dateArrive+")|"+sectionInfoDep+"|"+sectionInfoArr)
-
+    @Override
+    public String visit(OrganizableSection.Type type) {
+        return "[" + type.getStr() + "] " + Console.colorize(Console.BLUE, type.toString()) + "  " +
+                "\tratio: " + Console.colorize(Console.YELLOW, Integer.toString(type.getRatio())) + "%";
     }
-*/
+
+    @Override
+    public String visit(CabinSection.Type type) {
+        return "[" + type.getStr() + "] " + Console.colorize(Console.BLUE, type.toString()) + "   " +
+                "\tratio: " + Console.colorize(Console.YELLOW, Integer.toString(type.getRatio())) +
+                "%\tcapacité des cabines: " + Console.colorize(Console.YELLOW, Integer.toString(type.getCapacity())) + " personnes)";
+    }
+
+    @Override
+    public String visit(Disposition dispo) {
+        return "[" + dispo.getStr() + "] " + Console.colorize(Console.BLUE, dispo.toString()) +
+                "\t\tcolonnes: " + Console.colorize(Console.YELLOW, Integer.toString(dispo.getNbColumn())) + "  " +
+                "\taile(s) entre les rangées " + Console.colorize(Console.YELLOW, dispo.getLanes());
+    }
 
 }
