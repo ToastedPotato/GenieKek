@@ -61,7 +61,7 @@ public class Company {
         return transportFactory.createTransport(transportId, id);
     }
 
-    public Trip createTrip(String tripId, int number, Station departure, Station arrived, String transportId) {
+    public Trip createTrip(String tripId, int number, Station departure, Station arrived, String departureDate, String arrivalDate, String transportId) {
         if (tripId.length() != 2) {
             try {
                 throw new IdException(tripId);
@@ -75,13 +75,8 @@ public class Company {
             return null;
         }
         Transport transport = getTransport(transportId);
-        if (transport == null) {
-            try {
-                throw new TransportException(transportId);
-            } catch (TransportException ignored) { }
-            return null;
-        }
-        return tripFactory.createTrip(tripId, number, departure, arrived, id, transport);
+        if (transport == null) return null;
+        return tripFactory.createTrip(tripId, number, departure, arrived, id, departureDate, arrivalDate, transport);
     }
 
     public String transportToString(Visitor visitor) {

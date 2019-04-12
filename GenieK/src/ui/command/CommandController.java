@@ -29,7 +29,6 @@ public class CommandController {
             return null;
         }
         Command command = undo.get(undo.size() - 1);
-        redo.add(command);
         undo.remove(command);
         return command;
     }
@@ -42,7 +41,6 @@ public class CommandController {
             return null;
         }
         Command command = redo.get(redo.size() - 1);
-        undo.add(command);
         redo.remove(command);
         return command;
     }

@@ -99,6 +99,8 @@ public class ControlAdmin extends Control {
                 new Field(Field.Input.NUM),
                 new Field(Field.Input.DEP),
                 new Field(Field.Input.ARR),
+                new Field(Field.Input.DATE_DEP),
+                new Field(Field.Input.DATE_ARR),
                 new Field(Field.Input.TRANS_ID));
 
         FieldGroup modifyCompanyTripFields = new FieldGroup(
@@ -138,8 +140,8 @@ public class ControlAdmin extends Control {
                 });
 
         // Station Menu
-        stationMenu.addItem("1", "Créer", stationCreateMenu);
-        stationMenu.addItem("2", "Modifier",
+        stationMenu.addItem("1", "Créer une station", stationCreateMenu);
+        stationMenu.addItem("2", "Modifier une station",
                 "Modifiez une station en fournissant son {Id} pour modifier son {Id} et sa {Ville}" ,
                 modifyStationFields, new MenuInputCompleted() {
                     @Override
@@ -153,7 +155,7 @@ public class ControlAdmin extends Control {
                         printsuc("* station modifiée");
                     }
                 });
-        stationMenu.addItem("3", "Supprimer",
+        stationMenu.addItem("3", "Supprimer une station",
                 "Supprimez une station à partir de son {Id}",
                 new Field(Field.Input.ID), new MenuInputCompleted() {
                     @Override
@@ -164,7 +166,7 @@ public class ControlAdmin extends Control {
                         printsuc("- station supprimée");
                     }
                 });
-        stationMenu.addItem("4", "Afficher", new MenuItemListener() {
+        stationMenu.addItem("4", "Afficher les stations", new MenuItemListener() {
             @Override
             public void onSelect() {
                 display(DataBase.getInstance().stationsToString(visitor));
@@ -265,7 +267,7 @@ public class ControlAdmin extends Control {
 
 
         // Company Transport Menu
-        companyTransportMenu.addItem("1", "Créer",
+        companyTransportMenu.addItem("1", "Créer un transport",
                 "Créez un transport en choissant un {Id} ainsi que les sections et leur {Type} et {Disposition} ",
                 new Field(Field.Input.ID), new MenuInputCompleted() {
                 @Override
@@ -297,18 +299,7 @@ public class ControlAdmin extends Control {
                     listen(menu);
                 }
             });
-        companyTransportMenu.addItem("2", "Supprimer",
-                "Supprimez un transport à partir de son {Id}",
-                new Field(Field.Input.ID), new MenuInputCompleted() {
-                @Override
-                public void onCompleted(MenuInput inputs) {
-                    Transport transport = selectedCompany.getTransport(inputs.get(Field.Input.ID));
-                    if (transport == null) return;
-                    commandController.execute(new DeleteInstanceFrom<>(selectedCompany.getTransports(), transport));
-                    printsuc("- transport supprimé");
-                }
-            });
-        companyTransportMenu.addItem("3", "Afficher", new MenuItemListener() {
+        companyTransportMenu.addItem("2", "Afficher les transports", new MenuItemListener() {
                 @Override
                 public void onSelect() {
                     display(selectedCompany.transportToString(visitor));
@@ -350,7 +341,7 @@ public class ControlAdmin extends Control {
                 Station departure = dataBase.getStation(inputs.get(Field.Input.DEP));
                 Station arrived = dataBase.getStation(inputs.get(Field.Input.ARR));
                 String transportId = inputs.get(Field.Input.TRANS_ID);
-                Trip trip = selectedCompany.createTrip(tripId,number,departure,arrived,transportId);
+                Trip trip = selectedCompany.createTrip(tripId, number, departure, arrived, inputs.get(Field.Input.DATE_DEP), inputs.get(Field.Input.DATE_ARR), transportId);
                 if (trip == null) return;
                 onCreationTrip = trip;
                 if (!(selectedCompany instanceof FlightCompany)) {
@@ -358,10 +349,11 @@ public class ControlAdmin extends Control {
                     return;
                 }
                 createTrip(trip);
-                printsuc("+ voyage ajoutée");
+                printsuc("+ voyage ajouté");
             }
 
         } );
+
         companyTripMenu.addItem("2", "Modifier", "Modifiez un voyage en fournissant son {ID} son {transport ID} sa {date de depart} et sa {date d'arrivée} pour modifier ",modifyCompanyTripFields,new MenuInputCompleted(){
             @Override
             public void onCompleted(MenuInput inputs) {
@@ -373,7 +365,7 @@ public class ControlAdmin extends Control {
 
 
         });
-        companyTripMenu.addItem("3", "Supprimer",
+        companyTripMenu.addItem("3", "Supprimer un voyage",
                 "Supprimez un voyage à partir de son {Id}",
                 new Field(Field.Input.ID), new MenuInputCompleted() {
                 @Override
@@ -381,10 +373,10 @@ public class ControlAdmin extends Control {
                     Trip trip = selectedCompany.getTrip(inputs.get(Field.Input.ID));
                     if (trip == null) return;
                     commandController.execute(new DeleteInstanceFrom<>(selectedCompany.getTrips(), trip));
-                    printsuc("+ voyage créé");
+                    printsuc("- voyage supprimé");
                 }
             });
-        companyTripMenu.addItem("4", "Afficher", new MenuItemListener() {
+        companyTripMenu.addItem("4", "Afficher les voyages", new MenuItemListener() {
                 @Override
                 public void onSelect() {
                     display(selectedCompany.tripToString(visitor));
@@ -397,8 +389,8 @@ public class ControlAdmin extends Control {
         companyManageMenu.addItem("2", "Gérer les voyages", companyTripMenu);
 
         // Company Menu
-        companyMenu.addItem("1", "Créer", companyCreateMenu);
-        companyMenu.addItem("2", "Modifier",
+        companyMenu.addItem("1", "Créer une compagnie", companyCreateMenu);
+        companyMenu.addItem("2", "Modifier une compagnie",
                 "Modifiez une compagnie en fournissant son {Id} pour modifier son {Id}, son {Nom} et son {Prix} de base",
                 modifyCompanyFields, new MenuInputCompleted() {
                     @Override
@@ -414,7 +406,7 @@ public class ControlAdmin extends Control {
                         printsuc("* compagie modifiée");
                     }
                 });
-        companyMenu.addItem("3", "Supprimer",
+        companyMenu.addItem("3", "Supprimer une compagnie",
                 "Supprimez une compagnie à partir de son {Id}",
                 new Field(Field.Input.ID), new MenuInputCompleted() {
                     @Override

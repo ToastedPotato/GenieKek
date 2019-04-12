@@ -61,7 +61,7 @@ public class DataBase {
         c = TrainCompanyFactory.getInstance().createCompany("STM","STM Groupe", 400);
         c.getTransports().add(c.createTransport("PIO")
                 .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 30)));
-        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "PIO")
+        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "2019.04.26 12:28", "2019.04.26 17:23", "PIO")
                 .addStop(getStation("UID"))
                 .addStop(getStation("POZ")));
         addCompany(c);
@@ -69,13 +69,13 @@ public class DataBase {
         c = FlightCompanyFactory.getInstance().createCompany("ARC", "Air Canada", 800);
         c.getTransports().add(c.createTransport("A45")
                 .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 100)));
-        c.getTrips().add(c.createTrip("PT", 1, getStation("CDG"), getStation("YUL"), "A45"));
+        c.getTrips().add(c.createTrip("PT", 1, getStation("CDG"), getStation("YUL"), "2019.04.23 09:10", "2019.04.23 16:50", "A45"));
         addCompany(c);
 
         c = CruiseCompanyFactory.getInstance().createCompany("COS", "Costa Croisière", 2000);
         c.getTransports().add(c.createTransport("PQ4")
                 .addSection(new CabinSection(CabinSection.Type.OCEAN, 10)));
-        c.getTrips().add(c.createTrip("ME", 1, getStation("MSR"), getStation("MSR"), "PQ4")
+        c.getTrips().add(c.createTrip("ME", 1, getStation("MSR"), getStation("MSR"), "2019.04.29 11:45", "2019.05.12 16:20", "PQ4")
                 .addStop(getStation("ALE"))
                 .addStop(getStation("TUN"))
                 .addStop(getStation("EGY")));

@@ -3,17 +3,11 @@ package ui;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.FileHandler;
 
 import company.Company;
-import station.Station;
-import transport.Plane;
-import transport.section.Section;
 import trip.Trip;
 import ui.menu.*;
 import visitor.Client;
-
-import javax.xml.crypto.Data;
 
 public class ControlClient extends Control{
 
@@ -68,19 +62,19 @@ public class ControlClient extends Control{
         chooseTransport.addItem("1", "Voyager par avions", searchTrip, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
-                display(searchTrip(dataBase.getFlightCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
+                display(searchTrip(dataBase.getFlightCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE_DEP)));
             }
         });
         chooseTransport.addItem("2", "Voyager par train", searchTrip, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
-                display(searchTrip(dataBase.getTrainCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
+                display(searchTrip(dataBase.getTrainCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE_DEP)));
             }
         });
         chooseTransport.addItem("3", "Voyager par bateau", searchTrip, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
-                display(searchTrip(dataBase.getCruiseCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE)));
+                display(searchTrip(dataBase.getCruiseCompany(),inputs.get(Field.Input.CITYSTART),inputs.get(Field.Input.CITYARRIVAL),inputs.get(Field.Input.DATE_DEP)));
             }
         });
 

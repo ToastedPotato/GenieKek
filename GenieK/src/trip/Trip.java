@@ -92,7 +92,7 @@ public class Trip{
         return format.format(arrivedDate);
     }
 
-    public void setArrivedDate(Date arrivedDate) {
+    public void setArrivalDate(Date arrivedDate) {
         this.arrivedDate = arrivedDate;
     }
 
@@ -102,7 +102,7 @@ public class Trip{
         } catch (ParseException ignored) { }
     }
 
-    public void setArrivedDate(String arrivedDate) {
+    public void setArrivalDate(String arrivedDate) {
         try {
             this.arrivedDate = format.parse(arrivedDate);
         } catch (ParseException e) {

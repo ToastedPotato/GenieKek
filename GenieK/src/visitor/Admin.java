@@ -41,7 +41,8 @@ public class Admin implements Visitor{
 
     @Override
     public String visit (Trip trip){
-        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW,trip.getIdCompany()) + "]" + trip.getId() + "(date-depart.date-arrivee)";
+        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW,trip.getIdCompany()) + "]" + trip.getId() + trip.getNumber() +
+                "(" + trip.getDepartureDateToString() + "->" + trip.getArrivedDateToString() + ")";
         for (Section section : trip.getSections()) {
             string += "|" + section.getStr();
             if (section instanceof OrganizableSection) string += ((OrganizableSection) section).getDisposition().getStr();
