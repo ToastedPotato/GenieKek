@@ -101,6 +101,12 @@ public class ControlAdmin extends Control {
                 new Field(Field.Input.ARR),
                 new Field(Field.Input.TRANS_ID));
 
+        FieldGroup modifyCompanyTripFields = new FieldGroup(
+                new Field(Field.Input.ID),
+                new Field(Field.Input.DATE_DEP),
+                new Field(Field.Input.DATE_ARR),
+                new Field(Field.Input.TRANS_ID));
+
 
         // Station Create Menu
         stationCreateMenu.addItem("1", "Créer un aéroport", DESC_STATION_CREATE, createStationFields, new MenuInputCompleted() {
@@ -356,7 +362,17 @@ public class ControlAdmin extends Control {
             }
 
         } );
-        //companyTripMenu.addItem("2", "Modifier", );
+        companyTripMenu.addItem("2", "Modifier", "Modifiez un voyage en fournissant son {ID} son {transport ID} sa {date de depart} et sa {date d'arrivée} pour modifier ",modifyCompanyTripFields,new MenuInputCompleted(){
+            @Override
+            public void onCompleted(MenuInput inputs) {
+                Trip trip = dataBase.getTrip(inputs.get(Field.Input.ID));
+                if (trip == null) return;
+                //commandController.execute(new ModifyTrip(inputs.get(Field.Input.DATE_DEP),inputs.get(Field.Input.DATE_ARR),inputs.get(Field.Input.TRANS_ID)
+                printsuc("* voyage modifiée");
+            }
+
+
+        });
         companyTripMenu.addItem("3", "Supprimer",
                 "Supprimez un voyage à partir de son {Id}",
                 new Field(Field.Input.ID), new MenuInputCompleted() {
