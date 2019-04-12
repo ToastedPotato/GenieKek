@@ -22,6 +22,12 @@ public abstract class Section {
         return str;
     }
 
+    public Place pickFreePlace() {
+        for (int i = 0; i < nbPlaces; i++)
+            if (places[i].isFree()) return places[i];
+        return null;
+    }
+
     public int getNbPlaces() {
         return nbPlaces;
     }

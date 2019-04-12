@@ -11,7 +11,7 @@ public abstract class CompanyFactory {
     protected abstract Company fabricateCompany();
 
     public Company createCompany(String id, String name, int price) {
-        if (id.length() != 3) {
+        if (id.length() != 6) {
             try {
                 throw new IdException(id);
             } catch (IdException ignored) { }

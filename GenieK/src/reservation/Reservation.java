@@ -1,6 +1,7 @@
 package reservation;
 
 import place.Place;
+import place.state.Reserved;
 
 public class Reservation{
     
@@ -9,9 +10,11 @@ public class Reservation{
     private Confirmation confirmation;
     private Place place;
     
-    public Reservation(String idCompany) {
+    public Reservation(String idCompany, Place place) {
         this.resNum = idCompany + number;
         number++;
+        this.place = place;
+        place.setState(new Reserved());
         this.confirmation = null;
     }
 

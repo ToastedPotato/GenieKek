@@ -18,10 +18,7 @@ import transport.section.Disposition;
 import transport.section.OrganizableSection;
 import transport.section.Section;
 import trip.Trip;
-import ui.command.AddInstanceTo;
-import ui.command.DeleteInstanceFrom;
-import ui.command.ModifyCompany;
-import ui.command.ModifyStation;
+import ui.command.*;
 import ui.menu.*;
 import visitor.Admin;
 
@@ -93,7 +90,6 @@ public class ControlAdmin extends Control {
         FieldGroup createCabinSectionFields = new FieldGroup(
                 new Field(Field.Input.TYPE),
                 new Field(Field.Input.CABIN));
-
         FieldGroup createCompanyTripFields = new FieldGroup(
                 new Field(Field.Input.ID),
                 new Field(Field.Input.NUM),
@@ -102,7 +98,6 @@ public class ControlAdmin extends Control {
                 new Field(Field.Input.DATE_DEP),
                 new Field(Field.Input.DATE_ARR),
                 new Field(Field.Input.TRANS_ID));
-
         FieldGroup modifyCompanyTripFields = new FieldGroup(
                 new Field(Field.Input.ID),
                 new Field(Field.Input.DATE_DEP),
@@ -333,37 +328,40 @@ public class ControlAdmin extends Control {
         });
 
         // Company Trip Menu
-        companyTripMenu.addItem("1", "Créer un voyage", createCompanyTripFields, new MenuInputCompleted() {
-            @Override
-            public void onCompleted(MenuInput inputs) {
-                String tripId = inputs.get(Field.Input.ID);
-                int number = Integer.parseInt(inputs.get(Field.Input.NUM));
-                Station departure = dataBase.getStation(inputs.get(Field.Input.DEP));
-                Station arrived = dataBase.getStation(inputs.get(Field.Input.ARR));
-                String transportId = inputs.get(Field.Input.TRANS_ID);
-                Trip trip = selectedCompany.createTrip(tripId, number, departure, arrived, inputs.get(Field.Input.DATE_DEP), inputs.get(Field.Input.DATE_ARR), transportId);
-                if (trip == null) return;
-                onCreationTrip = trip;
-                if (!(selectedCompany instanceof FlightCompany)) {
-                    listen(stopTripMenu);
-                    return;
+        companyTripMenu.addItem("1", "Créer un voyage",
+                "Créer un voyage en choissant un {Id} le numéro {Num} sa {Date de départ} et {Date d'arrivée} ainsi que le {Transport Id}",
+                createCompanyTripFields, new MenuInputCompleted() {
+                @Override
+                public void onCompleted(MenuInput inputs) {
+                    String tripId = inputs.get(Field.Input.ID);
+                    int number = Integer.parseInt(inputs.get(Field.Input.NUM));
+                    Station departure = dataBase.getStation(inputs.get(Field.Input.DEP));
+                    Station arrived = dataBase.getStation(inputs.get(Field.Input.ARR));
+                    String transportId = inputs.get(Field.Input.TRANS_ID);
+                    Trip trip = selectedCompany.createTrip(tripId, number, departure, arrived, inputs.get(Field.Input.DATE_DEP), inputs.get(Field.Input.DATE_ARR), transportId);
+                    if (trip == null) return;
+                    onCreationTrip = trip;
+                    if (!(selectedCompany instanceof FlightCompany)) {
+                        listen(stopTripMenu);
+                        return;
+                    }
+                    createTrip(trip);
+                    printsuc("+ voyage ajouté");
                 }
-                createTrip(trip);
-                printsuc("+ voyage ajouté");
-            }
-
         } );
 
-        companyTripMenu.addItem("2", "Modifier", "Modifiez un voyage en fournissant son {ID} son {transport ID} sa {date de depart} et sa {date d'arrivée} pour modifier ",modifyCompanyTripFields,new MenuInputCompleted(){
-            @Override
-            public void onCompleted(MenuInput inputs) {
-                Trip trip = dataBase.getTrip(inputs.get(Field.Input.ID));
-                if (trip == null) return;
-                //commandController.execute(new ModifyTrip(inputs.get(Field.Input.DATE_DEP),inputs.get(Field.Input.DATE_ARR),inputs.get(Field.Input.TRANS_ID)
-                printsuc("* voyage modifiée");
-            }
-
-
+        companyTripMenu.addItem("2", "Modifier",
+                "Modifiez un voyage en fournissant son {Id} pour modifier son {Transport Id} sa {Date de depart} et sa {Date d'arrivée}",
+                modifyCompanyTripFields,new MenuInputCompleted(){
+                @Override
+                public void onCompleted(MenuInput inputs) {
+                    Trip trip = dataBase.getTrip(inputs.get(Field.Input.ID));
+                    if (trip == null) return;
+                    Transport transport = dataBase.getTransport(inputs.get(Field.Input.TRANS_ID));
+                    if (transport == null) return;
+                    commandController.execute(new ModifyTrip(trip, inputs.get(Field.Input.DATE_DEP),inputs.get(Field.Input.DATE_ARR),transport));
+                    printsuc("* voyage modifié");
+                }
         });
         companyTripMenu.addItem("3", "Supprimer un voyage",
                 "Supprimez un voyage à partir de son {Id}",

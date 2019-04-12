@@ -1,15 +1,15 @@
 package visitor;
 
 import company.Company;
-import place.Place;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
 import transport.section.Disposition;
 import transport.section.OrganizableSection;
-import trip.Schedule;
+import transport.section.Section;
 import trip.Trip;
 import ui.Console;
+import ui.DataBase;
 
 public class Client implements Visitor{
 
@@ -31,9 +31,17 @@ public class Client implements Visitor{
     }
 
     public String visit (Trip trip){
+        return "";
+    }
 
-        return visit(trip.getDepart()) + visit(trip.getArrive());
-
+    @Override
+    public String visit(Trip trip, String sectionStr) {
+        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW,trip.getCompanyId()) + "]" + trip.getId() +
+                "(" + trip.getDepartureDateToString() + "->" + trip.getArrivedDateToString() + ")|";
+        Section section = trip.getSection(sectionStr);
+        string += Console.colorize(Console.RED, Float.toString(section.calculPrice(DataBase.getInstance().getCompanyPrice(trip.getCompanyId())))) + "|";
+        string += sectionStr + Console.colorize(Console.BLUE, Integer.toString(section.getNbPlacesDispo()));
+        return string;
     }
 
     @Override

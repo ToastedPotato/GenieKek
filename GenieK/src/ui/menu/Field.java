@@ -7,21 +7,22 @@ public class Field {
         NEW_ID ("Nouvel Id"),
         NAME ("Nom"),
         CITY ("Ville"),
-        CITYSTART ("Ville de départ"),
-        CITYARRIVAL ("Ville d'arrivé"),
+        CITY_START("Ville de départ"),
+        CITY_ARRIVAL("Ville d'arrivé"),
         PRICE ("Prix"),
         TYPE ("Type"),
         DISPO ("Disposition"),
         SEAT ("Nombre de siège"),
         CABIN ("Nombre de cabine"),
-        SECTION ("La classe souhaitée"),
+        SECTION ("Section"),
         DATE("Date (yyyy.MM.dd)"),
         DATE_DEP("Date de départ (yyyy.MM.dd hh:mm)"),
         DATE_ARR("Date d'arrivée (yyyy.MM.dd hh:mm)"),
         NUM ("Nombre"),
         DEP ("Station Id de depart"),
         ARR ("Station Id d'arrivée"),
-        TRANS_ID("Tranport Id")
+        TRANS_ID("Tranport Id"),
+        RES_ID ("Num de réservation")
         ;
 
         private final String text;

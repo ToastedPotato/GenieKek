@@ -15,6 +15,7 @@ public interface Visitor {
     String visit (Station station);
     String visit (Transport transport);
     String visit (Trip trip);
+    String visit (Trip trip, String sectionStr);
     String visit (OrganizableSection.Type type);
     String visit (CabinSection.Type type);
     String visit (Disposition dispo);

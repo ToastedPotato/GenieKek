@@ -1,9 +1,6 @@
 package company;
 
-import exception.ExistException;
-import exception.IdException;
-import exception.TransportException;
-import exception.TripException;
+import exception.*;
 import factory.transport.*;
 import factory.trip.TripFactory;
 import reservation.Reservation;
@@ -61,22 +58,22 @@ public class Company {
         return transportFactory.createTransport(transportId, id);
     }
 
-    public Trip createTrip(String tripId, int number, Station departure, Station arrived, String departureDate, String arrivalDate, String transportId) {
-        if (tripId.length() != 2) {
+    public Trip createTrip(String prefix, int number, Station departure, Station arrived, String departureDate, String arrivalDate, String transportId) {
+        if (prefix.length() != 2) {
             try {
-                throw new IdException(tripId);
-            } catch (IdException ignored) { }
+                throw new PrefixException(prefix);
+            } catch (PrefixException ignored) { }
             return null;
         }
-        if (DataBase.getInstance().tripExist(tripId)) {
+        if (DataBase.getInstance().tripExist(prefix)) {
             try {
-                throw new ExistException(tripId);
+                throw new ExistException(prefix);
             } catch (ExistException ignored) { }
             return null;
         }
         Transport transport = getTransport(transportId);
         if (transport == null) return null;
-        return tripFactory.createTrip(tripId, number, departure, arrived, id, departureDate, arrivalDate, transport);
+        return tripFactory.createTrip(prefix + number, departure, arrived, id, departureDate, arrivalDate, transport);
     }
 
     public String transportToString(Visitor visitor) {
@@ -122,7 +119,15 @@ public class Company {
         return false;
     }
 
-    public Reservation reservedPlace(String tripId, String sectionId) {
+    public String reservePlace(String tripId, String sectionId) {
+        Reservation reservation = new Reservation(id, getTrip(tripId).pickFreePlace(sectionId));
+        reservations.add(reservation);
+        return reservation.getResNum();
+    }
+
+    public Reservation getReservation(String numResa) {
+        for (Reservation reservation : reservations)
+            if (reservation.getResNum().equals(numResa)) return reservation;
         return null;
     }
 

@@ -5,26 +5,24 @@ import company.CruiseCompany;
 import company.FlightCompany;
 import company.TrainCompany;
 import exception.NullObjectException;
+import exception.TripException;
 import factory.company.CruiseCompanyFactory;
 import factory.company.FlightCompanyFactory;
 import factory.company.TrainCompanyFactory;
 import factory.station.AeroportFactory;
 import factory.station.PortFactory;
 import factory.station.RailwayFactory;
+import reservation.Reservation;
 import station.*;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
 import transport.section.OrganizableSection;
 import transport.section.Disposition;
-import trip.Cruise;
-import trip.Flight;
-import trip.Line;
 import trip.Trip;
 import visitor.Visitor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataBase {
 
@@ -58,7 +56,7 @@ public class DataBase {
         addStation(PortFactory.getInstance().createStation("ALE", "Alge"));
 
         Company c;
-        c = TrainCompanyFactory.getInstance().createCompany("STM","STM Groupe", 400);
+        c = TrainCompanyFactory.getInstance().createCompany("STMGRP","STM Groupe", 400);
         c.getTransports().add(c.createTransport("PIO")
                 .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 30)));
         c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "2019.04.26 12:28", "2019.04.26 17:23", "PIO")
@@ -66,13 +64,13 @@ public class DataBase {
                 .addStop(getStation("POZ")));
         addCompany(c);
 
-        c = FlightCompanyFactory.getInstance().createCompany("ARC", "Air Canada", 800);
+        c = FlightCompanyFactory.getInstance().createCompany("AIRCAN", "Air Canada", 800);
         c.getTransports().add(c.createTransport("A45")
                 .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 100)));
         c.getTrips().add(c.createTrip("PT", 1, getStation("CDG"), getStation("YUL"), "2019.04.23 09:10", "2019.04.23 16:50", "A45"));
         addCompany(c);
 
-        c = CruiseCompanyFactory.getInstance().createCompany("COS", "Costa Croisière", 2000);
+        c = CruiseCompanyFactory.getInstance().createCompany("COSTAC", "Costa Croisière", 2000);
         c.getTransports().add(c.createTransport("PQ4")
                 .addSection(new CabinSection(CabinSection.Type.OCEAN, 10)));
         c.getTrips().add(c.createTrip("ME", 1, getStation("MSR"), getStation("MSR"), "2019.04.29 11:45", "2019.05.12 16:20", "PQ4")
@@ -266,7 +264,17 @@ public class DataBase {
         for (Company company : companies) {
             if (company.haveTrip(tripId)) return company;
         }
+        try {
+            throw new TripException(tripId);
+        } catch (TripException ignored) { }
         return null;
+    }
+
+    public Reservation getReservation(String numResa) {
+        if (numResa.length() != 6) return null;
+        Company company = getCompany(numResa.substring(0, 6));
+        if (company == null) return null;
+        return company.getReservation(numResa);
     }
 
     public int getCompanyPrice(String companyId) {

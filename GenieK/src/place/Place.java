@@ -19,6 +19,14 @@ public abstract class Place{
         return state instanceof Free;
     }
 
+    public boolean isReserved() {
+        return state instanceof Reserved;
+    }
+
+    public boolean isConfirmed() {
+        return state instanceof Confirmed;
+    }
+
     public void manage(Reservation res){
         this.state.manage(this, res);
     }

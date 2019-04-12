@@ -1,14 +1,12 @@
 package visitor;
 
 import company.Company;
-import place.Place;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
 import transport.section.Disposition;
 import transport.section.OrganizableSection;
 import transport.section.Section;
-import trip.Schedule;
 import trip.Trip;
 import ui.Console;
 import ui.DataBase;
@@ -41,15 +39,20 @@ public class Admin implements Visitor{
 
     @Override
     public String visit (Trip trip){
-        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW,trip.getIdCompany()) + "]" + trip.getId() + trip.getNumber() +
+        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW,trip.getCompanyId()) + "]" + trip.getId() +
                 "(" + trip.getDepartureDateToString() + "->" + trip.getArrivedDateToString() + ")";
         for (Section section : trip.getSections()) {
             string += "|" + section.getStr();
             if (section instanceof OrganizableSection) string += ((OrganizableSection) section).getDisposition().getStr();
             string += "(" + Console.colorize(Console.BLUE, Integer.toString(section.getNbPlacesReserved())) + "/" + section.getNbPlaces() + ")";
-            string += Console.colorize(Console.RED, Float.toString(section.calculPrice(DataBase.getInstance().getCompanyPrice(trip.getIdCompany()))));
+            string += Console.colorize(Console.RED, Float.toString(section.calculPrice(DataBase.getInstance().getCompanyPrice(trip.getCompanyId()))));
         }
         return string;
+    }
+
+    @Override
+    public String visit(Trip trip, String sectionStr) {
+        return visit(trip);
     }
 
     @Override

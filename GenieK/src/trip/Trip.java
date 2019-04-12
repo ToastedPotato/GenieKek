@@ -1,5 +1,6 @@
 package trip;
 
+import place.Place;
 import station.Station;
 import transport.Transport;
 import transport.section.Section;
@@ -7,21 +8,17 @@ import transport.section.Section;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class Trip{
 
     private String id;
-    private int number;
     private Station depart, arrive;
-    private String idCompany;
+    private String companyId;
     private Transport transport;
     private Date departureDate, arrivedDate;
     private ArrayList<Station> stops = new ArrayList<>();
     private SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd hh:mm");
-
 
     public Trip() {
 
@@ -35,20 +32,16 @@ public class Trip{
         this.id = id;
     }
     
-    public int getNumber() {
-        return this.number;
-    }    
-    
-    public void setNumber(int number) {
-        this.number = number;
-    }
-    
     public Station getDepart(){
         return this.depart;
     }
     
     public Station getArrive(){
         return this.arrive;
+    }
+
+    public Place pickFreePlace(String sectionId) {
+        return getSection(sectionId).pickFreePlace();
     }
 
     public Transport getTransport() {
@@ -64,12 +57,24 @@ public class Trip{
         this.arrive = arrive;
     }
 
-    public String getIdCompany() {
-        return this.idCompany;
+    public String getCompanyId() {
+        return this.companyId;
     }    
 
     public ArrayList<Section> getSections() {
         return transport.getSections();
+    }
+
+    public Section getSection(String sectionId) {
+        for (Section section : getSections())
+            if (section.getStr().equals(sectionId)) return section;
+        return null;
+    }
+
+    public boolean haveSectionDispo(String str) {
+        for (Section section : getSections())
+            if (section.getStr().equals(str) && section.getNbPlacesDispo() > 0) return true;
+        return false;
     }
 
     public Date getDepartureDate() {
@@ -110,8 +115,8 @@ public class Trip{
         }
     }
 
-    public void setIdCompany(String idCompany) {
-        this.idCompany = idCompany;
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
     }
 
     public boolean haveStop(Station stop) {
