@@ -8,10 +8,8 @@ public class Reserved implements State{
     /**
      * Annule la réservation
      * @param place : la place
-     * @param reservation : la réservation
      */
-    public void manage(Place place, Reservation reservation){
-        reservation.setPlace(null);
+    public void manage(Place place) {
         place.setState(new Free());
     }
 

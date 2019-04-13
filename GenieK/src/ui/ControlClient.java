@@ -18,7 +18,6 @@ import java.util.Date;
 public class ControlClient extends Control{
 
     private String selectedSectionId = "";
-    private Reservation selectedReservation = null;
 
     public ControlClient() {
         super(new Client());
@@ -28,9 +27,15 @@ public class ControlClient extends Control{
         Calendar c1 = Calendar.getInstance();
         c1.setTime(date1);
         Calendar c2 = Calendar.getInstance();
+        if (date2 == null) {
+            c2.setTime(new Date());
+            if (c1.get(Calendar.YEAR) < c2.get(Calendar.YEAR)) return false;
+            if (c1.get(Calendar.MONTH) < c2.get(Calendar.MONTH)) return false;
+            return c1.get(Calendar.DATE) >= c2.get(Calendar.DATE);
+        }
         c2.setTime(date2);
-        if(c1.get(Calendar.YEAR) != c2.get(Calendar.YEAR)) return false;
-        if(c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH)) return false;
+        if (c1.get(Calendar.YEAR) != c2.get(Calendar.YEAR)) return false;
+        if (c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH)) return false;
         return c1.get(Calendar.DATE) == c2.get(Calendar.DATE);
     }
 
@@ -157,7 +162,7 @@ public class ControlClient extends Control{
                         public void onSelect() {
                             Company company = dataBase.getCompany(reservation.getCompanyId());
                             Trip trip = dataBase.getTrip(reservation.getTripId());
-                            println(searchTripCompany(company, trip.getDepart().getCity(), trip.getArrive().getCity(), new Date(), reservation.getSectionId()));
+                            println(searchTripCompany(company, trip.getDepart().getCity(), trip.getArrive().getCity(), null, reservation.getSectionId()));
                             String tripId = listen("Nouveau voyage Id");
                             if (!dataBase.tripExist(tripId)) { printne(tripId); return; }
                             if (!choice("Êtes-vous sûr de changer de voyage ?")) return;

@@ -1,7 +1,9 @@
 package place;
 
-import place.state.*;
-import reservation.*;
+import place.state.Confirmed;
+import place.state.Free;
+import place.state.Reserved;
+import place.state.State;
 
 public abstract class Place{
 
@@ -33,8 +35,8 @@ public abstract class Place{
         return state instanceof Confirmed;
     }
 
-    public void manage(Reservation res){
-        this.state.manage(this, res);
+    public void manage(){
+        this.state.manage(this);
     }
 
     public void payement(){

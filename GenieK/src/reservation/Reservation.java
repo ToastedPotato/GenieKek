@@ -6,18 +6,16 @@ import place.state.Reserved;
 import trip.Trip;
 import ui.DataBase;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Reservation{
-    
+
     private static int number = 1;
     private String resNum, companyId, tripId, sectionId;
     private Confirmation confirmation;
     private Place place;
-    
+
     public Reservation(String companyId, String tripId, String sectionId, Place place) {
         this.resNum = companyId + tripId + number;
         number++;
@@ -51,7 +49,7 @@ public class Reservation{
     }
 
     public void changePlace(Place newPlace) {
-        place.manage(this);
+        place.manage();
         place = newPlace;
         place.setState(new Confirmed());
     }
@@ -81,7 +79,7 @@ public class Reservation{
     public Confirmation getConfirmation(){
         return this.confirmation;
     }
-    
+
     public void setConfirmation(Confirmation conf){
         this.confirmation = conf;
     }
@@ -94,7 +92,7 @@ public class Reservation{
     public Place getPlace(){
         return this.place;
     }
-    
+
     public void setPlace(Place place){
         this.place = place;
     }
@@ -105,7 +103,8 @@ public class Reservation{
     }
 
     public void cancel() {
-        place.manage(this);
+        place.manage();
+        place = null;
         DataBase.getInstance().getCompany(companyId).cancelReservation(this);
     }
 

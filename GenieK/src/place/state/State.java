@@ -5,7 +5,7 @@ import reservation.*;
 
 public interface State{
     
-    void manage(Place place, Reservation reservation);
+    void manage(Place place);
     
     void payment(Place place);
 }

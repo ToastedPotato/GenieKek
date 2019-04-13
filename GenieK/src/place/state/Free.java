@@ -1,5 +1,6 @@
 package place.state;
 
+import exception.StateException;
 import place.Place;
 import reservation.*;
 
@@ -8,10 +9,8 @@ public class Free implements State{
     /**
      * Change l'état
      * @param place : la place
-     * @param reservation : réservation
      */
-    public void manage(Place place, Reservation reservation){
-        reservation.setPlace(place);
+    public void manage(Place place) {
         place.setState(new Reserved());
     }
 
