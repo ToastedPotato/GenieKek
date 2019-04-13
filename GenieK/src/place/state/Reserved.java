@@ -18,10 +18,8 @@ public class Reserved implements State{
     /**
      * Procède au paiement de la place avec la confirmation
      * @param place : la place
-     * @param confirmation : la confirmation
      */
-    public void payment(Place place, Confirmation confirmation, Reservation reservation){
-        reservation.setConfirmation(confirmation);
+    public void payment(Place place){
         place.setState(new Confirmed());
     }
 

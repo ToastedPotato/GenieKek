@@ -6,11 +6,17 @@ import reservation.*;
 public abstract class Place{
 
     private State state;
-    
-    public Place() {
+    private int requiredAnnulationTime;
+
+    public Place(int requiredAnnulationTime) {
         this.state = new Free();
+        this.requiredAnnulationTime = requiredAnnulationTime;
     }
-    
+
+    public int getRequiredAnnulationTime() {
+        return requiredAnnulationTime;
+    }
+
     public void setState(State state){
         this.state = state;
     }
@@ -31,7 +37,7 @@ public abstract class Place{
         this.state.manage(this, res);
     }
 
-    public void payement(Confirmation conf, Reservation res){
-        this.state.payment(this, conf, res);
+    public void payement(){
+        this.state.payment(this);
     }
 }

@@ -6,7 +6,7 @@ public class Cabin extends Place{
     private int capacity;
 
     public Cabin(int capacity) {
-        super();
+        super(72);
         this.capacity = capacity;
     }
 

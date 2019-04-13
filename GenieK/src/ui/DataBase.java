@@ -4,7 +4,6 @@ import company.Company;
 import company.CruiseCompany;
 import company.FlightCompany;
 import company.TrainCompany;
-import exception.NullObjectException;
 import exception.TripException;
 import factory.company.CruiseCompanyFactory;
 import factory.company.FlightCompanyFactory;
@@ -13,7 +12,6 @@ import factory.station.AeroportFactory;
 import factory.station.PortFactory;
 import factory.station.RailwayFactory;
 import reservation.Reservation;
-import station.*;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
@@ -55,11 +53,13 @@ public class DataBase {
         addStation(PortFactory.getInstance().createStation("EGY", "Le Caire"));
         addStation(PortFactory.getInstance().createStation("ALE", "Alge"));
 
+        // FIXME, quand une station ou une compagnie est modifiée il faut le modifier aussi sur les voyages !!
+
         Company c;
         c = TrainCompanyFactory.getInstance().createCompany("STMGRP","STM Groupe", 400);
         c.getTransports().add(c.createTransport("PIO")
                 .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 30)));
-        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "2019.04.26 12:28", "2019.04.26 17:23", "PIO")
+        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "2019.04.13 20:20", "2019.04.14 10:23", "PIO")
                 .addStop(getStation("UID"))
                 .addStop(getStation("POZ")));
         addCompany(c);
@@ -67,7 +67,11 @@ public class DataBase {
         c = FlightCompanyFactory.getInstance().createCompany("AIRCAN", "Air Canada", 800);
         c.getTransports().add(c.createTransport("A45")
                 .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 100)));
+        c.getTransports().add(c.createTransport("A48")
+                .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 140))
+                .addSection(new OrganizableSection(OrganizableSection.Type.BUSINESS, Disposition.MEDIUM, 60)));
         c.getTrips().add(c.createTrip("PT", 1, getStation("CDG"), getStation("YUL"), "2019.04.23 09:10", "2019.04.23 16:50", "A45"));
+        c.getTrips().add(c.createTrip("KO", 4, getStation("CDG"), getStation("YUL"), "2019.04.24 10:50", "2019.04.24 18:24", "A48"));
         addCompany(c);
 
         c = CruiseCompanyFactory.getInstance().createCompany("COSTAC", "Costa Croisière", 2000);
@@ -78,7 +82,6 @@ public class DataBase {
                 .addStop(getStation("TUN"))
                 .addStop(getStation("EGY")));
         addCompany(c);
-        View.CONSOLE_ENABLE = true;
     }
 
     /**
@@ -119,54 +122,9 @@ public class DataBase {
         return stations;
     }
 
-    public ArrayList<Aeroport> getAeroport(String city) {
-
-        ArrayList<Aeroport> aeroports = new ArrayList<>();
-
-        for (Station s:stations) {
-
-            if(s.getCity().equals(city) && s instanceof Aeroport) aeroports.add((Aeroport)s);
-
-        }
-
-        return aeroports;
-
-    }
-
-    public ArrayList<Port> getHarbor(String city) {
-
-        ArrayList<Port> ports = new ArrayList<>();
-
-        for (Station s:stations) {
-
-            if(s.getCity().equals(city) && s instanceof Port) ports.add((Port)s);
-
-        }
-
-        return ports;
-
-    }
-
-    public ArrayList<Railway> getRailway(String city) {
-
-        ArrayList<Railway> railways = new ArrayList<>();
-
-        for (Station s:stations) {
-
-            if(s.getCity().equals(city) && s instanceof Railway) railways.add((Railway) s);
-
-        }
-
-        return railways;
-
-    }
-
     public Station getStation(String stationId) {
         for (Station station : stations)
             if (station.getId().equals(stationId)) return station;
-        try {
-            throw new NullObjectException(stationId);
-        } catch (NullObjectException ignored) {}
         return null;
     }
 
@@ -220,9 +178,6 @@ public class DataBase {
     public Company getCompany(String companyId) {
         for (Company company : companies)
             if (company.getId().equals(companyId)) return company;
-        try {
-            throw new NullObjectException(companyId);
-        } catch (NullObjectException ignored) {}
         return null;
     }
 
@@ -231,33 +186,19 @@ public class DataBase {
     }
 
     public boolean companyExist(String companyId) {
-        for (Company company : companies)
-            if (company.getId().equals(companyId)) return true;
-        return false;
+        return getCompany(companyId) != null;
     }
 
     public boolean stationExist(String stationId) {
-        for (Station station : stations)
-            if (station.getId().equals(stationId)) return true;
-        return false;
+        return getStation(stationId) != null;
     }
 
     public boolean transportExist(String transportId) {
-        Transport transport;
-        for (Company company : companies) {
-            transport = company.getTransport(transportId);
-            if (transport != null) return true;
-        }
-        return false;
+        return getTransport(transportId) != null;
     }
 
     public boolean tripExist(String tripId) {
-        Trip trip;
-        for (Company company : companies) {
-            trip = company.getTrip(tripId);
-            if (trip != null) return true;
-        }
-        return false;
+        return getTrip(tripId) != null;
     }
 
     public Company getCompanyByTrip(String tripId) {
@@ -271,7 +212,7 @@ public class DataBase {
     }
 
     public Reservation getReservation(String numResa) {
-        if (numResa.length() != 6) return null;
+        if (numResa.length() <= 6) return null;
         Company company = getCompany(numResa.substring(0, 6));
         if (company == null) return null;
         return company.getReservation(numResa);
@@ -290,11 +231,10 @@ public class DataBase {
     }
 
     public String companiesToString(Visitor visitor){
-        StringBuilder string = new StringBuilder();
-        for (Company company : companies) {
-            string.append(visitor.visit(company)).append("\n");
-        }
-        return string.toString();
+        String string = "";
+        for (Company company : companies)
+            string += visitor.visit(company) + "\n";
+        return string;
     }
 
 }

@@ -11,9 +11,9 @@ public class ModifyCompany implements Command{
     private String oldName, newName, oldId, newId;
 
     public ModifyCompany(Company company, String newId, String newName, int newPrice) {
-        if (newId.length() != 3) {
+        if (newId.length() != 6) {
             try {
-                throw new IdException(newId);
+                throw new IdException(newId, 6);
             } catch (IdException ignored) { }
         }
         if (newPrice <= 0) {
@@ -31,16 +31,18 @@ public class ModifyCompany implements Command{
     }
 
     @Override
-    public void execute(){
+    public boolean execute(){
         this.company.setPrice(this.newPrice);
         this.company.setId(this.newId);
         this.company.setName(this.newName);
+        return true;
     }
 
     @Override
-    public void unexecute(){
+    public boolean unexecute(){
         this.company.setPrice(this.oldPrice);
         this.company.setId(this.oldId);
         this.company.setName(this.oldName);
+        return true;
     }    
 }

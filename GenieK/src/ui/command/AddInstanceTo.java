@@ -12,12 +12,12 @@ public class AddInstanceTo<T> implements Command{
         this.instance = instance;
     }
     
-    public void execute(){
-        target.add(this.instance);
+    public boolean execute(){
+        return target.add(this.instance);
     }
     
-    public void unexecute(){
-        target.remove(this.instance);
+    public boolean unexecute(){
+        return target.remove(this.instance);
     }
 }
 

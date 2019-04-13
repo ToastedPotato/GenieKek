@@ -13,7 +13,7 @@ public abstract class CompanyFactory {
     public Company createCompany(String id, String name, int price) {
         if (id.length() != 6) {
             try {
-                throw new IdException(id);
+                throw new IdException(id, 6);
             } catch (IdException ignored) { }
         }
         if (price <= 0) {

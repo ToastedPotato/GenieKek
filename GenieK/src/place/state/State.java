@@ -7,5 +7,5 @@ public interface State{
     
     void manage(Place place, Reservation reservation);
     
-    void payment(Place place, Confirmation confirmation, Reservation reservation);
+    void payment(Place place);
 }

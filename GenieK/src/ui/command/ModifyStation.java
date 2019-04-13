@@ -11,7 +11,7 @@ public class ModifyStation implements Command{
     public ModifyStation(Station station, String newId, String newCity){
         if (newId.length() != 3) {
             try {
-                throw new IdException(newId);
+                throw new IdException(newId, 3);
             } catch (IdException ignored) { }
         }
         this.station = station;
@@ -21,14 +21,16 @@ public class ModifyStation implements Command{
         this.newCity = newCity;
     }
     
-    public void execute(){
+    public boolean execute(){
         this.station.setId(this.newId);
         this.station.setCity(this.newCity);
+        return true;
     }
     
-    public void unexecute(){
+    public boolean unexecute(){
         this.station.setId(this.oldId);
         this.station.setCity(this.oldCity);
+        return true;
     }
 
 }

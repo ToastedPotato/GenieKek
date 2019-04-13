@@ -62,16 +62,36 @@ public abstract class Control {
         listen(menu);
     }
 
+    public String listen(String message) {
+        print(message + ": ");
+        return scanner.next();
+    }
+
+    public boolean choice(String message) {
+        println(message + " y/n");
+        print("> ");
+        String choice = scanner.next();
+        return choice.equals("y") || choice.equals("Y");
+    }
+
     private boolean applyCommand(String command) {
         if (command.equals("quit")) System.exit(0);
         if (!commands.containsKey(command)) return false;
-        commands.get(command).execute();
+        if (commands.get(command).execute()) printsuc("# commande exécutée");
         FLAG_CMD = true;
         return true;
     }
 
     public void printsuc(String message) {
         println(Console.colorize(Console.GREEN, message));
+    }
+
+    public void printerr(String message) {
+        println(Console.colorize(Console.RED, message));
+    }
+
+    public void printne(String object) {
+        printerr("L'élément [" + object + "] n'existe pas dans la base de donnée");
     }
 
     public void println(String message) {
@@ -85,7 +105,13 @@ public abstract class Control {
     }
 
     public void display(String data) {
+        println(Console.section());
         println(data);
+        println(Console.section());
+        waitin();
+    }
+
+    public void waitin() {
         print("\"Entrée\" pour continuer");
         scanner.nextLine();
         scanner.nextLine();

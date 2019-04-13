@@ -28,6 +28,10 @@ public abstract class Section {
         return null;
     }
 
+    public boolean isFull() {
+        return getNbPlacesDispo() == 0;
+    }
+
     public int getNbPlaces() {
         return nbPlaces;
     }

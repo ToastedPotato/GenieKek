@@ -1,6 +1,8 @@
 package visitor;
 
 import company.Company;
+import reservation.Confirmation;
+import reservation.Reservation;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
@@ -16,21 +18,20 @@ public class Admin implements Visitor{
 
     @Override
     public String visit (Company company){
-        return "ID:" + company.getId()+ " Nom:" +company.getName() + " Prix:" + company.getPrice();
+        return "[" + Console.colorize(Console.YELLOW, company.getId()) + "] "
+                + company.getName() + ", prix: " + Console.colorize(Console.RED, "$" + company.getPrice());
     }
 
     @Override
     public String visit (Station station){
-        return "ID:"+ station.getId() +" Ville:"+station.getCity();
+        return "[" + Console.colorize(Console.GREEN, station.getId()) + "] " + station.getCity();
     }
 
     @Override
     public String visit (Transport transport){
-        String string = transport.getId() + ":[" + Console.colorize(Console.YELLOW, transport.getCompanyId()) + "]";
-        boolean b = true;
+        String string = transport.getId();
         for (Section section : transport.getSections()) {
-            string += (!b ? "|" : "") + section.getStr();
-            b = false;
+            string += "|"  + section.getStr();
             if (section instanceof OrganizableSection) string += ((OrganizableSection) section).getDisposition().getStr();
             string += Console.colorize(Console.BLUE, Integer.toString(section.getNbPlaces()));
         }
@@ -39,7 +40,7 @@ public class Admin implements Visitor{
 
     @Override
     public String visit (Trip trip){
-        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW,trip.getCompanyId()) + "]" + trip.getId() +
+        String string = trip.getDepart().getId() + "-" + trip.getArrive().getId() + ":[" + Console.colorize(Console.YELLOW, trip.getCompanyId()) + "]" + trip.getId() +
                 "(" + trip.getDepartureDateToString() + "->" + trip.getArrivedDateToString() + ")";
         for (Section section : trip.getSections()) {
             string += "|" + section.getStr();
@@ -48,6 +49,16 @@ public class Admin implements Visitor{
             string += Console.colorize(Console.RED, Float.toString(section.calculPrice(DataBase.getInstance().getCompanyPrice(trip.getCompanyId()))));
         }
         return string;
+    }
+
+    @Override
+    public String visit(Confirmation confirmation) {
+        return "";
+    }
+
+    @Override
+    public String visit(Reservation reservation) {
+        return "";
     }
 
     @Override

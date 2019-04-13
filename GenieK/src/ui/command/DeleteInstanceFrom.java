@@ -12,11 +12,11 @@ public class DeleteInstanceFrom<T> implements Command{
         this.instance = instance;
     }
 
-    public void execute(){
-        target.remove(this.instance);
+    public boolean execute(){
+        return target.remove(this.instance);
     }
 
-    public void unexecute(){
-        target.add(this.instance);
+    public boolean unexecute(){
+        return target.add(this.instance);
     }
 }

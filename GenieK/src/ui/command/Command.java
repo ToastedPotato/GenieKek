@@ -2,7 +2,7 @@ package ui.command;
 
 public interface Command{
 
-    void execute();
+    boolean execute();
     
-    void unexecute();
+    boolean unexecute();
 }

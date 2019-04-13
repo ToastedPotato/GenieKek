@@ -30,8 +30,14 @@ public class Company {
         this.tripFactory = tripFactory;
     }
 
+    private void updateId(String id) {
+        for (Trip trip : trips) trip.setCompanyId(id);
+        for (Reservation reservation : reservations) reservation.setCompanyId(id);
+    }
+
     public void setId(String id) {
         this.id = id;
+        updateId(id);
     }
 
     public void setName(String name) {
@@ -45,7 +51,7 @@ public class Company {
     public Transport createTransport(String transportId) {
         if (transportId.length() != 3) {
             try {
-                throw new IdException(transportId);
+                throw new IdException(transportId, 3);
             } catch (IdException ignored) { }
             return null;
         }
@@ -55,7 +61,7 @@ public class Company {
             } catch (ExistException ignored) { }
             return null;
         }
-        return transportFactory.createTransport(transportId, id);
+        return transportFactory.createTransport(transportId);
     }
 
     public Trip createTrip(String prefix, int number, Station departure, Station arrived, String departureDate, String arrivalDate, String transportId) {
@@ -93,22 +99,14 @@ public class Company {
     }
 
     public Transport getTransport(String transportId) {
-        for (Transport transport : transports) {
+        for (Transport transport : transports)
             if (transport.getId().equals(transportId)) return transport;
-        }
-        try {
-            throw new TransportException(transportId);
-        } catch (TransportException ignored) { }
         return null;
     }
 
     public Trip getTrip(String tripId) {
-        for (Trip trip : trips) {
+        for (Trip trip : trips)
             if (trip.getId().equals(tripId)) return trip;
-        }
-        try {
-            throw new TripException(tripId);
-        } catch (TripException ignored) { }
         return null;
     }
 
@@ -120,9 +118,17 @@ public class Company {
     }
 
     public String reservePlace(String tripId, String sectionId) {
-        Reservation reservation = new Reservation(id, getTrip(tripId).pickFreePlace(sectionId));
+        Reservation reservation = new Reservation(id, tripId, sectionId, getTrip(tripId).pickFreePlace(sectionId));
         reservations.add(reservation);
         return reservation.getResNum();
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
+    public void cancelReservation(Reservation reservation) {
+        reservations.remove(reservation);
     }
 
     public Reservation getReservation(String numResa) {

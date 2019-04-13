@@ -52,7 +52,7 @@
 ./src/visitor/Client.java
 ./src/visitor/Visitor.java
 ./src/visitor/Admin.java
-./src/Main.java
+./src/ui.SystemMain.java
 ./src/exception/SystemException.java
 ./src/exception/PriceException.java
 ./src/exception/NullObjectException.java

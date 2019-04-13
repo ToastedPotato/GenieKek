@@ -22,7 +22,13 @@ public class Field {
         DEP ("Station Id de depart"),
         ARR ("Station Id d'arrivée"),
         TRANS_ID("Tranport Id"),
-        RES_ID ("Num de réservation")
+        RES_ID ("Num de réservation"),
+        ADDRESS("Adresse"),
+        MAIL ("Courriel"),
+        PHONE_NUM ("Numéro de téléphone"),
+        BIRTH_DATE ("Date de naissance (yyyy.MM.dd)"),
+        PASSEPORT ("Numéro de passeport"),
+        EXPIRATION_PASSEPORT_DATE ("Date d'expiration du passeport")
         ;
 
         private final String text;

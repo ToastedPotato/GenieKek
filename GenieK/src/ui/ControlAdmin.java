@@ -142,10 +142,10 @@ public class ControlAdmin extends Control {
                     @Override
                     public void onCompleted(MenuInput inputs) {
                         Station station = dataBase.getStation(inputs.get(Field.Input.ID));
-                        if (station == null) return;
+                        if (station == null) { printne(inputs.get(Field.Input.ID)); return; }
                         commandController.execute(new ModifyStation(
                                 station,
-                                inputs.get(Field.Input.ID),
+                                inputs.get(Field.Input.NEW_ID),
                                 inputs.get(Field.Input.CITY)));
                         printsuc("* station modifiée");
                     }
@@ -156,7 +156,7 @@ public class ControlAdmin extends Control {
                     @Override
                     public void onCompleted(MenuInput inputs) {
                         Station station = dataBase.getStation(inputs.get(Field.Input.ID));
-                        if (station == null) return;
+                        if (station == null) { printne(inputs.get(Field.Input.ID)); return; }
                         commandController.execute(new DeleteInstanceFrom<>(dataBase.getStations(), station));
                         printsuc("- station supprimée");
                     }
@@ -206,11 +206,15 @@ public class ControlAdmin extends Control {
                 public void onCompleted(MenuInput inputs) {
                     Section section = null;
                     try {
+                        // récupère les champs
                         OrganizableSection.Type type = OrganizableSection.Type.get(inputs.get(Field.Input.TYPE));
                         Disposition disposition = Disposition.get(inputs.get(Field.Input.DISPO));
                         int nbSeat = Integer.parseInt(inputs.get(Field.Input.SEAT));
-                        if (type == null || disposition == null) return;
+                        // vérifie leurs intégrités
+                        if (type == null) { printne(inputs.get(Field.Input.TYPE)); return; }
+                        if (disposition == null) { printne(inputs.get(Field.Input.DISPO)); return; }
                         if (nbSeat <= 0) throw new NbPlaceException();
+                        // si le transport a déjà la même section on lève une erreur
                         section = new OrganizableSection(type, disposition, nbSeat);
                         if (onCreationTransport.haveSection(section)) {
                             section = null;
@@ -236,10 +240,13 @@ public class ControlAdmin extends Control {
             public void onCompleted(MenuInput inputs) {
                 Section section = null;
                 try {
+                    // récupère les champs
                     CabinSection.Type type = CabinSection.Type.get(inputs.get(Field.Input.TYPE));
                     int nbCabin = Integer.parseInt(inputs.get(Field.Input.CABIN));
-                    if (type == null) return;
+                    // vérifie leurs intégrités
+                    if (type == null) { printne(inputs.get(Field.Input.TYPE)); return; }
                     if (nbCabin <= 0) throw new NbPlaceException();
+                    // si le transport à la même section on lève une erreur
                     section = new CabinSection(type, nbCabin);
                     if (onCreationTransport.haveSection(section)) {
                         section = null;
@@ -270,27 +277,31 @@ public class ControlAdmin extends Control {
                     onCreationTransport = selectedCompany.createTransport(inputs.get(Field.Input.ID));
                     if (onCreationTransport == null) return;
                     Menu menu = null;
+                    // affiche les sections disponible
                     println(Console.section());
                     println("{Type} de section disponible:");
+                    // si le transport a des sections organisées, c'est à dire avec des dispositions
                     if (onCreationTransport.getSectionClass() == OrganizableSection.class) {
                         menu = sectionOrganizedMenu;
-                        for (OrganizableSection.Type type : OrganizableSection.Type.values()) {
+                        // affiche les sections
+                        for (OrganizableSection.Type type : OrganizableSection.Type.values())
                             println(type.print(visitor));
-                        }
                         println(Console.section());
+                        // afiche les dispositions
                         println("{Disposition} de section disponible:");
-                        for (Disposition disposition : Disposition.values()) {
+                        for (Disposition disposition : Disposition.values())
                             println(disposition.print(visitor));
-                        }
                     }
+                    // sinon si le transport a des sections de cabines
                     else if (onCreationTransport.getSectionClass() == CabinSection.class) {
                         menu = sectionCabinMenu;
-                        for (CabinSection.Type type : CabinSection.Type.values()) {
+                        // affiche les sections
+                        for (CabinSection.Type type : CabinSection.Type.values())
                             println(type.print(visitor));
-                        }
                     }
                     println(Console.section());
                     if (menu == null) return;
+                    // affiche et écoute le menu correspondant
                     listen(menu);
                 }
             });
@@ -333,32 +344,39 @@ public class ControlAdmin extends Control {
                 createCompanyTripFields, new MenuInputCompleted() {
                 @Override
                 public void onCompleted(MenuInput inputs) {
+                    // récupère les champs
                     String tripId = inputs.get(Field.Input.ID);
                     int number = Integer.parseInt(inputs.get(Field.Input.NUM));
                     Station departure = dataBase.getStation(inputs.get(Field.Input.DEP));
                     Station arrived = dataBase.getStation(inputs.get(Field.Input.ARR));
                     String transportId = inputs.get(Field.Input.TRANS_ID);
+                    // vérifie leurs intégrités
+                    if (departure == null) { printne(inputs.get(Field.Input.DEP)); return; }
+                    if (arrived == null) { printne(inputs.get(Field.Input.ARR)); return; }
+                    // créer le voyage
                     Trip trip = selectedCompany.createTrip(tripId, number, departure, arrived, inputs.get(Field.Input.DATE_DEP), inputs.get(Field.Input.DATE_ARR), transportId);
                     if (trip == null) return;
                     onCreationTrip = trip;
+                    // si ce n'est pas un avion on peut lui ajouter des stops
                     if (!(selectedCompany instanceof FlightCompany)) {
                         listen(stopTripMenu);
                         return;
                     }
+                    // créer le voyage dans la base de données
                     createTrip(trip);
                     printsuc("+ voyage ajouté");
                 }
         } );
 
-        companyTripMenu.addItem("2", "Modifier",
+        companyTripMenu.addItem("2", "Modifier un voyage",
                 "Modifiez un voyage en fournissant son {Id} pour modifier son {Transport Id} sa {Date de depart} et sa {Date d'arrivée}",
                 modifyCompanyTripFields,new MenuInputCompleted(){
                 @Override
                 public void onCompleted(MenuInput inputs) {
                     Trip trip = dataBase.getTrip(inputs.get(Field.Input.ID));
-                    if (trip == null) return;
+                    if (trip == null) { printne(inputs.get(Field.Input.ID)); return; }
                     Transport transport = dataBase.getTransport(inputs.get(Field.Input.TRANS_ID));
-                    if (transport == null) return;
+                    if (transport == null) { printne(inputs.get(Field.Input.TRANS_ID)); return; }
                     commandController.execute(new ModifyTrip(trip, inputs.get(Field.Input.DATE_DEP),inputs.get(Field.Input.DATE_ARR),transport));
                     printsuc("* voyage modifié");
                 }
@@ -369,7 +387,7 @@ public class ControlAdmin extends Control {
                 @Override
                 public void onCompleted(MenuInput inputs) {
                     Trip trip = selectedCompany.getTrip(inputs.get(Field.Input.ID));
-                    if (trip == null) return;
+                    if (trip == null) { printne(inputs.get(Field.Input.ID)); return; }
                     commandController.execute(new DeleteInstanceFrom<>(selectedCompany.getTrips(), trip));
                     printsuc("- voyage supprimé");
                 }
@@ -394,7 +412,7 @@ public class ControlAdmin extends Control {
                     @Override
                     public void onCompleted(MenuInput inputs) {
                         Company company = dataBase.getCompany(inputs.get(Field.Input.ID));
-                        if (company == null) return;
+                        if (company == null) { printne(inputs.get(Field.Input.ID)); return; }
                         commandController.execute(new ModifyCompany(
                                 company,
                                 inputs.get(Field.Input.NEW_ID),
@@ -410,7 +428,7 @@ public class ControlAdmin extends Control {
                     @Override
                     public void onCompleted(MenuInput inputs) {
                         Company company = dataBase.getCompany(inputs.get(Field.Input.ID));
-                        if (company == null) return;
+                        if (company == null) { printne(inputs.get(Field.Input.ID)); return; }
                         commandController.execute(new DeleteInstanceFrom<>(dataBase.getCompanies(), company));
                         printsuc("- compagie supprimée");
                     }
@@ -421,7 +439,7 @@ public class ControlAdmin extends Control {
                 @Override
                 public void onCompleted(MenuInput inputs) {
                     Company company = dataBase.getCompany(inputs.get(Field.Input.ID));
-                    if (company == null) return;
+                    if (company == null) { printne(inputs.get(Field.Input.ID)); return; }
                     selectedCompany = company;
                     companyManageMenu.appendTitle(company.getName());
                     listen(companyManageMenu);

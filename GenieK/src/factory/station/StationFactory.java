@@ -12,7 +12,7 @@ public abstract class StationFactory {
     public Station createStation(String id, String city){
         if (id.length() != 3) {
             try {
-                throw new IdException(id);
+                throw new IdException(id, 3);
             } catch (IdException ignored) { }
             return null;
         }

@@ -19,16 +19,18 @@ public class ModifyTrip implements Command{
         this.oldTransport = trip.getTransport();
     }
     
-    public void execute(){
+    public boolean execute(){
         this.trip.setTransport(newTransport);
         this.trip.setDepartureDate(newDepartureDate);
         this.trip.setArrivalDate(newArrivalDate);
+        return true;
     }
     
-    public void unexecute(){
+    public boolean unexecute(){
         this.trip.setTransport(oldTransport);
         this.trip.setDepartureDate(oldDepartureDate);
         this.trip.setArrivalDate(oldArrivalDate);
+        return true;
     }
 
 }

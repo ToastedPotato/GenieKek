@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Transport {
 
-    private String id, companyId;
+    private String id;
     private ArrayList<Section> sections = new ArrayList<>();
     private Class<?> sectionClass;
 
@@ -24,14 +24,6 @@ public class Transport {
 
     public String getId() {
         return id;
-    }
-
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
     }
 
     public boolean haveSection(Section section) {

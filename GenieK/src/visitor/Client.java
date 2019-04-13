@@ -1,6 +1,8 @@
 package visitor;
 
 import company.Company;
+import reservation.Confirmation;
+import reservation.Reservation;
 import station.Station;
 import transport.Transport;
 import transport.section.CabinSection;
@@ -32,6 +34,21 @@ public class Client implements Visitor{
 
     public String visit (Trip trip){
         return "";
+    }
+
+    @Override
+    public String visit(Confirmation confirmation) {
+        return Console.colorize(Console.YELLOW_UNDERLINED, confirmation.getResNum()) + "|" + confirmation.getPrice() + "|" + confirmation.getName();
+    }
+
+    @Override
+    public String visit(Reservation reservation) {
+        String string = Console.colorize(Console.YELLOW_UNDERLINED, reservation.getResNum());
+        string += "|" + reservation.getDateToString();
+        string += "|" + (reservation.isConfirmed() ? "CONFIRMÉ" : "EN ATTENTE DE PAIEMENT");
+        if (reservation.isConfirmed())
+            string += "|" + (reservation.isCancelable() ? "" : "NON ") + "ANNULABLE";
+        return string;
     }
 
     @Override

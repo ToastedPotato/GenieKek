@@ -1,10 +1,9 @@
 package ui.menu;
 
-import company.Company;
 import ui.Console;
 import ui.Control;
+import ui.SystemMain;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,7 +45,7 @@ public class Menu {
     }
 
     public void back() {
-        if (parent == null) System.exit(0);
+        if (parent == null) SystemMain.choice();
         control.listen(parent);
     }
 
