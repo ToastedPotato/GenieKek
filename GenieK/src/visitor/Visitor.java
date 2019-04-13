@@ -1,7 +1,6 @@
 package visitor;
 
 import company.Company;
-import place.Place;
 import reservation.Confirmation;
 import reservation.Reservation;
 import station.Station;
@@ -9,8 +8,7 @@ import transport.Transport;
 import transport.section.CabinSection;
 import transport.section.Disposition;
 import transport.section.OrganizableSection;
-import transport.section.Section;
-import trip.*;
+import trip.Trip;
 
 public interface Visitor {
 
@@ -24,6 +22,5 @@ public interface Visitor {
     String visit (OrganizableSection.Type type);
     String visit (CabinSection.Type type);
     String visit (Disposition dispo);
-
         
 }

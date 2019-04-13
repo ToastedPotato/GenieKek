@@ -2,7 +2,6 @@ package place.state;
 
 import exception.StateException;
 import place.Place;
-import reservation.*;
 
 public class Confirmed implements State{
 

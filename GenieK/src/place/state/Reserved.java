@@ -1,7 +1,6 @@
 package place.state;
 
 import place.Place;
-import reservation.*;
 
 public class Reserved implements State{
 

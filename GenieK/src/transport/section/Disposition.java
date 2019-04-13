@@ -1,7 +1,6 @@
 package transport.section;
 
 import exception.EnumException;
-import visitor.Visitor;
 
 public enum Disposition {
     SMALL (3, "1-2"),
@@ -39,10 +38,4 @@ public enum Disposition {
     public int getNbColumn() {
         return column;
     }
-
-    public String print(Visitor visitor) {
-        return visitor.visit(this);
-    }
-
-
 }

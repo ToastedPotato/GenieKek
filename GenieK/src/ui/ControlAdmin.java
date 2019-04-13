@@ -285,19 +285,19 @@ public class ControlAdmin extends Control {
                         menu = sectionOrganizedMenu;
                         // affiche les sections
                         for (OrganizableSection.Type type : OrganizableSection.Type.values())
-                            println(type.print(visitor));
+                            println(visitor.visit(type));
                         println(Console.section());
                         // afiche les dispositions
                         println("{Disposition} de section disponible:");
                         for (Disposition disposition : Disposition.values())
-                            println(disposition.print(visitor));
+                            println(visitor.visit(disposition));
                     }
                     // sinon si le transport a des sections de cabines
                     else if (onCreationTransport.getSectionClass() == CabinSection.class) {
                         menu = sectionCabinMenu;
                         // affiche les sections
                         for (CabinSection.Type type : CabinSection.Type.values())
-                            println(type.print(visitor));
+                            println(visitor.visit(type));
                     }
                     println(Console.section());
                     if (menu == null) return;

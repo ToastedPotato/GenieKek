@@ -2,7 +2,6 @@ package transport.section;
 
 import exception.EnumException;
 import place.Cabin;
-import visitor.Visitor;
 
 public class CabinSection extends Section {
 
@@ -43,10 +42,6 @@ public class CabinSection extends Section {
 
         public int getCapacity() {
             return capacity;
-        }
-
-        public String print(Visitor visitor) {
-            return visitor.visit(this);
         }
     }
 

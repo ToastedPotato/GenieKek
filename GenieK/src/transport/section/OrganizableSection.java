@@ -3,7 +3,6 @@ package transport.section;
 import exception.EnumException;
 import place.Column;
 import place.Seat;
-import visitor.Visitor;
 
 public class OrganizableSection extends Section {
 
@@ -38,10 +37,6 @@ public class OrganizableSection extends Section {
 
         public int getRatio() {
             return ratio;
-        }
-
-        public String print(Visitor visitor) {
-            return visitor.visit(this);
         }
     }
 
