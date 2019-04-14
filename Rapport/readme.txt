@@ -6,16 +6,16 @@ Section 0: Démarrage de l'application
         le bouton "exécuter" (le chevron vert dans la barre de tâches de l'IDE).
         
     Exécution à partir du terminal:
-        Sous Linux (et possiblement MacOS), vous pouvez utiliser l'outil "make" 
-        à partir du terminal afin de compiler et exécuter l'application. 
-        À partir du répertoire "code" du dossier de remise, exécutez dans votre 
-        terminal la commande "make" (un raccourci pour l'appel consécutif des 
-        commandes "make build" et "make run") prédéfinie dans le makefile 
-        fourni avec le projet.
+        Sous Linux (et MacOS), vous pouvez utiliser l'outil "make" à partir du 
+        terminal afin de compiler et exécuter l'application. À partir du 
+        répertoire "code" du dossier de remise, exécutez dans votre terminal la 
+        commande "make" (un raccourci pour l'appel consécutif des commandes 
+        "make build" et "make run") prédéfinie dans le makefile fourni avec le 
+        projet.
         
         N.B.: vous pouvez ajouter l'option silencieux "-s" ("make -s" par 
         exemple) aux commandes de make pour alléger le texte généré dans votre 
-        terminal
+        terminal.
     
     Exécution à partir d'une archive .jar:
         À partir du répertoire "code" vous pouvez exécuter l'archive jar fournie 
