@@ -1,5 +1,6 @@
 package trip;
 
+import exception.CruiseException;
 import place.Place;
 import station.Station;
 import transport.Transport;
@@ -52,7 +53,7 @@ public class Trip{
         this.transport = transport;
     }
 
-    public void setStation(Station depart, Station arrive) {
+    public void setStation(Station depart, Station arrive) throws CruiseException {
         this.depart = depart;
         this.arrive = arrive;
     }

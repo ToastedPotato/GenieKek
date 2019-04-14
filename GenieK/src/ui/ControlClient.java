@@ -4,6 +4,8 @@ import company.Company;
 import reservation.Confirmation;
 import reservation.Reservation;
 import transport.Transport;
+import transport.section.CabinSection;
+import transport.section.OrganizableSection;
 import transport.section.Section;
 import trip.Trip;
 import ui.menu.*;
@@ -77,7 +79,7 @@ public class ControlClient extends Control{
         FieldGroup searchTripFields = new FieldGroup(
                 new Field(Field.Input.CITY_START),
                 new Field(Field.Input.CITY_ARRIVAL),
-                new Field(Field.Input.DATE_DEP),
+                new Field(Field.Input.DATE),
                 new Field(Field.Input.SECTION));
         FieldGroup payementFields = new FieldGroup(
                 new Field(Field.Input.NAME),
@@ -103,35 +105,59 @@ public class ControlClient extends Control{
         reservationMenu.addItem("2", "Nouvelle recherche", chooseTransport);
         reservationMenu.addItem("3", "Sortir", mainMenu);
 
-        chooseTransport.addItem("1", "Voyager par avion", searchTripFields, new MenuInputCompleted() {
+        chooseTransport.addItem("1", "Voyager par avion", searchTripFields, new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                println(Console.section());
+                println("{Section} disponibles:");
+                for (OrganizableSection.Type type : OrganizableSection.Type.values())
+                    println(visitor.visit(type));
+                println(Console.section());
+            }}, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
                 println(searchTrip(dataBase.getFlightCompany(),
                         inputs.get(Field.Input.CITY_START),
                         inputs.get(Field.Input.CITY_ARRIVAL),
-                        inputs.get(Field.Input.DATE_DEP),
+                        inputs.get(Field.Input.DATE),
                         inputs.get(Field.Input.SECTION)));
                 listen(reservationMenu);
             }
         });
-        chooseTransport.addItem("2", "Voyager par train", searchTripFields, new MenuInputCompleted() {
+        chooseTransport.addItem("2", "Voyager par train", searchTripFields, new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                println(Console.section());
+                println("{Section} disponibles:");
+                for (OrganizableSection.Type type : OrganizableSection.Type.values())
+                    println(visitor.visit(type));
+                println(Console.section());
+            }}, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
                 println(searchTrip(dataBase.getTrainCompany(),
                         inputs.get(Field.Input.CITY_START),
                         inputs.get(Field.Input.CITY_ARRIVAL),
-                        inputs.get(Field.Input.DATE_DEP),
+                        inputs.get(Field.Input.DATE),
                         inputs.get(Field.Input.SECTION)));
                 listen(reservationMenu);
             }
         });
-        chooseTransport.addItem("3", "Voyager par bateau", searchTripFields, new MenuInputCompleted() {
+        chooseTransport.addItem("3", "Voyager par bateau", searchTripFields, new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                println(Console.section());
+                println("{Section} disponibles:");
+                for (CabinSection.Type type : CabinSection.Type.values())
+                    println(visitor.visit(type));
+                println(Console.section());
+            }}, new MenuInputCompleted() {
             @Override
             public void onCompleted(MenuInput inputs) {
                 println(searchTrip(dataBase.getCruiseCompany(),
                         inputs.get(Field.Input.CITY_START),
                         inputs.get(Field.Input.CITY_ARRIVAL),
-                        inputs.get(Field.Input.DATE_DEP),
+                        inputs.get(Field.Input.DATE),
                         inputs.get(Field.Input.SECTION)));
                 listen(reservationMenu);
             }
@@ -157,7 +183,7 @@ public class ControlClient extends Control{
                             menu.back();
                         }
                     });
-                    menu.addItem("2", "Changer de vol pour la même destination dans la même section (sans frais)", new MenuItemListener() {
+                    menu.addItem("2", "Changer de voyage pour la même destination dans la même section (sans frais)", new MenuItemListener() {
                         @Override
                         public void onSelect() {
                             Company company = dataBase.getCompany(reservation.getCompanyId());

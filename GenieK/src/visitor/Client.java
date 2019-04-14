@@ -63,22 +63,17 @@ public class Client implements Visitor{
 
     @Override
     public String visit(OrganizableSection.Type type) {
-        return "[" + type.getStr() + "] " + Console.colorize(Console.BLUE, type.toString()) + "  " +
-                "\tratio: " + Console.colorize(Console.YELLOW, Integer.toString(type.getRatio())) + "%";
+        return "[" + type.getStr() + "] " + Console.colorize(Console.BLUE, type.toString());
     }
 
     @Override
     public String visit(CabinSection.Type type) {
-        return "[" + type.getStr() + "] " + Console.colorize(Console.BLUE, type.toString()) + "   " +
-                "\tratio: " + Console.colorize(Console.YELLOW, Integer.toString(type.getRatio())) +
-                "%\tcapacité des cabines: " + Console.colorize(Console.YELLOW, Integer.toString(type.getCapacity())) + " personnes)";
+        return "[" + type.getStr() + "] " + Console.colorize(Console.BLUE, type.toString());
     }
 
     @Override
     public String visit(Disposition dispo) {
-        return "[" + dispo.getStr() + "] " + Console.colorize(Console.BLUE, dispo.toString()) +
-                "\t\tcolonnes: " + Console.colorize(Console.YELLOW, Integer.toString(dispo.getNbColumn())) + "  " +
-                "\taile(s) entre les rangées " + Console.colorize(Console.YELLOW, dispo.getLanes());
+        return "";
     }
 
 }

@@ -1,5 +1,6 @@
 package factory.trip;
 
+import exception.CruiseException;
 import station.Station;
 import transport.Transport;
 import trip.*;
@@ -13,7 +14,11 @@ public abstract class TripFactory {
         t.setId(id);
         t.setCompanyId(companyId);
         t.setTransport(transport);
-        t.setStation(departure, arrived);
+        try {
+            t.setStation(departure, arrived);
+        } catch (CruiseException ignore) {
+            return null;
+        }
         t.setDepartureDate(departureDate);
         t.setArrivalDate(arrivalDate);
         return t;

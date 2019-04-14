@@ -77,6 +77,19 @@ public class Menu {
             }
         }));
     }
+
+    public void addItem(String id, String text, FieldGroup fieldGroup, MenuItemListener menuItemListener, MenuInputCompleted menuInputCompleted) {
+        menuItems.put(id, new MenuItem(control, id, text, null, new MenuItemListener() {
+            @Override
+            public void onSelect() {
+                menuItemListener.onSelect();
+                MenuInput menuInput = new MenuInput(control, fieldGroup);
+                menuInput.display();
+                menuInputCompleted.onCompleted(menuInput);
+            }
+        }));
+    }
+
     public void addItem(String id, String text, FieldGroup fieldGroup, MenuInputCompleted menuInputCompleted) {
         addItem(id, text, null, fieldGroup, menuInputCompleted);
     }

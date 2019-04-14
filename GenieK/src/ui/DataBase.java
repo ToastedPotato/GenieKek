@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import company.Company;
 import company.CruiseCompany;
 import company.FlightCompany;
@@ -51,33 +52,64 @@ public class DataBase {
         addStation(PortFactory.getInstance().createStation("MSR", "Marseille"));
         addStation(PortFactory.getInstance().createStation("TUN", "Tunis"));
         addStation(PortFactory.getInstance().createStation("EGY", "Le Caire"));
-        addStation(PortFactory.getInstance().createStation("ALE", "Alge"));
-
-        // FIXME, quand une station ou une compagnie est modifiée il faut le modifier aussi sur les voyages !!
+        addStation(PortFactory.getInstance().createStation("ALE", "Alger"));
 
         Company c;
+        // compagnie de train
         c = TrainCompanyFactory.getInstance().createCompany("STMGRP","STM Groupe", 400);
+        // trains
         c.getTransports().add(c.createTransport("PIO")
-                .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 30)));
-        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "2019.04.13 20:20", "2019.04.14 10:23", "PIO")
+                .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 500)));
+        c.getTransports().add(c.createTransport("MRP")
+                .addSection(new OrganizableSection(OrganizableSection.Type.PREMIERE, Disposition.MEDIUM, 300))
+                .addSection(new OrganizableSection(OrganizableSection.Type.BUSINESS, Disposition.COMFORT, 200)));
+        // trajets
+        c.getTrips().add(c.createTrip("PZ", 1, getStation("GDN"), getStation("AGD"), "2019.04.25 10:20", "2019.04.25 15:23", "PIO")
                 .addStop(getStation("UID"))
                 .addStop(getStation("POZ")));
+        c.getTrips().add(c.createTrip("PL", 56, getStation("POZ"), getStation("UID"), "2019.04.26 09:40", "2019.04.26 12:19", "MRP")
+                .addStop(getStation("GDN")));
+        c.getTrips().add(c.createTrip("PL", 57, getStation("POZ"), getStation("UID"), "2019.04.27 09:40", "2019.04.27 11:45", "MRP"));
         addCompany(c);
 
+        // compagnie aérienne
         c = FlightCompanyFactory.getInstance().createCompany("AIRCAN", "Air Canada", 800);
+        // avions
         c.getTransports().add(c.createTransport("A45")
                 .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 100)));
         c.getTransports().add(c.createTransport("A48")
                 .addSection(new OrganizableSection(OrganizableSection.Type.ECONOMIC, Disposition.LARGE, 140))
                 .addSection(new OrganizableSection(OrganizableSection.Type.BUSINESS, Disposition.MEDIUM, 60)));
+        // vols
         c.getTrips().add(c.createTrip("PT", 1, getStation("CDG"), getStation("YUL"), "2019.04.23 09:10", "2019.04.23 16:50", "A45"));
         c.getTrips().add(c.createTrip("KO", 4, getStation("CDG"), getStation("YUL"), "2019.04.24 10:50", "2019.04.24 18:24", "A48"));
+        c.getTrips().add(c.createTrip("KI", 67, getStation("YUL"), getStation("JFK"), "2019.04.25 16:30", "2019.04.25 18:38", "A48"));
         addCompany(c);
 
+        // compagnie de croisière
         c = CruiseCompanyFactory.getInstance().createCompany("COSTAC", "Costa Croisière", 2000);
+        // paquebots
         c.getTransports().add(c.createTransport("PQ4")
-                .addSection(new CabinSection(CabinSection.Type.OCEAN, 10)));
-        c.getTrips().add(c.createTrip("ME", 1, getStation("MSR"), getStation("MSR"), "2019.04.29 11:45", "2019.05.12 16:20", "PQ4")
+                .addSection(new CabinSection(CabinSection.Type.OCEAN, 80))
+                .addSection(new CabinSection(CabinSection.Type.INTERIOR, 100))
+                .addSection(new CabinSection(CabinSection.Type.DELUXE, 50))
+                .addSection(new CabinSection(CabinSection.Type.FAMILY, 50))
+                .addSection(new CabinSection(CabinSection.Type.SUITE, 30)));
+        c.getTransports().add(c.createTransport("FO3")
+                .addSection(new CabinSection(CabinSection.Type.OCEAN, 100))
+                .addSection(new CabinSection(CabinSection.Type.INTERIOR, 150))
+                .addSection(new CabinSection(CabinSection.Type.DELUXE, 60))
+                .addSection(new CabinSection(CabinSection.Type.FAMILY, 80))
+                .addSection(new CabinSection(CabinSection.Type.SUITE, 45)));
+        // itinéraires
+        c.getTrips().add(c.createTrip("MA", 1, getStation("MSR"), getStation("MSR"), "2019.04.29 11:45", "2019.05.12 16:20", "PQ4")
+                .addStop(getStation("ALE"))
+                .addStop(getStation("TUN"))
+                .addStop(getStation("EGY")));
+        c.getTrips().add(c.createTrip("AE", 1, getStation("ALE"), getStation("ALE"), "2019.05.15 08:55", "2019.06.24 14:30", "FO3")
+                .addStop(getStation("EGY"))
+                .addStop(getStation("TUN")));
+        c.getTrips().add(c.createTrip("AT", 1, getStation("MSR"), getStation("MSR"), "2019.05.29 11:45", "2019.06.12 16:20", "PQ4")
                 .addStop(getStation("ALE"))
                 .addStop(getStation("TUN"))
                 .addStop(getStation("EGY")));
