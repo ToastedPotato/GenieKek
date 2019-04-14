@@ -169,20 +169,16 @@
     <div>
       <h2>Hypothèses</h2>
       <ul>
-          <li>
-              Au début du programme, l'utilisateur doit se définir en temps qu'administrateur ou client pour utiliser le système. De cette manière, il est possible
-              de vérifier directement si les changements on bien été fait.
+          <li>Nous supposons qu'au début de l'exécution du programme, l'utilisateur doit s'authentifier en temps qu'administrateur ou client pour utiliser le système. Nous supposons aussi qu'un administrateur peut retourner au menu d'authentification afin de vérifier rapidement le résultat de modifications à la base de données selon le point de vue d'un autre type d'usager.
           </li>
           <li>
-            Pour une place réservée, mais non confirmée, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre.
+            Nous supposons que, pour une place réservée, mais non confirmée, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre afin d'éviter l'accumulation de réservations non payées par des clients frauduleux ou mal organisés.
           </li>
           <li>
-            Au niveau de l'entrée des dates on suppose que l'utilisateur entre les dates correctement selon le format spécifié à l'écran.
+            Lors de l'entrée des dates, nous supposons que l'utilisateur entre les dates correctement selon le format décrit à l'écran.
           </li>
           <li>
-            Lorsque l'admin créer un voyage, c'est à lui de s'assurer que les destinations correspondent exactement au type de transport. 
-            Par exemple, pour un voyage en avion on doit avoir absolument comme lieu départ et d'arrivée un aéroport. S'il advient que le
-            lieu de départ et d'arrivé soit une garre ou port pour un voyage en avion, c'est à lui de corriger avec les méthodes de modifications disponibles.
+            Lorsque l'administrateur crée un voyage, nous supposons il s'assure que les destinations correspondent au type de transport utilisé. Par exemple, pour un voyage en avion on doit avoir absolument comme stations de départ et d'arrivée des aéroports. Si la station de départ ou d'arrivé d'un vol est une gare ou un port, l'administrateur devra corriger cette situation avec les options de modifications disponibles.
           </li>
   	  </ul>
     </div>
@@ -245,25 +241,11 @@
     </div>
 
     <div id="JAVA">
-      <h2>Implémentation du système en Java</h2>
+      <h2>Particularités de l'implémentation Java</h2>
       
-      <p>
-        Après le design de classe du diagramme que nous avons pris soins de construire à l'aide des patrons de conception, nous avons généré un diagramme et y ajouter du code.
-        Le code est organisé par les différents paquets: company,exception,factory , place reservation , station , transport trip , visitor et ui.
-        Le paquet compagnie contient une classe abstraite compagnie qui fait abstration des compagnies de crosière "CruiseCompagny",
-        des classes de compagnie de vol "FlightCompany" et des classes de compagnie de train "TrainCompany". Les classes qui font abtraction de compagnie possède toutes les informations 
-        nécessaire à la création et l'opération d'une compagnie. Le Paquet Exception contient les exceptions suivantes: EnumException, ExistException , IdException, NbPlaceException, 
-        NoCommandException, PrefixException, PriceException, SectionException, StateException, StopException, SystemException et TripException.
-        Toute ces exceptions sont presente pour prévention et gestion des erreurs dans le système. Le paquets factory contient 3 sous paquet ce chargeant de la création de 
-        compagnie, station ,transport et de voyage. Ce paquet ce charge de l'abstraction de la création des differentes objets utilisé dans l'application. Le paquets place possède
-        un paquet "state" contenant les états des places, contient une classe abstraite "place" pour les types de place qui en hérite. Les places sont des cabines "cabin" ou des et sièges "seat". 
-        Le paquet réservation contient une classe Confirmation et Reservation. Dans le cas ou une reservation est confirmé on lui ajoute une confirmation qui se charge des informations supplémentaire
-        sur la réservation. le paquet station possède une classe abstaite station pour les classes Aérport , Port , Ligne de Train "Railway". Ensuite le paquet le transport qui contient la 
-        classe bateau "Boat" , Avion "Plane" , Train  qui prenent abstration de la classe Transport. Elle contient aussi les differents type de section qui se charge des places.
-         Après le paquet Trip contient tous les types de voyage, c'est à dire  croisière, le vol et voyage en train "line". La classe trip fait abstraction de tout ces type de voyages. 
-         Le paquet UI contient tout ce qui communique avec la vue cest à dire la console,les différents controlleur la base de donnée, et la vue. Il y a aussi 2 sous-paquets ce changeant du menu et  des commandes. 
-         Finalement , on a le paquet visiteur "visitor" qui possède une interface visiteur implémenter par l'admin et le client. Celle-ci  permet d'afficher les données que consulte l'utilisateur.
-      </p>
+      <p>Pour permettre à notre application de fournir une meilleure expérience usager, nous avons dû implémenter quelques fonctionnalités hors du cadre du projet ou organiser nos entités d'une façon qui semblerait peu-être un peu moins "intuitive".</p>
+      <p>Le paquet "exception" permet la gestion et la prévention des erreurs durant diverses opérations du système comme l'entrée de données ou la réservation d'une place dans un voyage par l'usager.</p>
+      <p>Nous avons décidé d'inclure les réservations dans les compagnies. Selon nous, ceci est une association plus logique car les clients réservent des places dans des voyages spécifiques à une compagnie. Ceci permet aussi d'accélérer la récupération des informations requises lors du calcul du prix à payer ou lors du changement de la date ou de la classe du voyage par le client.</p>
     </div>
 
     <div id="IA">
