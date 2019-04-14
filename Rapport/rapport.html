@@ -161,7 +161,7 @@
     <div>
       <h2>Ressources</h2>
       <ul>
-          <li>Lien Visual Paradigm : <a href="">Diagrammes</a></li>
+          <li>Lien Visual Paradigm : <a href="projet.vpp">Diagrammes</a></li>
           <li>Lien vers le Manuel de l'application  : <a href="readme.txt">README</a></li>
       </ul>
     </div>
@@ -239,17 +239,17 @@
       <h2>Discussion de la qualité de la conception</h2>
       <h3></h3>
       <p>
-        Lors du travail pratique 2 , nous étions concentré sur l'objectif de création et généralisation du système.Il sagisait d'étendre
-        le design pour permettre l'ajout d'autres types de compagnie permettant d'autres type de voyage. Il fallait étendre les fonctionnalités 
-        pour chaque type de compagnie. Le priorité était donc de créer un design permettant la création d'un tel système sans considéré les 
-        différents patrons de conception. Il clair que dans certains cas, les patrons de conception pouvaient nous aider à regler des problèmes appliqués 
-        dans certaines situations.Nous avons été en mesure de restructurer et d'améliorer la qualité du design de notre logiciel grâce au patrons de fabrique.
-        Ceci nous permis d'abstraite la création des objets. Nous avons fait usage d'une data auxquels nous referons pour les données sensibles aux changements.
-        Par exemple, le prix de réservation pourrait changer au cours de la consultation, ou la disponibilité d'un vol, ou encore d'un siege (patrons de l'observateur).
-        Comme notre application ce fait en ligne de commande, opter pour un model MVC, Modèle, Vue et Contrôle plus facile à gérer et evidement plus pratique pour la 
-        sépartion des données. Le Modèle notre base de donnée correspondant à la classe "DataBase" , notre vue à la classe "view" et "console" et notre control grace à 
-        la classe admin ControlAdmin , ControlClient et Control.
-
+        Lors du travail pratique 2 , nous étions concentré sur l'objectif de création et généralisation du système. Il sagisait d'étendre
+        le design pour permettre l'ajout d'autres types de compagnie et d'autres type de voyage. La priorité était donc de créer un design permettant la création d'un tel système sans considéré les 
+        différents patrons de conception. <br>
+        À l'étape 3 nous avons vu que dans certains cas les patrons de conception pouvaient nous aider à regler des problèmes appliqués dans certaines situations.
+        Nous avons été en mesure de restructurer et d'améliorer la qualité du design de notre logiciel grâce au patrons de fabrique.
+        Ceci nous a permis d'abstraite la création des objets.
+        Nous avons fait usage d'une base de données auxquels nous referons pour les données sensibles aux changements.
+        Par exemple, le prix de réservation peut changer entre la consultation, la réservation et le paiement, pour connaître le prix on questionne la base de données pour s'assurer d'avoir
+        la bonne valeur à jour.<br>     
+        Comme notre application ce fait en ligne de commande, opter pour un model MVC : Modèle, Vue et Controlleur, plus facile à gérer et evidement plus pratique pour la 
+        séparation des données. Le Modèle est notre base de donnée correspondant à la classe "DataBase" , notre vue à la classe "view" et notre Controlleur est la classe "Control" qui se divise en "ControlAdmin" et "ControlClient". 
       </p>
     </div>
 
