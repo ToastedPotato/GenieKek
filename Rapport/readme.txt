@@ -18,7 +18,15 @@ Section 0: Démarrage de l'application
         terminal
     
     Exécution à partir d'une archive .jar:
-        *En construction*     
+        À partir du répertoire "code" vous pouvez exécuter l'archive jar fournie 
+        en entrant dans votre terminal la commande:
+        
+        java -jar GenieK/artifacts/GestionReservation.jar
+        
+        Si vous avez accès à l'outil "make", vous pouvez aussi entrer:
+        
+        make runjar
+            
 Section 1: Commandes générales naviguation de menus
 
     Après l'authentification de l'usager, les commandes suivantes peuvent être 
