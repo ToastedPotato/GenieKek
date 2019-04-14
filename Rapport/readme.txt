@@ -1,5 +1,24 @@
 Section 0: Démarrage de l'application
 
+    Exécution à partir d'un IDE:
+        Le point d'entrée (méthode "main") est situé dans la class "SystemMain". 
+        Vous pouvez simplement ouvrir cette classe dans votre IDE et cliquer sur 
+        le bouton "exécuter" (le chevron vert dans la barre de tâches de l'IDE).
+        
+    Exécution à partir du terminal:
+        Sous Linux (et possiblement MacOS), vous pouvez utiliser l'outil "make" 
+        à partir du terminal afin de compiler et exécuter l'application. 
+        À partir du répertoire "code" du dossier de remise, exécutez dans votre 
+        terminal la commande "make" (un raccourci pour l'appel consécutif des 
+        commandes "make build" et "make run") prédéfinie dans le makefile 
+        fourni avec le projet.
+        
+        N.B.: vous pouvez ajouter l'option silencieux "-s" ("make -s" par 
+        exemple) aux commandes de make pour alléger le texte généré dans votre 
+        terminal
+    
+    Exécution à partir d'une archive .jar:
+        *En construction*     
 Section 1: Commandes générales naviguation de menus
 
     Après l'authentification de l'usager, les commandes suivantes peuvent être 
@@ -70,10 +89,54 @@ Section 3: Menu principal du client
         
 Section 4 : Menu principal de l'administrateur système
 
-    L'administrateur système peut créer, modifier et supprimer des Stations (
-    Aéroports, Gares, Ports), Compagnies, Voyages et Transports (Avions, 
-    Paquebots et Trains) et afficher le contenu de la base de données du 
-    système.
+    Sous-section 4.A.: Navigation des menus Administrateur
     
-    Pour accéder aux options de gestion des Stations, l'administrateur devra 
-    choisir l'option "Station" du menu principal.
+        L'administrateur système peut créer, modifier et supprimer des Stations 
+        (Aéroports, Gares, Ports), Compagnies, Voyages et Transports (Avions, 
+        Paquebots et Trains) et afficher le contenu de la base de données du 
+        système.
+
+        Pour accéder aux options de gestion des Stations, l'administrateur devra 
+        choisir l'option "Station" du menu principal.
+
+        Pour accéder aux options de gestion de Compagnies, Voyages et 
+        Transports, il faut sélectionner l'option "Compagnie". Le sous-menu 
+        offrira ensuite les options de création, modification, suppression, 
+        gestion et affichage des compagnies présentes dans la base de données. 
+
+        Les Voyages et Transports étant des composantes d'une compagnie, avant 
+        de pouvoir accéder à leurs options administratives, il faudra d'abord 
+        choisir l'option "Gestion d'une compagnie" puis entrer l'identifiant de 
+        la Compagnie dont vous voulez gérer les Voyages et Transports.
+
+        Pour voir le résultat des actions d'administration du point de vue 
+        d'un client régulier, il faut retourner au menu d'authentification du 
+        système puis s'authentifier en mode "client" (voir Section 2).
+    
+    Sous-section 4.B.: Format d'affichage des information en mode Administrateur
+        
+        Veuillez prendre note du format de l'affichage des différentes entités:
+        
+        > Affichage des Stations
+        
+        [IDENTIFIANT] Ville            | Exemple: [YUL] Montréal
+        
+        > Affichage des Compagnies
+        
+        [IDENTIFIANT] Nom, Prix        | Exemple:[STMGRP] STM Groupe, prix: $400
+
+        > Affichage des Voyages
+        
+        DÉPART-ARRIVÉE:[COMPAGNIE]IdVoyage(DateHeureDépart->DateHeureArrivée)|TypeSECTIONConfiguration(PlacesReservées/TotalPlaces)PRIX
+        
+        Exemple: CDG-YUL:[AIRCAN]PT1(2019.04.23 09:10->2019.04.23 04:50)|EL(0/100)400.0
+        
+        Exemple: CDG-YUL:[AIRCAN]KO4(2019.04.24 10:50->2019.04.24 06:24)|EL(0/140)400.0|AM(0/60)600.0
+
+        > Affichage des Transports
+        
+        IDENTIFIANT|TypeSECTIONConfigurationTotalPlaces 
+        
+        Exemple: A45|EL100
+        
+        Exemple: A48|EL140|AM60
