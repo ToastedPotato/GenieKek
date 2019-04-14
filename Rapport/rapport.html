@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>IFT3911 DM2 Gosse Grassin</title>
+    <title>IFT3911 DM3</title>
     <style type="text/css">
         table
         {
@@ -43,6 +43,9 @@
         a {
           color: blue;
         }
+        img {
+          max-width: 100vh;
+        }
         .classe {
           background: #f4f4f4;
           border-radius: 5px;
@@ -56,7 +59,7 @@
     </style>
 </head>
 <body>
-    <h1>IFT 3911 - Devoir 2</h1>
+    <h1>IFT 3911 - Devoir 3</h1>
     <div>
       <h2>Information générale</h2>
       <p>
@@ -159,6 +162,7 @@
       <h2>Ressources</h2>
       <ul>
           <li>Lien Visual Paradigm : <a href="">Diagrammes</a></li>
+          <li>Lien Visual Paradigm : <a href="readme.txt">README</a></li>
       </ul>
     </div>
     <h1>Rapport</h1>
@@ -170,21 +174,21 @@
               de vérifier directement si les changements on bien été fait.
           </li>
           <li>
-            Pour une place réserver, mais non confirmer, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre.
+            Pour une place réservée, mais non confirmée, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre.
           </li>
           <li>
-            Au niveau de l'entrée des dates on suppose qu'un utilisateur entre les dates correctement selon le format spécifié à l'écran.
+            Au niveau de l'entrée des dates on suppose que l'utilisateur entre les dates correctement selon le format spécifié à l'écran.
           </li>
           <li>
-            Lorsque l'admin crée un voyage, c'est à lui de s'assurer que les destinations correspondent exactement au type de transport. 
-            Par exemple, pour un voyage en avion on doit avoir absolument comme lieu départ et d'arrivée un aéroport.S'il advient que le
+            Lorsque l'admin créer un voyage, c'est à lui de s'assurer que les destinations correspondent exactement au type de transport. 
+            Par exemple, pour un voyage en avion on doit avoir absolument comme lieu départ et d'arrivée un aéroport. S'il advient que le
             lieu de départ et d'arrivé soit une garre ou port pour un voyage en avion, c'est à lui de corriger avec les méthodes de modifications disponibles.
           </li>
   	  </ul>
     </div>
     <div id="DC">
         <h2>Diagramme de Classe</h2>
-        <img src="images/dc.jpg"></img>
+        <img src="img/dc.jpg"></img>
     </div>
     <div id="DS">
       <h2>Diagrammes de séquence ou de collaboration</h2>
@@ -204,18 +208,7 @@
     <div id="DP">
       <h2>Diagramme de paquets</h2>
       <p>Grace à ce graphe on peut observer que l'on respecte le Acyclic Dependency Principle (ADP)</p>
-      <h3> Patrons Fabrique</h3>
-      <img src=""></img>
-      <h3>Patrons Singleton</h3>
-      <img src=""></img>
-      <h3>Patron État</h3>
-      <img src=""></img>
-      <h3>Patron Observateur</h3>
-      <img src=""></img>
-      <h3>Patron Commande</h3>
-      <img src=""></img>
-      <h3>Patron Visiteur</h3>
-      <img src=""></img>
+      <img src="img/paquet.jpg"></img>
     </div>
     <div id="CC">
       <h2>Discussion de la qualité de la conception</h2>
@@ -259,13 +252,13 @@
     <div id="IA">
         <h2>Modélisation du diagramme de Pétri du système</h2>
         <h3>Diagramme de Pétri</h3>
-          <img src="petri.png"></img>
+          <img src="img/petri.png"></img>
 
           <h3>Arbre de couverture</h3>
-          <img src="petri_AC.png"></img>
+          <img src="img/petri_AC.png"></img>
 
           <h4>Graphe d'accèssibilité</h4>
-          <img src="petri_AC.png"></img>
+          <img src="img/petri_AC.png"></img>
 
         </div>
     </div>
