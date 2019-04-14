@@ -172,19 +172,19 @@
           <li>Nous supposons qu'au début de l'exécution du programme, l'utilisateur doit s'authentifier en temps qu'administrateur ou client pour utiliser le système. Nous supposons aussi qu'un administrateur peut retourner au menu d'authentification afin de vérifier rapidement le résultat de modifications à la base de données selon le point de vue d'un autre type d'usager.
           </li>
           <li>
-            Nous supposons que, pour une place réservée, mais non confirmée, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre afin d'éviter l'accumulation de réservations non payées par des clients frauduleux ou mal organisés.
+            Nous supposons que pour une place réservée, mais non confirmée, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre afin d'éviter l'accumulation de réservations non payées par des clients frauduleux ou mal organisés.
           </li>
           <li>
             Lors de l'entrée des dates, nous supposons que l'utilisateur entre les dates correctement selon le format décrit à l'écran.
           </li>
           <li>
-            Lorsque l'administrateur crée un voyage, nous supposons il s'assure que les destinations correspondent au type de transport utilisé. Par exemple, pour un voyage en avion on doit avoir absolument comme stations de départ et d'arrivée des aéroports. Si la station de départ ou d'arrivé d'un vol est une gare ou un port, l'administrateur devra corriger cette situation avec les options de modifications disponibles.
+            Lorsque l'administrateur crée un voyage, nous supposons qu'il s'assure que les destinations correspondent au type de transport utilisé. Par exemple, pour un voyage en avion on doit avoir absolument comme stations de départ et d'arrivée des aéroports. Si la station de départ ou d'arrivé d'un vol est une gare ou un port, l'administrateur devra corriger cette situation avec les options de modifications disponibles.
           </li>
   	  </ul>
     </div>
     <div id="DC">
         <h2>Diagramme de Classe</h2>
-        Étant donné que le digramme est plus compréhensible dans sa totalité nous avons préféré laisser le diagramme de classe tel quel car il regroupe tous   les patrons.
+        Étant donné que le diagramme est plus compréhensible dans sa totalité nous avons préféré laisser le diagramme de classe tel quel car il regroupe tous les patrons.
         <img src="img/dc.jpg"></img>
         <ul>
             <li>Le paquet "factory" implémente le patron de Fabrique</li>
@@ -200,7 +200,7 @@
       <h2>Diagrammes de séquence ou de collaboration</h2>
       Nous avons mis à jour nos diagrammes de séquence avec Visual Paradigm, nous affichons ici les diagrammes qui nous semblent pertinent pour les patrons de conception.
       <h3>Patron Fabrique</h3>
-        <p>Conformément à la spécification de ce patron, les diagrammes montrent qu'une fabrique est appellé et que celle-ci s'occupe entièrement de l'instanciation des Compagnies, Transports, Voyages et Stations.</p>
+        <p>Conformément à la spécification de ce patron, les diagrammes montrent qu'une fabrique est appelé et que celle-ci s'occupe entièrement de l'instanciation des Compagnies, Transports, Voyages et Stations.</p>
         <h4>Compagnie</h4>
         <img src="img/dsc_fabrique_company.jpg"></img>
         <h4>Transport</h4>
@@ -234,18 +234,21 @@
     <div id="CC">
       <h2>Discussion de la qualité de la conception</h2>
       <h3></h3>
-      <p>Lors du travail pratique 2, il fallait d'étendre notre conception à d'autres types de compagnies et d'autres type de voyages. Nous nous sommes donc concentrés sur la conception d'un design permettant la création d'un tel système sans considérer les différents patrons de conception. </p>
+      <p>Lors du travail pratique 2, il fallait étendre notre conception à d'autres types de compagnies et d'autres type de voyages. Nous nous sommes donc concentrés sur la conception d'un design permettant la création d'un tel système sans considérer les différents patrons de conception. </p>
         <p>Notre design précédent n'imposait aucune restriction sur l'instanciation des composantes de la base de données, ce qui augmentait inutilement le couplage de certaines classes. Le patron de Fabrique restreint cette responsabilité aux fabriques, rendant le design moins fragile en cas de changement des composantes à instancier. </p>
-        <p>L'usage du patron de commande nous a permis de mieux respecter le CRP (Composite Reuse Principle). En effet, dans notre précédent design, le contrôlleur s'occupait de l'exécution des commandes de l'admin en plus d'interagir avec l'usager, rendant notre design plus fragile en cas de redéfinition de ces commandes. Déléguer la gestion des commandes à l'invocateur de commande et aux instances implémentant l'interface Command a rendu notre design plus solide. </p>
-        <p>En général, l'usage des patrons de conception nous a permis de mieux respecter le DIP (Dependency Inversion Principle). En effet, la structure même des patrons rendait naturelle l'adoption une hiérarchie où les classes concrètes dépendent toujours de classes abstraites ou d'interfaces.</p>
+        <p>L'usage du patron de commande nous a permis de mieux respecter le CRP (Composite Reuse Principle). En effet, dans notre précédent design, le contrôlleur s'occupait de l'exécution des commandes de l'admin en plus d'interagir avec l'usager, rendant notre design plus fragile en cas de redéfinition de ces commandes. 
+          Déléguer la gestion des commandes à l'invocateur de commande et aux instances implémentant l'interface Command a rendu notre design plus solide. </p>
+        <p>En général, l'usage des patrons de conception nous a permis de mieux respecter le DIP (Dependency Inversion Principle). En effet, la structure même des patrons rendait 
+          naturelle l'adoption d'une hiérarchie où les classes concrètes dépendent toujours de classes abstraites ou d'interfaces.</p>
     </div>
 
     <div id="JAVA">
       <h2>Particularités de l'implémentation Java</h2>
       
-      <p>Pour permettre à notre application de fournir une meilleure expérience usager, nous avons dû implémenter quelques fonctionnalités hors du cadre du projet ou organiser nos entités d'une façon qui semblerait peu-être un peu moins "intuitive".</p>
+      <p>Pour permettre à notre application de fournir une meilleure expérience usager, nous avons dû implémenter quelques fonctionnalités hors du cadre du projet ou organiser nos entités d'une façon qui semblerait peut-être un peu moins "intuitive".</p>
       <p>Le paquet "exception" permet la gestion et la prévention des erreurs durant diverses opérations du système comme l'entrée de données ou la réservation d'une place dans un voyage par l'usager.</p>
-      <p>Nous avons décidé d'inclure les réservations dans les compagnies. Selon nous, ceci est une association plus logique car les clients réservent des places dans des voyages spécifiques à une compagnie. Ceci permet aussi d'accélérer la récupération des informations requises lors du calcul du prix à payer ou lors du changement de la date ou de la classe du voyage par le client.</p>
+      <p>Nous avons décidé d'inclure les réservations dans les compagnies. Selon nous, ceci est une association plus logique, car les clients réservent des places dans des voyages spécifiques à une compagnie. Ceci permet aussi d'accélérer 
+        la récupération des informations requises lors du calcul du prix à payer ou lors du changement de la date ou de la classe du voyage par le client.</p>
     </div>
 
     <div id="IA">
