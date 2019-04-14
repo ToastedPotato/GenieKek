@@ -257,19 +257,21 @@
       <h2>Implémentation du système en Java</h2>
       
       <p>
-        Après le design de classe du diagramme que nous avons pris soins de construire à l'aide des patrons de conception, nous avons généré un diagramme.
-        notre code est organisé par les différents paquets: company,exception,factory , place reservation , station , transport trip , visitor et ui.
-        Le paquet compagnie contient une classe abstraite compagnie qui fait abstration de la classe  compagnie  de la compagnie de crosière "CruiseCompagny",
-        de la classe compagnie de vol "FlightCompany" et de la classe de Train "TrainCompany".Le Paquet Exception contenant EnumException, ExistException , 
-        IdException, NbPlaceException, NoCommandException, PrefixException, PriceException, SectionException, StateException, StopException, SystemException et TripException.
-        Toute ces exceptions sont là pour prévenir et gérer les erreurs dans le système. Le paquets factory contient 3 sous paquet ce chargeant de la création de 
-        company, station ,transport ou de voyage.Le paquets place un paquet contenant "state" contenant les états des places, contient une classe abstraite "place" pour les 
-        types de place.Les places sont cabine "cabin" et siege "seat". Le paquet réservation contient une classe Confirmation et Reservation.Un paquet station possèdant 
-        une classe abstaite station pour les classes Aérport , Port , Ligne de Train "Railway". Ensuite le paquet le transport qui contient la classe bateau "Boat" , Avion "Plante" , 
-        Train  qui prenent abstration de la classe Transport.Elle contient aussi les different type de section. Après le paquet Trip contient toute les types de Croisière, le vol et 
-        la ligne dont la classe trip fait abstraction. Le paquet UI contient tout ce qui communique avec la vue cest à dire la console,les différents controlleur la base de donnée, er
-        la vue. Il aussi 2 sous-paquet ce changeant du menu, des commandes. Finalement , on a le paquet visiteur "visitor" possèant une interface visiteur implémenter par l'admin et 
-        le client permettant de l'afficher les données que consulte l'utilisateur.
+        Après le design de classe du diagramme que nous avons pris soins de construire à l'aide des patrons de conception, nous avons généré un diagramme et y ajouter du code.
+        Le code est organisé par les différents paquets: company,exception,factory , place reservation , station , transport trip , visitor et ui.
+        Le paquet compagnie contient une classe abstraite compagnie qui fait abstration des compagnies de crosière "CruiseCompagny",
+        des classes de compagnie de vol "FlightCompany" et des classes de compagnie de train "TrainCompany". Les classes qui font abtraition de compagnie possède toutes les informations 
+        nécessaire à la création et l'opération d'une compagnie. Le Paquet Exception contient les exceptions suivantes: EnumException, ExistException , IdException, NbPlaceException, 
+        NoCommandException, PrefixException, PriceException, SectionException, StateException, StopException, SystemException et TripException.
+        Toute ces exceptions sont presente pour prévention et gestion des erreurs dans le système. Le paquets factory contient 3 sous paquet ce chargeant de la création de 
+        compagnie, station ,transport et de voyage. Ce paquet ce charge de l'abstraction de la création des differentes objets utilisé dans l'application. Le paquets place possède
+        un paquet "state" contenant les états des places, contient une classe abstraite "place" pour les types de place qui en hérite. Les places sont cabine "cabin" et siege "seat". 
+        Le paquet réservation contient une classe Confirmation et Reservation. Dans le cas ou une reservation est confirmé on lui ajoute une confirmation qui se charge des informations supplémentaire
+        sur la réservation. le paquet station possède une classe abstaite station pour les classes Aérport , Port , Ligne de Train "Railway". Ensuite le paquet le transport qui contient la 
+        classe bateau "Boat" , Avion "Plante" , Train  qui prenent abstration de la classe Transport.Elle contient aussi les different type de section qui se charge des places.
+         Après le paquet Trip contient tous les types de voyage, c'est à dire  croisière, le vol et voyage en train "line". La classe trip fait abstraction de tout ces type de voyages. 
+         Le paquet UI contient tout ce qui communique avec la vue cest à dire la console,les différents controlleur la base de donnée, et la vue. Il y a aussi 2 sous-paquets ce changeant du menu et  des commandes. 
+         Finalement , on a le paquet visiteur "visitor" qui possède une interface visiteur implémenter par l'admin et le client. Celle-ci  permet d'afficher les données que consulte l'utilisateur.
 
       </p>
     </div>
