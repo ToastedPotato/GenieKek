@@ -8,7 +8,7 @@ Section 0: Démarrage de l'application
     Exécution à partir du terminal:
         Sous Linux (et MacOS), vous pouvez utiliser l'outil "make" à partir du 
         terminal afin de compiler et exécuter l'application. À partir du 
-        répertoire "code" du dossier de remise, exécutez dans votre terminal la 
+        répertoire "Code" du dossier de remise, exécutez dans votre terminal la 
         commande "make" (un raccourci pour l'appel consécutif des commandes 
         "make build" et "make run") prédéfinie dans le makefile fourni avec le 
         projet.
@@ -18,7 +18,7 @@ Section 0: Démarrage de l'application
         terminal.
     
     Exécution à partir d'une archive .jar:
-        À partir du répertoire "code" vous pouvez exécuter l'archive jar fournie 
+        À partir du répertoire "Code" vous pouvez exécuter l'archive jar fournie 
         en entrant dans votre terminal la commande:
         
         java -jar GenieK/artifacts/GestionReservation.jar

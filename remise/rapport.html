@@ -1,0 +1,264 @@
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>IFT3911 DM3</title>
+    <style type="text/css">
+        table
+        {
+            border: outset 1px #cacaca;
+            border-collapse: collapse;
+        }
+        th
+        {
+            border-bottom: double 1px #cacaca;
+            background-color: #f4f4f4;
+        }
+        td
+        {
+            border-bottom: solid 1px #cacaca;
+        }
+        body {
+          background-color: #f4f4f4;
+          font-family: "Ubuntu", sans-serif;
+          padding: 20px;
+          line-height: 1.5em;
+        }
+
+        body > div {
+          background-color: white;
+          box-shadow: #cacaca 0 0 5px;
+          padding: 20px;
+          border-radius: 5px;
+          margin: 25px 0;
+        }
+        body > div > h2 {
+          margin: 0 0 10px 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #cacaca;
+        }
+        body h1:first-child {
+          text-align: center;
+        }
+        a {
+          color: blue;
+        }
+        img {
+          max-width: 100vh;
+        }
+        .classe {
+          background: #f4f4f4;
+          border-radius: 5px;
+          color: #505050;
+          padding: 0px 6px;
+        }
+        .inline {
+          display: flex;
+          flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <h1>IFT 3911 - Devoir 3</h1>
+    <div>
+      <h2>Information générale</h2>
+      <p>
+          <span style="font-weight: bold;">Nom: </span>Pierre-Loup Gosse
+          <br />
+          <span style="font-weight: bold;">Matricule: </span>0944
+          <br />
+          <span style="font-weight: bold;">Courriel: </span>pierre-loup.gosse@umontreal.ca
+          <br />
+          <span style="font-weight: bold;">temps mis: </span>environs 20h
+      </p>
+      <p>
+          <span style="font-weight: bold;">Nom: </span>Louis Grassin
+          <br />
+          <span style="font-weight: bold;">Matricule: </span>0947
+          <br />
+          <span style="font-weight: bold;">Courriel: </span>louis.grassin@umontreal.ca
+          <br />
+          <span style="font-weight: bold;">temps mis: </span>environs 20h
+      </p>
+      <p>
+      <span style="font-weight: bold;">Nom: </span>Christophe Apollon-Roy
+          <br />
+          <span style="font-weight: bold;">Matricule: </span>092403
+          <br />
+          <span style="font-weight: bold;">Courriel: </span>christophe.apollon-roy@umontreal.ca 
+          <br />
+          <span style="font-weight: bold;">temps mis: </span>environs 20h
+      </p>
+      <p>
+        <span style="font-weight: bold;">Nom: </span>Fahirah Diarra
+            <br />
+            <span style="font-weight: bold;">Matricule: </span>20034025
+            <br />
+            <span style="font-weight: bold;">Courriel: </span>fahirah-baba-muaka.diarra@umontreal.ca 
+            <br />
+            <span style="font-weight: bold;">temps mis: </span>environs 20h
+        </p>
+    </div>
+    <div>
+      <h2>Distribution des tâches</h2>
+        <h4>Soumetteur: Christophe Apollon-Roy</h4>
+      <table cellpadding="7px">
+          <thead>
+              <tr><th> Tâche </th>
+                  <th>Pierre-Loup</th>
+                  <th>Louis</th>
+                  <th>Christophe</th>
+                  <th>Fahirah</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><a href="#DC">Diagramme de classe logiciel</a></td>
+                  <td>25%</td>
+                  <td>25%</td>
+                  <td>25%</td>
+                  <td>25%</td>
+              </tr>
+              <tr>
+                  <td><a href="#DS">Diagrammes de séquence ou de collaboration</a></td>
+                  <td>25%</td>
+                  <td>25%</td>
+                  <td>25%</td>
+                  <td>25%</td>
+              </tr>
+              <tr>
+                  <td><a href="#DP">Diagramme de paquets</a></td>
+                  <td>25%</td>
+                  <td>25%</td>
+                  <td>25%</td>
+                  <td>25%</td>
+              </tr>
+              <tr>
+                  <td><a href="#CC">Discussion de la qualité de la conception</a></td>
+                  <td>10%</td>
+                  <td>10%</td>
+                  <td>40%</td>
+                  <td>40%</td>
+              </tr>
+              <tr>
+                  <td><a href="#JAVA">Implémentation du système en Java</a></td>
+                  <td>40%</td>
+                  <td>20%</td>
+                  <td>20%</td>
+                  <td>20%</td>
+              </tr>
+              <tr>
+                  <td><a href="#IA">Modélisation du diagramme de Pétri du système</a></td>
+                  <td>10%</td>
+                  <td>30%</td>
+                  <td>50%</td>
+                  <td>10%</td>
+              </tr>
+          </tbody>
+      </table>
+
+    </div>
+    <div>
+      <h2>Ressources</h2>
+      <ul>
+          <li>Lien Visual Paradigm : <a href="Design/projet.vpp">Diagrammes</a></li>
+          <li>Lien vers le Manuel de l'application  : <a href="Code/readme.txt">README</a></li>
+      </ul>
+    </div>
+    <h1>Rapport</h1>
+    <div>
+      <h2>Hypothèses</h2>
+      <ul>
+          <li>Nous supposons qu'au début de l'exécution du programme, l'utilisateur doit s'authentifier en temps qu'administrateur ou client pour utiliser le système. Nous supposons aussi qu'un administrateur peut retourner au menu d'authentification afin de vérifier rapidement le résultat de modifications à la base de données selon le point de vue d'un autre type d'usager.
+          </li>
+          <li>Nous supposons que, pour une place réservée, mais non confirmée, l'utilisateur devra annuler sa réservation avant d'en effectuer une autre afin d'éviter l'accumulation de réservations non payées par des clients frauduleux ou mal organisés.
+          </li>
+          <li>Lors de l'entrée des dates, nous supposons que l'utilisateur entre les dates correctement selon le format décrit à l'écran.
+          </li>
+          <li>Lorsque l'administrateur crée un voyage, nous supposons il s'assure que les destinations correspondent au type de transport utilisé. Par exemple, pour un voyage en avion on doit avoir absolument comme stations de départ et d'arrivée des aéroports. Si la station de départ ou d'arrivée d'un vol est une gare ou un port, l'administrateur devra corriger cette situation avec les options de modification disponibles.</li>
+  	  </ul>
+    </div>
+    <div id="DC">
+        <h2>Diagramme de Classe</h2>
+        <p>Étant donné que le diagramme est plus compréhensible dans sa totalité nous avons préféré le laisser tel quel car il regroupe tous les patrons.</p>
+        <img src="img/dc.jpg"></img>
+        <ul>
+            <li>Le paquet "factory" implémente le patron de Fabrique</li>
+            <li>La méthode "getInstance()" des fabrique implémente le patron du Singleton</li>
+            <li>Le paquet "state" inclus dans le paquet "place" implémente le patron d'État</li>
+            <li>Le paquet "ui" regroupe les classes implémentant le modèle MVC (patron de l'Observateur)</li>
+            <li>Le paquet "command", interne au paquet "ui", regroupe les classes implémentant le patron de Commande</li>
+            <li>Le paquet "visitor" regroupe les classes implémentant le patron du Visiteur pour chaque type d'usager</li>
+        </ul>
+        
+    </div>
+    <div id="DS">
+      <h2>Diagrammes de séquence ou de collaboration</h2>
+      <p>Nous avons mis à jour nos diagrammes de séquence avec Visual Paradigm. Nous affichons ici les diagrammes qui nous semblent pertinents pour les patrons de conception.</p>
+      <h3>Patron Fabrique</h3>
+        <p>Conformément à la spécification de ce patron, les diagrammes montrent qu'une fabrique est appelé et que celle-ci s'occupe entièrement de l'instanciation des Compagnies, Transports, Voyages et Stations.</p>
+        <h4>Compagnie</h4>
+        <img src="img/dsc_fabrique_company.jpg"></img>
+        <h4>Transport</h4>
+        <img src="img/dsc_fabrique_transport.jpg"></img>
+        <h4>Trip</h4>
+        <img src="img/dsc_fabrique_trip.jpg"></img>
+        <h4>Station</h4>
+        <img src="img/dsc_fabrique_station.jpg"></img>
+      <h3>Patron État</h3>
+      <p>Conformément à la spécification de ce patron, les diagrammes montrent que l'état d'un Siège ou d'une Cabine s'assure du bon comportement de celui-ci lors des actions de réservation ou d'annulation (méthode "manage") et de paiement (méthode payment).</p>
+        <h4>Place</h4>
+        <img src="img/dsc_etat_place.jpg"></img>
+        <h4>Libre</h4>
+        <img src="img/dsc_etat_free.jpg"></img>
+        <h4>Réservé</h4>
+        <img src="img/dsc_etat_reserved.jpg"></img>
+        <h4>Confirmé</h4>
+        <img src="img/dsc_etat_confirmed.jpg"></img>
+      <h3>Patron Observateur</h3>
+      <p>Nous avons jugé le MVC comme étant la variante du patron d'Observateur la plus adaptée à notre application. Le diagramme qui suit montre comment le Controlleur (Control) met à jour la Vue (View) et le modèle (Database) tout en interagissant avec l'usager (par l'usage de méthodes comme "listen(Menu:menu)").</p>
+        <img src="img/dsc_mvc.jpg"></img>
+      <h3>Patron Commande</h3>
+      <p>Conformément à la spécification de ce patron, le diagramme montre que les commandes de l'admin sont exécutées à l'aide d'un invocateur (CommandController) et que le stockage des Commandes instanciées (classes implémentant Command) dans les listes Undo et Redo permet l'implémentation de l'annulation et la réexécution des commandes de l'admin.</p>
+        <img src="img/dsc_command.jpg"></img>
+    </div>
+    <div id="DP">
+      <h2>Diagramme de paquets</h2>
+      <p>Grace à ce graphe on peut observer que l'on respecte le Acyclic Dependency Principle (ADP)</p>
+      <img src="img/paquet.jpg"></img>
+    </div>
+    <div id="CC">
+      <h2>Discussion de la qualité de la conception</h2>
+      <p>Lors du travail pratique 2, il fallait étendre notre conception à d'autres types de compagnies et d'autres type de voyages. Nous nous sommes donc concentrés sur la conception d'un design permettant la création d'un tel système sans considérer les différents patrons de conception.</p>
+      <p>Notre design précédent n'imposait aucune restriction sur l'instanciation des composantes de la base de données, ce qui augmentait inutilement le couplage de certaines classes. Le patron de Fabrique restreint cette responsabilité aux fabriques, rendant le design moins fragile en cas de changements dans les composantes à instancier.</p>
+      <p>L'usage du patron de commande nous a permis de mieux respecter le CRP (Composite Reuse Principle). En effet, dans notre précédent design, le contrôlleur s'occupait de l'exécution des commandes de l'admin en plus d'interagir avec l'usager, rendant notre design plus fragile en cas de redéfinition de ces commandes. Déléguer la gestion des commandes à l'invocateur de commande et aux instances implémentant l'interface Command a rendu notre design plus solide.</p>
+      <p>En général, l'usage des patrons de conception nous a permis de mieux respecter le DIP (Dependency Inversion Principle). En effet, la structure même des patrons rendait naturelle l'adoption une hiérarchie où les classes concrètes dépendent toujours de classes abstraites ou d'interfaces.</p>
+    </div>
+
+    <div id="JAVA">
+      <h2>Particularités de l'implémentation Java</h2>
+      
+      <p>Pour permettre à notre application de fournir une meilleure expérience usager, nous avons dû implémenter quelques fonctionnalités hors du cadre du projet ou organiser nos entités d'une façon qui semblerait peut-être un peu moins "intuitive".</p>
+      <p>Le paquet "exception" permet la gestion et la prévention des erreurs durant diverses opérations du système comme l'entrée de données ou la réservation d'une place dans un voyage par l'usager.</p>
+      <p>Nous avons décidé d'inclure les réservations dans les compagnies. Selon nous, ceci est une association plus logique, car les clients réservent des places dans des voyages spécifiques à une compagnie. Ceci permet aussi d'accélérer 
+        la récupération des informations requises lors du calcul du prix à payer ou lors du changement de la date ou de la classe du voyage par le client.</p>
+    </div>
+
+    <div id="IA">
+        <h2>Modélisation du tunnel en réseau de Pétri</h2>
+        <h3>Réseau de Pétri</h3>
+          <img src="img/petri.png"></img>
+          <p>Tel que montré dans le diagramme, les places p4 et p5 font office de feux de circulation et inhibent les transitions t3 et t4 afin de garantir un accès équitable au tunnel. La place p3 représente l'intérieur du tunnel et inhibe les transitions t3 et t4 afin de restreindre le nombre de voitures dans le tunnel à 1. Les transitions t1 et t2 permettent à d'autres voitures d'entrer dans le système, respectant ainsi la contrainte d'avoir un flux constant d'automobiles. Nous considérons qu'une fois sortie du tunnel, une voiture n'est plus dans le système, d'où l'usage de transitions au lieu de places pour les sorties.</p>
+
+          <h3>Graphe d'accèssibilité</h3>
+          <img src="img/petri_GA.png"></img>
+          <p>Si nous faisons une loi de conservation en utilisant le vecteur de pondération décrit par le diagramme (0, 0, 1, 0, 0), le produit scalaire entre le vecteur de pondération et un état quelconque donne soit 0 ou 1 pour tous les états du graphe. Cela nous montre que p3 (l'intérieur du tunnel) est bornée-k, où k = 1, et donc que p3 est sécuritaire.</p>
+          <p>On peut en conclure qu'il ne peut y avoir plus d'un jeton (voiture) à la place p3, peu importe l'état du système, ce qui prouve que la contrainte "seule 1 voiture peut être à l'intérieur du tunnel à la fois" est respectée.</p>
+          <h3>Arbre de couverture</h3>
+          <img src="img/petri_AC.png"></img>
+          <p>Un examen de l'arbre de couverture nous montre que lorsque le nombre de voitures à chaque entrée du tunnel (p1, p2) atteint &#969, le système entre dans un cycle entre les états (&#969, &#969, 0, 1, 0) -tunnel vide, feu rouge Rive-Sud-, (&#969, &#969, 1, 1, 0) -voiture de Mtl dans le tunnel-, (&#969, &#969, 0, 0, 1) -tunnel vide, feu rouge Mtl- et (&#969, &#969, 1, 0 1) -voiture de la Rive-Sud dans le tunnel-. Ainsi, l'usage du tunnel alterne entre la voie Mtl-&#62Rive-Sud et la voie Rive-Sud-&#62Mtl, montrant un usage équitable du tunnel par les deux voies.</p>
+          <p>On peut en conclure que la contrainte "faire passer une voiture à la fois de chaque côté de manière équitable" est respectée et qu'il n'y a pas de famine dans le système car chaque "processus" (Mtl-&#62Rive-Sud, Rive-Sud-&#62Mtl) a accès au tunnel pendant exactement la moitié du cycle.</p>
+        </div>
+    </div>
+</body>
+</html>
