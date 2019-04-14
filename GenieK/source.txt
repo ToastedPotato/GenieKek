@@ -4,7 +4,6 @@
 ./src/place/state/State.java
 ./src/place/state/Confirmed.java
 ./src/place/state/Free.java
-./src/place/state/StateException.java
 ./src/place/Place.java
 ./src/place/Column.java
 ./src/transport/section/OrganizableSection.java
@@ -40,6 +39,7 @@
 ./src/ui/command/ModifyTrip.java
 ./src/ui/Console.java
 ./src/ui/DataBase.java
+./src/ui/SystemMain.java
 ./src/ui/ControlAdmin.java
 ./src/ui/View.java
 ./src/ui/Control.java
@@ -52,18 +52,17 @@
 ./src/visitor/Client.java
 ./src/visitor/Visitor.java
 ./src/visitor/Admin.java
-./src/ui.SystemMain.java
+./src/exception/PrefixException.java
 ./src/exception/SystemException.java
 ./src/exception/PriceException.java
-./src/exception/NullObjectException.java
 ./src/exception/SectionException.java
 ./src/exception/NoCommandException.java
 ./src/exception/ExistException.java
 ./src/exception/IdException.java
 ./src/exception/TripException.java
 ./src/exception/StopException.java
-./src/exception/TransportException.java
 ./src/exception/EnumException.java
+./src/exception/StateException.java
 ./src/exception/NbPlaceException.java
 ./src/company/CruiseCompany.java
 ./src/company/Company.java
