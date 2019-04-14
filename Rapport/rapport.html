@@ -190,11 +190,21 @@
         <h2>Diagramme de Classe</h2>
         Étant donné que le digramme est plus compréhensible dans sa totalité nous avons préféré laisser le diagramme de classe tel quel car il regroupe tous   les patrons.
         <img src="img/dc.jpg"></img>
+        <ul>
+            <li>Le paquet "factory" implémente le patron de Fabrique</li>
+            <li>La méthode "getInstance()" des fabrique implémente le patron du Singleton</li>
+            <li>Le paquet "state" inclus dans le paquet "place" implémente le patron d'État</li>
+            <li>Le paquet "ui" regroupe les classes implémentant le modèle MVC (patron de l'Observateur)</li>
+            <li>Le paquet "command", interne au paquet "ui", regroupe les classes implémentant le patron de Commande</li>
+            <li>Le paquet "visitor" regroupe les classes implémentant le patron du Visiteur pour chaque type d'usager</li>
+        </ul>
+        
     </div>
     <div id="DS">
       <h2>Diagrammes de séquence ou de collaboration</h2>
       Nous avons mis à jour nos diagrammes de séquence avec Visual Paradigm, nous affichons ici les diagrammes qui nous semblent pertinent pour les patrons de conception.
       <h3>Patron Fabrique</h3>
+        <p>Conformément à la spécification de ce patron, les diagrammes montrent qu'une fabrique est appellé et que celle-ci s'occupe entièrement de l'instanciation des Compagnies, Transports, Voyages et Stations.</p>
         <h4>Compagnie</h4>
         <img src="img/dsc_fabrique_company.jpg"></img>
         <h4>Transport</h4>
@@ -204,6 +214,7 @@
         <h4>Station</h4>
         <img src="img/dsc_fabrique_station.jpg"></img>
       <h3>Patron État</h3>
+      <p>Conformément à la spécification de ce patron, les diagrammes montrent que l'état d'un Siège ou d'une Cabine s'assure du bon comportement de celui-ci lors des actions de réservation ou d'annulation (méthode "manage") et de paiement (méthode payment).</p>
         <h4>Place</h4>
         <img src="img/dsc_etat_place.jpg"></img>
         <h4>Libre</h4>
@@ -213,8 +224,10 @@
         <h4>Confirmé</h4>
         <img src="img/dsc_etat_confirmed.jpg"></img>
       <h3>Patron Observateur</h3>
+      <p>Nous avons jugé le MVC comme étant la variante du patron d'Observateur la plus adaptée à notre application. Le diagramme qui suit montre comment le Controlleur (Control) met à jour la Vue (View) et le modèle (Database) tout en interagissant avec l'usager (par l'usage de méthodes comme "listen(Menu:menu)").</p>
         <img src="img/dsc_mvc.jpg"></img>
       <h3>Patron Commande</h3>
+      <p>Conformément à la spécification de ce patron, le diagramme montre que les commandes de l'admin sont exécutées à l'aide d'un invocateur (CommandController) et que le stockage des Commandes instanciées (classes implémentant Command) dans les listes Undo et Redo permet l'implémentation de l'annulation et la réexécution des commandes de l'admin.</p>
         <img src="img/dsc_command.jpg"></img>
     </div>
     <div id="DP">
