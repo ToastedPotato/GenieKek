@@ -162,7 +162,7 @@
       <h2>Ressources</h2>
       <ul>
           <li>Lien Visual Paradigm : <a href="">Diagrammes</a></li>
-          <li>Lien Visual Paradigm : <a href="readme.txt">README</a></li>
+          <li>Lien vers le Manuel de l'application  : <a href="readme.txt">README</a></li>
       </ul>
     </div>
     <h1>Rapport</h1>
@@ -261,8 +261,8 @@
           <p>On peut en conclure qu'il ne peut y avoir plus d'un jeton (voiture) à la place p3, peu importe l'état du système, ce qui prouve que la contrainte "seule 1 voiture peut être à l'intérieur du tunnel à la fois" est respectée.</p>
           <h3>Arbre de couverture</h3>
           <img src="img/petri_AC.png"></img>
-          <p>Un examen de l'arbre de couverture nous montre que lorsque le nombre de voitures à chaque entrée du tunnel (p1, p2) atteint &#969, le système entre dans un cycle entre les états (&#969, &#969, 0, 1, 0) -tunnel vide, feu rouge Rive-Sud-, (&#969, &#969, 1, 1, 0) -voiture de Mtl dans le tunnel-, (&#969, &#969, 0, 0, 1) -tunnel vide, feu rouge Mtl- et (&#969, &#969, 1, 0 1) -voiture de la Rive-Sud dans le tunnel-. Ainsi, l'usage du tunnel alterne entre la voie Mtl et la voie Rive-Sud, montrant un usage équitable du tunnel par les deux voies.</p>
-          <p>On peut en conclure que la contrainte "faire passer une voiture à la fois de chaque côté de manière équitable" est respectée et qu'il n'y a pas de famine dans le système car chaque "processus" (Mtl -> Rive-Sud, Rive-Sud -> Mtl) a accès au tunnel pendant exactement la moitié du cycle.</p>
+          <p>Un examen de l'arbre de couverture nous montre que lorsque le nombre de voitures à chaque entrée du tunnel (p1, p2) atteint &#969, le système entre dans un cycle entre les états (&#969, &#969, 0, 1, 0) -tunnel vide, feu rouge Rive-Sud-, (&#969, &#969, 1, 1, 0) -voiture de Mtl dans le tunnel-, (&#969, &#969, 0, 0, 1) -tunnel vide, feu rouge Mtl- et (&#969, &#969, 1, 0 1) -voiture de la Rive-Sud dans le tunnel-. Ainsi, l'usage du tunnel alterne entre la voie Mtl-&#62Rive-Sud et la voie Rive-Sud-&#62Mtl, montrant un usage équitable du tunnel par les deux voies.</p>
+          <p>On peut en conclure que la contrainte "faire passer une voiture à la fois de chaque côté de manière équitable" est respectée et qu'il n'y a pas de famine dans le système car chaque "processus" (Mtl-&#62Rive-Sud, Rive-Sud-&#62Mtl) a accès au tunnel pendant exactement la moitié du cycle.</p>
         </div>
     </div>
 </body>
