@@ -238,19 +238,10 @@
     <div id="CC">
       <h2>Discussion de la qualité de la conception</h2>
       <h3></h3>
-      <p>
-        Lors du travail pratique 2 , nous étions concentré sur l'objectif de création et généralisation du système. Il sagisait d'étendre
-        le design pour permettre l'ajout d'autres types de compagnie et d'autres type de voyage. La priorité était donc de créer un design permettant la création d'un tel système sans considéré les 
-        différents patrons de conception. <br>
-        À l'étape 3 nous avons vu que dans certains cas les patrons de conception pouvaient nous aider à regler des problèmes appliqués dans certaines situations.
-        Nous avons été en mesure de restructurer et d'améliorer la qualité du design de notre logiciel grâce au patrons de fabrique.
-        Ceci nous a permis d'abstraite la création des objets.
-        Nous avons fait usage d'une base de données auxquels nous referons pour les données sensibles aux changements.
-        Par exemple, le prix de réservation peut changer entre la consultation, la réservation et le paiement, pour connaître le prix on questionne la base de données pour s'assurer d'avoir
-        la bonne valeur à jour.<br>     
-        Comme notre application ce fait en ligne de commande, opter pour un model MVC : Modèle, Vue et Controlleur, plus facile à gérer et evidement plus pratique pour la 
-        séparation des données. Le Modèle est notre base de donnée correspondant à la classe "DataBase" , notre vue à la classe "view" et notre Controlleur est la classe "Control" qui se divise en "ControlAdmin" et "ControlClient". 
-      </p>
+      <p>Lors du travail pratique 2, il fallait d'étendre notre conception à d'autres types de compagnies et d'autres type de voyages. Nous nous sommes donc concentrés sur la conception d'un design permettant la création d'un tel système sans considérer les différents patrons de conception. </p>
+        <p>Notre design précédent n'imposait aucune restriction sur l'instanciation des composantes de la base de données, ce qui augmentait inutilement le couplage de certaines classes. Le patron de Fabrique restreint cette responsabilité aux fabriques, rendant le design moins fragile en cas de changement des composantes à instancier. </p>
+        <p>L'usage du patron de commande nous a permis de mieux respecter le CRP (Composite Reuse Principle). En effet, dans notre précédent design, le contrôlleur s'occupait de l'exécution des commandes de l'admin en plus d'interagir avec l'usager, rendant notre design plus fragile en cas de redéfinition de ces commandes. Déléguer la gestion des commandes à l'invocateur de commande et aux instances implémentant l'interface Command a rendu notre design plus solide. </p>
+        <p>En général, l'usage des patrons de conception nous a permis de mieux respecter le DIP (Dependency Inversion Principle). En effet, la structure même des patrons rendait naturelle l'adoption une hiérarchie où les classes concrètes dépendent toujours de classes abstraites ou d'interfaces.</p>
     </div>
 
     <div id="JAVA">
