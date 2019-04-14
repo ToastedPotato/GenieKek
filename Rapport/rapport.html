@@ -1,0 +1,250 @@
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>IFT3911 DM2 Gosse Grassin</title>
+    <style type="text/css">
+        table
+        {
+            border: outset 1px #cacaca;
+            border-collapse: collapse;
+        }
+        th
+        {
+            border-bottom: double 1px #cacaca;
+            background-color: #f4f4f4;
+        }
+        td
+        {
+            border-bottom: solid 1px #cacaca;
+        }
+        body {
+          background-color: #f4f4f4;
+          font-family: "Ubuntu", sans-serif;
+          padding: 20px;
+          line-height: 1.5em;
+        }
+
+        body > div {
+          background-color: white;
+          box-shadow: #cacaca 0 0 5px;
+          padding: 20px;
+          border-radius: 5px;
+          margin: 25px 0;
+        }
+        body > div > h2 {
+          margin: 0 0 10px 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #cacaca;
+        }
+        body h1:first-child {
+          text-align: center;
+        }
+        a {
+          color: blue;
+        }
+        img {
+          max-width: 100vh;
+          max-height: 100vh;
+        }
+        .classe {
+          background: #f4f4f4;
+          border-radius: 5px;
+          color: #505050;
+          padding: 0px 6px;
+        }
+        .inline {
+          display: flex;
+          flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+    <h1>IFT 3911 - Devoir 2</h1>
+    <div>
+      <h2>Information générale</h2>
+      <p>
+          <span style="font-weight: bold;">Nom: </span>Pierre-Loup Gosse
+          <br />
+          <span style="font-weight: bold;">Matricule: </span>0944
+          <br />
+          <span style="font-weight: bold;">Courriel: </span>pierre-loup.gosse@umontreal.ca
+          <br />
+          <span style="font-weight: bold;">temps mis: </span>environs 13h
+      </p>
+      <p>
+          <span style="font-weight: bold;">Nom: </span>Louis Grassin
+          <br />
+          <span style="font-weight: bold;">Matricule: </span>0947
+          <br />
+          <span style="font-weight: bold;">Courriel: </span>louis.grassin@umontreal.ca
+          <br />
+          <span style="font-weight: bold;">temps mis: </span>environs 7h
+      </p>
+      <p>
+      <span style="font-weight: bold;">Nom: </span>Christophe Apollon-Roy
+          <br />
+          <span style="font-weight: bold;">Matricule: </span>092403
+          <br />
+          <span style="font-weight: bold;">Courriel: </span>christophe.apollon-roy@umontreal.ca 
+          <br />
+          <span style="font-weight: bold;">temps mis: </span>environs 7h
+      </p>
+      <p>
+        <span style="font-weight: bold;">Nom: </span>Fahirah Diarra
+            <br />
+            <span style="font-weight: bold;">Matricule: </span>20034025
+            <br />
+            <span style="font-weight: bold;">Courriel: </span>fahirah-baba-muaka.diarra@umontreal.ca 
+            <br />
+            <span style="font-weight: bold;">temps mis: </span>environs 7h
+        </p>
+    </div>
+    <div>
+      <h2>Distribution des tâches</h2>
+
+      <table cellpadding="7px">
+          <thead>
+              <tr><th> Tâche </th>
+                  <th>Pierre-Loup</th>
+                  <th>Louis</th>
+                  <th>Christophe</th>
+                  <th>Fahirah</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><a href="#DC">Diagramme de classe logiciel</a></td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+              </tr>
+              <tr>
+                  <td><a href="#DS">Diagrammes de séquence ou de collaboration</a></td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+              </tr>
+              <tr>
+                  <td><a href="#DP">Diagramme de paquets</a></td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+              </tr>
+              <tr>
+                  <td><a href="#DP">Discussion de la qualité de la conception</a></td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+              </tr>
+              <tr>
+                  <td><a href="#OCL">Implémentation du système en Java</a></td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+              </tr>
+              <tr>
+                  <td><a href="#MR">Modélisation du diagramme de Pétrie du système</a></td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+              </tr>
+          </tbody>
+      </table>
+
+    </div>
+    <div>
+      <h2>Ressources</h2>
+      <ul>
+          <li>Lien Visual Paradigm : <a href="">Diagrammes</a></li>
+      </ul>
+    </div>
+    <h1>Rapport</h1>
+    <div>
+      <h2>Hypothèses</h2>
+      <ul>
+          <li>
+            Au niveau de l'entrée des dates on suppose qu'un utilisateur entre les dates correctement selon le format spécifié à l'écran.
+          </li>
+          <li>
+            Lorsque l'admin crée un voyage, c'est à lui de s'assurer que les destinations correspondent exactement au type de transport. 
+            Par exemple, pour un voyage en avion on doit avoir absolument comme lieu départ et d'arrivée un aéroport.S'il advient que le
+            lieu de départ et d'arrivé soit une garre ou port pour un voyage en avion, c'est à lui de corriger avec les méthodes de modifications disponibles.
+          </li>
+  	  </ul>
+    </div>
+    <div id="DC">
+        <h2>Diagramme de Classe</h2>
+        <img src="images/dc.jpg"></img>
+    </div>
+    <div id="DS">
+      <h2>Diagrammes de séquence ou de collaboration</h2>
+      <h3>Vérifier Voyages</h3>
+      <img src="images/ds_voyage.jpg"></img>
+      <h3>Réserver Place</h3>
+      <img src="images/ds_reserver.jpg"></img>
+      <h3>Payer Réservation</h3>
+      <img src="images/ds_payer.jpg"></img>
+      <h3>Annuler Réservation</h3>
+      <img src="images/ds_annuler.jpg"></img>
+      <h3>Changer Place</h3>
+      <img src="images/ds_changer_place.jpg"></img>
+      <h3>Changer Voyage</h3>
+      <img src="images/ds_changer_voyage.jpg"></img>
+    </div>
+    <div id="DP">
+      <h2>Diagramme de paquets</h2>
+      <p>Grace à ce graphe on peut observer que l'on respecte le Acyclic Dependency Principle (ADP)</p>
+      <img src="images/paquets.jpg"></img>
+    </div>
+    <div id="MR">
+      <h2>Identifications des modules réutilisables</h2>
+      Notre implémentation utilise des modules à usage général réutilisable tel que <span class="classe">Transport</span>
+      qui permet au système de supporter d'autre type de transport très facilement.<br>
+      La classe <span class="classe">Place</span> est générale pour les différents type de place (cabine, siège...)<br>
+      La classe <span class="classe">Voyage</span> est réutilisable pour d'autre type de voyage.
+    </div>
+    <div id="CC">
+      <h2>Discussion de la qualité de la conception</h2>
+      <h3></h3>
+      <p>
+        Lors du travail pratique 2 , nous étions concentré sur l'objectif de création et généralisation du système.Il sagissait d'étendre
+        le design pour permettre l'ajout d'autres types de compagnie permettant d'autres type de voyage. Il fallait étendre les fonctionnalités 
+        pour chaque type de compagnie. Le priorité était donc de créer un design permettant la création d'un tel système sans considéré les 
+        différents patrons de conception. Il clair que dans certains cas, les patrons de conception pouvaient nous aider à regler des problèmes appliqués 
+        dans certaines situations.Nous avons été en mesure de restructurer et d'améliorer la qualité du design de notre logiciel grâce au patrons de fabrique.
+        Ceci nous permis d'abstraite la création des objets. Nous avons fait usage d'une data auxquels nous referons pour les données sensible aux changements.
+        Par exemple, le prix de réservation pourrait changer au cours de la consultation, ou la disponibilité d'un vol, ou encore d'un siege (patrons de l'observateur).
+        Comme notre application ce fait en ligne de commande, opter pour un model MVC, Modèle, Vue et Contrôle plus facile à gérer et evidement plus pratique pour la sépartion des données. Le Modèle notre base de donnée correspondant à la classe "DataBase" , notre vue à la classe "view" et "console" et notre control grace à la classe admin ControlAdmin , ControlClient et Control.
+
+      </p>
+      <h3>KEK2</h3>
+      <p>
+        Le <span class="classe">kek kek </span> utilise la <b>cohésion fonctionnelle</b> notamment grâce à au respect du principe ISP.
+      </p>
+    </div>
+
+    <div id="IA">
+      <h2>Implémentation du système en Java</h2>
+      
+      <p>
+        Après le design de classe du diagramme que nous avons pris soins de construire à l'aide des patrons de conception, nous avons généré un diagramme 
+      </p>
+    </div>
+
+    <div id="IA">
+        <h2>Modélisation du diagramme de Pétrie du système</h2>
+        
+        </div>
+        <p>
+          
+        </p>
+      </div>
+   
+</html>
