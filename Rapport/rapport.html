@@ -166,6 +166,10 @@
       <h2>Hypothèses</h2>
       <ul>
           <li>
+              Au début du programme, l'utilisateur doit se définir en temps qu'administrateur ou client pour utiliser le système. De cette manière, il est possible
+              de vérifier directement si les changements on bien été fait.
+          </li>
+          <li>
             Au niveau de l'entrée des dates on suppose qu'un utilisateur entre les dates correctement selon le format spécifié à l'écran.
           </li>
           <li>
@@ -181,23 +185,34 @@
     </div>
     <div id="DS">
       <h2>Diagrammes de séquence ou de collaboration</h2>
-      <h3>Vérifier Voyages</h3>
-      <img src="images/ds_voyage.jpg"></img>
-      <h3>Réserver Place</h3>
-      <img src="images/ds_reserver.jpg"></img>
-      <h3>Payer Réservation</h3>
-      <img src="images/ds_payer.jpg"></img>
-      <h3>Annuler Réservation</h3>
-      <img src="images/ds_annuler.jpg"></img>
-      <h3>Changer Place</h3>
-      <img src="images/ds_changer_place.jpg"></img>
-      <h3>Changer Voyage</h3>
-      <img src="images/ds_changer_voyage.jpg"></img>
+      <h3> Patrons Fabrique</h3>
+      <img src=""></img>
+      <h3>Patrons Singleton</h3>
+      <img src=""></img>
+      <h3>Patron État</h3>
+      <img src=""></img>
+      <h3>Patron Observateur</h3>
+      <img src=""></img>
+      <h3>Patron Commande</h3>
+      <img src=""></img>
+      <h3>Patron Visiteur</h3>
+      <img src=""></img>
     </div>
     <div id="DP">
       <h2>Diagramme de paquets</h2>
       <p>Grace à ce graphe on peut observer que l'on respecte le Acyclic Dependency Principle (ADP)</p>
-      <img src="images/paquets.jpg"></img>
+      <h3> Patrons Fabrique</h3>
+      <img src=""></img>
+      <h3>Patrons Singleton</h3>
+      <img src=""></img>
+      <h3>Patron État</h3>
+      <img src=""></img>
+      <h3>Patron Observateur</h3>
+      <img src=""></img>
+      <h3>Patron Commande</h3>
+      <img src=""></img>
+      <h3>Patron Visiteur</h3>
+      <img src=""></img>
     </div>
     <div id="MR">
       <h2>Identifications des modules réutilisables</h2>
@@ -210,19 +225,17 @@
       <h2>Discussion de la qualité de la conception</h2>
       <h3></h3>
       <p>
-        Lors du travail pratique 2 , nous étions concentré sur l'objectif de création et généralisation du système.Il sagissait d'étendre
+        Lors du travail pratique 2 , nous étions concentré sur l'objectif de création et généralisation du système.Il sagisait d'étendre
         le design pour permettre l'ajout d'autres types de compagnie permettant d'autres type de voyage. Il fallait étendre les fonctionnalités 
         pour chaque type de compagnie. Le priorité était donc de créer un design permettant la création d'un tel système sans considéré les 
         différents patrons de conception. Il clair que dans certains cas, les patrons de conception pouvaient nous aider à regler des problèmes appliqués 
         dans certaines situations.Nous avons été en mesure de restructurer et d'améliorer la qualité du design de notre logiciel grâce au patrons de fabrique.
-        Ceci nous permis d'abstraite la création des objets. Nous avons fait usage d'une data auxquels nous referons pour les données sensible aux changements.
+        Ceci nous permis d'abstraite la création des objets. Nous avons fait usage d'une data auxquels nous referons pour les données sensibles aux changements.
         Par exemple, le prix de réservation pourrait changer au cours de la consultation, ou la disponibilité d'un vol, ou encore d'un siege (patrons de l'observateur).
-        Comme notre application ce fait en ligne de commande, opter pour un model MVC, Modèle, Vue et Contrôle plus facile à gérer et evidement plus pratique pour la sépartion des données. Le Modèle notre base de donnée correspondant à la classe "DataBase" , notre vue à la classe "view" et "console" et notre control grace à la classe admin ControlAdmin , ControlClient et Control.
+        Comme notre application ce fait en ligne de commande, opter pour un model MVC, Modèle, Vue et Contrôle plus facile à gérer et evidement plus pratique pour la 
+        sépartion des données. Le Modèle notre base de donnée correspondant à la classe "DataBase" , notre vue à la classe "view" et "console" et notre control grace à 
+        la classe admin ControlAdmin , ControlClient et Control.
 
-      </p>
-      <h3>KEK2</h3>
-      <p>
-        Le <span class="classe">kek kek </span> utilise la <b>cohésion fonctionnelle</b> notamment grâce à au respect du principe ISP.
       </p>
     </div>
 
@@ -235,91 +248,16 @@
     </div>
 
     <div id="IA">
-        <h2>Graphe IA et justification</h2>
-        <div class="inline">
-            <table cellpadding="7px">
-                <tr>
-                    <th>Paquet</th>
-                    <th>Instabilité</th>
-                    <th>Abstraction</th>
-                </tr>
-                <tr>
-                    <td>Station</td>
-                    <td>0</td>
-                    <td>0,25</td>
-                </tr>
-                <tr>
-                    <td>Trip</td>
-                    <td>0,2</td>
-                    <td>0,25</td>
-                </tr>
-                <tr>
-                    <td>Place</td>
-                    <td>0</td>
-                    <td>0.25</td>
-                </tr>
-                <tr>
-                    <td>Transport</td>
-                    <td>0</td>
-                    <td>0,25</td>
-                </tr>
-                <tr>
-                    <td>Company</td>
-                    <td>0,8</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>Ui</td>
-                    <td>1</td>
-                    <td>0.14</td>
-                </tr>
-                <tr>
-                    <td>command</td>
-                    <td>0.8</td>
-                    <td>0.11</td>
-                </tr>
-                <tr>
-                    <td>menu</td>
-                    <td></td>
-                    <td>0.28</td>
-                </tr>
-                <tr>
-                    <td>visitor</td>
-                    <td>1</td>
-                    <td>0.33</td>
-                </tr>
-                <tr>
-                    <td>Trip Factory</td>
-                    <td>0.75</td>
-                    <td>0.25</td>
-                </tr>
-                <tr>
-                    <td>Company Factory</td>
-                    <td>1</td>
-                    <td>0.25</td>
-                </tr>
-                <tr>
-                    <td>Station Factory</td>
-                    <td>1</td>
-                    <td>0.25</td>
-                </tr>
-                <tr>
-                    <td>Transport Factory</td>
-                    <td>0.5</td>
-                    <td>0.25</td>
-                </tr>
-                <tr>
-                    <td>Section</td>
-                    <td>0.5</td>
-                    <td>0.25</td>
-                </tr>
-                <tr>
-                    <td>State</td>
-                    <td></td>
-                    <td>0.25</td>
-                </tr>
-            </table>
-            <img src="IA.png"></img>
+        <h2>Modélisation du diagramme de Pétri du système</h2>
+        <h3>Diagramme de Pétri</h3>
+          <img src="petri.png"></img>
+
+          <h3>Arbre de couverture</h3>
+          <img src="petri_AC.png"></img>
+
+          <h4>Graphe d'accèssibilité</h4>
+          <img src="petri_AC.png"></img>
+
         </div>
     </div>
 </body>
